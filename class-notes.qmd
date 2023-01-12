@@ -1,0 +1,167 @@
+---
+title: "MATH-472: Class Notes"
+description: |
+  Running qmd to keep notes during MATH-472 lectures.
+author: "Andrew Moore"
+knitr:
+  opts_chunk: 
+    echo: true
+    warning: false
+    message: false
+---
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+```
+
+# 1/10/23
+
+## Summary
+
+Overview of syllabus. Covered introduction to R.
+
+- basic operators
+  - `+ / - * ^ = <-`
+- logical operators
+- assignment (Dr. Ko prefers `<-`)
+- `sum()`, `length()`, `c()`
+- definition of functions
+- if/then
+
+# 1/12/23
+
+## Summary
+
+More preamble. Should've skipped, no new material, painful.
+
+## Notes
+
+Continuing where we left off. If/else statements.
+
+- `ifelse()`
+  - you can do assignment inside of this (wild, seems inadvisible, but neat)
+  - e.g. `ifelse(1 > 2, x <- 1, x <- 0)`
+
+```{r}
+ex2 <- 76
+ifelse(
+  ex2 >= 90, grade <- 'A',
+  ifelse(
+    ex2 >= 80, grade <- 'B',
+    ifelse(ex2 >= 70, grade <- 'C', '')
+  )
+)
+```
+
+- Arrays: used to store results of computations
+  - one dimension: vectors e.g. `x <- numeric(k)` for a numeric vector of size `k`
+  - two dimensions: matrices
+    - $A_{2 \times 3}$
+    - e.g. `y <- matrix(0, nrow = m, ncol = n)` for a `m` x `n` 0 matrix.
+  - more dimensions
+    - e.g. `l <- array(0, dim = c(m, n, ...))`
+
+- covered indexing with matrices using bracket notation
+
+### Loops
+
+For loops
+
+```{r}
+k <- 0
+for (i in 1:10) {
+  k <- k + i
+}
+
+k
+
+x <- 1:10
+k <- 0
+
+for (i in x) {
+  k <- k + x[i]
+}
+
+k
+```
+
+While loops
+
+```{r}
+k <- 0
+i <- 0
+
+while (i <= 10) {
+  k <- k + i
+  i <- i + 1
+}
+
+k; i
+```
+
+### Practice, create a function that computes an average without using `sum()` or `mean()`
+
+```{r}
+avg <- function(x) {
+  s <- 0
+  for (i in x) s <- s + i
+
+  s / i
+}
+
+x <- 1:10
+
+avg(x) == 5.5
+```
+
+### `ifelse()` is vectorized, `if` is not
+
+```{r}
+score <- c(76, 92, 83)
+grade <- ifelse(
+  score >= 90, 'A',
+  ifelse(score >= 80, 'B',
+    ifelse(score >= 70, 'C')
+  )
+)
+grade
+
+# will fail-- length(score) > 1
+if (score >= 90) {
+  grade <- 'A'
+} else if (score >= 80) {
+  grade <- 'B'
+} else {
+  grade <- 'C'
+}
+```
+
+### Note on statistical software
+
+- R adapted from S Plus.
+
+- Dr. Ko says this should be enough for us to cover the programming we'll use this semester.
+  - recommends learning branching and loop syntax for adapting to other languages.
+
+### Textbook chapter 2, Probability and Statistics Review
+
+- **Random variable**: assigns outcomes in a sample space $\rightarrow$ Real numbers
+  - describes behavior of population elements
+  - **Probability Density Function** (pdf)
+    - $f_X(x)$
+  - **Cumulative Distribution Function** (cdf)
+    - $F_X(x) \equiv P[X \leq x]$
+    - non-decreasing function: $x_1 < x_2 \iff F_X(x_1) \leq F_X(x_2)$
+    - right-continuous: $\lim_{\epsilon \to 0^{+}} F_X(x + \epsilon) = F_X(x), x \in \mathbb{R}$
+    - $\lim_{x \to \infty} F_X(x) = 1, \lim_{x \to -\infty} F_X(x) = 0$.
+    - CDFs for discrete functions are step functions.
+
+# 1/17/23
+
+# 1/19/23
+
+# 1/24/23
+
+# 1/26/23
