@@ -22,6 +22,8 @@ library(tidyverse)
 
 Overview of syllabus. Covered introduction to R.
 
+## Notes
+
 - basic operators
   - `+ / - * ^ = <-`
 - logical operators
@@ -163,5 +165,31 @@ if (score >= 90) {
 # 1/19/23
 
 # 1/24/23
+
+## Summary
+
+Discussing MLE, analytical solutions vs. numerical solutions.
+
+## Notes
+
+Review of analytical MLE is done in my notebook. Numerical estimation can be done using the `mle()` function, which is from the `stats4` package. This approach is only possible if we know the definition of the negative-loglik function. Also, depending on the starting value, it may take time for `mle()` to produce an estimate.
+
+What kind of search is `mle()` using? It depends on `optim()`... which uses an implementation of *Nelder and Mead (1965).* 
+
+
+
+```{r}
+library(stats4)
+
+# y <- c(0.04304550, 0.50263474)
+y <- 1:4
+
+mlogl <- function(theta) -(length(y)*log(theta) - theta*sum(y))
+
+fit <- mle(mlogl, 1.4)
+summary(fit)
+
+1 / mean(y)
+```
 
 # 1/26/23
