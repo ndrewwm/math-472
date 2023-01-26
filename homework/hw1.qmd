@@ -1,0 +1,165 @@
+---
+title: "MATH-472: Homework 1"
+author: "Andrew Moore"
+date: "1/25/23"
+knitr:
+  opts_chunk: 
+    echo: true
+    warning: false
+    message: false
+---
+
+# Question 1
+
+Let $U$ be a random variable with support $\mathbb{R}_U = (0, 1).$
+
+Define the pdf and cdf of $U$ respectively as
+$$
+f_U(u) = \begin{cases}
+  \frac{1}{1} & 0 < u < 1 \\
+  0 & \text{otherwise}
+\end{cases}
+$$
+
+$$
+F_U(u) = \begin{cases}
+  0 & 0 \leq 0 \\
+  u & 0 < u < 1 \\
+  1 & u \geq 1
+\end{cases}
+$$
+
+Let $T = e^U.$ Then, $g(u) = e^u$ is strictly increasing on $(0, 1).$ So, we then have $g^{-1}(t) = ln(t).$
+
+Define $F_T(t)$ and $f_T(t)$ as 
+$$
+F_T(t) = \begin{cases}
+  0 & t \leq 1 \\
+  F_U(g^{-1}(t)) = ln(t) & 1 < t < e \\
+  1 & t \geq e.
+\end{cases}
+$$
+
+$$
+f_T(t) = \frac{d}{dt} F_T(t) = \begin{cases}
+  ln(t) \cdot \frac{1}{t} & t \in (0, 1) \\
+  0 & \text{otherwise}.
+\end{cases}
+$$
+
+\begin{align*}
+E[T] &= \int_{-\infty}^{\infty} t f(t)\ dt \\
+  &= \int_{1}^{e} t \frac{ln(t)}{t}\ dt \\
+  &= \int_{1}^{e} ln(t)\ dt \\
+  &= t ln(t) \Big|_1^e - \int_1^e \ dt \\
+  &= (e ln(e) - ln(1)) - t \Big|_1^e \\
+  &= e - e + 1 \\ 
+  &= 1.
+\end{align*}
+
+\begin{align*}
+E[T^2] &= \int_{-\infty}^{\infty} t^2 f(t)\ dt \\
+  &= \int_{1}^{e} t^2 \frac{ln(t)}{t}\ dt \\
+  &= \int_1^e t ln(t)\ dt \\
+  & \int_1^e u\ dv = uv\Big|_1^e - \int_1^e v\ du \\
+  & \text{let } u = ln(t), du = \frac{1}{t}\ dt, v = \frac{1}{2} t^2, dv = t\ dt \\ 
+  &= \frac{1}{2} t^2 ln(t) \Big|_1^e - \frac{1}{2} \int_1^e t\ dt \\
+  &= \frac{1}{2}e^2 - \frac{1}{4} t^2 \Big|_1^e \\
+  &= \frac{1}{2}e^2 - \frac{1}{4}(e^2 - 1) \\
+  &= \frac{1}{2}e^2 - \frac{1}{4}e^2 + \frac{1}{4} \\
+  &= \frac{1}{4}e^2 + \frac{1}{4} \\
+  &= \frac{1}{4}(e^2 + 1).
+\end{align*}
+
+$$
+Var(T) = E[T^2] - (E[T])^2 = \frac{1}{4}(e^2 + 1) - 1 = \frac{1}{4}e^2 - \frac{3}{4}.
+$$
+
+Let $l(u) = u.$
+
+$$
+E[l(u)] = \int_{-\infty}^\infty u l(u)\ du = \int_0^1 u\ du = \frac{1}{2}u^2 \Big|_0^1 = \frac{1}{2}
+$$
+
+$$
+E[l(u)^2] = \int_{-\infty}^\infty u^2 l(u)\ du = \int_0^1 u^2\ du = \frac{1}{3} u^3 \Big|_0^1 = \frac{1}{3}
+$$
+
+$$
+Var(l(u)) = E[l(u)^2] - (E[l(u)])^2 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6}
+$$
+
+\newpage
+# Question 2
+
+Let $I(x) = \begin{cases} 1 & 0 < X < 0.5 \\ 0 & \text{otherwise} \end{cases}$, where $X \sim Uniform(0, 1)$.
+
+\begin{align*}
+P(X \leq 0.5) &= F(0.5) = \int_{0}^{0.5} \frac{1}{1 - 0}\ dx = x\Big|_{0}^{0.5} \\
+  &= (0.5 - 0) \\
+  &= 0.5 \\
+  &= 1 \cdot (0.5) + 0 \cdot (0.5) \\
+  &= P(I(x) = 1) + P(I(x) = 0) \\
+  &= E[I(x)].
+\end{align*}
+
+
+$$
+\int_0^c 1\ dx = x \Big|_0^c = (c - 0) = c(1 - 0) = c\Bigl[ y \Bigr]_0^1 = \int_0^1 c\ dy
+$$
+
+
+\newpage
+# Question 3
+
+Let $x_1, x_2, \cdots, x_{10} \stackrel{i.i.d.}{\sim} f(x_i; \sigma^2) = \begin{cases} \frac{x}{\sigma^2} e^{\frac{-x^2}{2\sigma^2}} & x > 0, \sigma^2 > 0 \\ 0 & \text{otherwise} \end{cases}.$
+
+First, we find the likelihood function $L(\sigma^2)$ and the log-likelihood function $\ell(\sigma^2)$.
+
+\begin{align*}
+L(\sigma^2) = \prod_{i=1}^{10} f(x_i ; \sigma^2) &= \prod_{i=1}^{10} \frac{x_i}{\sigma^2} e^{\frac{-x^2_i}{2\sigma^2}} \\
+  &= \bigl( \prod_{i=1}^{10} \frac{x_i}{\sigma^2} \bigr)\bigl( \prod_{i=1}^{10} e^{\frac{-x^2_i}{2\sigma^2}} \bigr) \\
+  &= \bigl( \prod_{i=1}^{10} \frac{x_i}{\sigma^2} \bigr) e^{\frac{-1}{2\sigma^2} \sum_{i = 1}^{10} x^2_i}.
+\end{align*}
+
+\begin{align*}
+\ell(\sigma^2) = ln[L(\sigma^2)] &= ln\Bigl[ \bigl( \prod_{i=1}^{10} \frac{x_i}{\sigma^2} \bigr) e^{\frac{-1}{2\sigma^2} \sum_{i = 1}^{10} x^2_i} \Bigr] \\
+  &= ln\bigl( \prod_{i=1}^{10} \frac{x_i}{\sigma^2} \bigr) + ln\bigl( e^{\frac{-1}{2\sigma^2} \sum_{i = 1}^{10} x^2_i} \bigr) \\
+  &= \sum_{i = 1}^{10} ln(\frac{x_i}{\sigma^2}) - \frac{1}{2\sigma^2}\sum_{i=1}^{10} x^2_i \\
+  &= \sum_{i = 1}^{10} (ln(\frac{1}{\sigma^2}) + ln(x_i)) - \frac{1}{2\sigma^2}\sum_{i=1}^{10} x^2_i \\
+  &= 10ln(\frac{1}{\sigma^2}) + \sum_{i=1}^{10} ln(x_i) - \frac{1}{2\sigma^2}\sum_{i=1}^{10} x^2_i
+\end{align*}
+
+Taking the derivative and setting it equal to zero, we solve for $\hat{\sigma^2}$:
+
+\begin{align*}
+  \frac{d}{d\sigma} [\ell(\sigma^2)] &= \frac{-20}{\sigma} + \frac{1}{\sigma^3}\sum_{i=1}^{10} x^2_i \\
+  0 &\stackrel{set}{=} \frac{-20}{\sigma} + \frac{1}{\sigma^3}\sum_{i=1}^{10} x^2_i  \\
+  \implies \frac{20}{\sigma} &= \frac{1}{\sigma^3}\sum_{i=1}^{10} x^2_i \\
+  \implies \hat{\sigma^2} &= \frac{\sum_{i=1}^{10} x^2_i}{20} \\ 
+  \implies \hat{\sigma^2} &\approx 74.50549.
+\end{align*}
+
+Evaluating the second derivative at $\hat{\sigma^2}$ we see
+
+\begin{align*}
+  \frac{d^2}{d\sigma^2}[\ell(\sigma^2)]_{\sigma^2 = 74.50549} &= \frac{d}{d\sigma} \Bigl[\frac{-20}{\sigma} + \frac{1}{\sigma^3}\sum_{i=1}^{10} x^2_i \Bigr]_{\sigma^2 = 74.50549} \\
+   &= \frac{20}{\sigma^2} - \frac{3}{\sigma^4} \sum_{i=1}^{10} x^2_i \Big|_{\sigma^2 = 74.50549} \\
+   &\approx 0.2684366 - 0.8053076 \\
+   &< 0 \\
+   &\therefore \sigma^2 \text{ is a local maximum.}
+\end{align*}
+
+We now confirm these results numerically.
+
+```{r}
+x <- c(16.88, 10.23, 4.59, 6.66, 13.68, 14.23, 19.87, 9.40, 6.51, 10.95)
+
+ll <- function(sigma) {
+  -(10 * log(1 / sigma^2) + sum(log(x)) - (1 / (2*sigma^2)) * sum(x^2))
+}
+
+stats4::mle(ll, 10)
+```
+
+Squaring the coefficient (approximately) matches our analytical calculation for $\hat{\sigma^2}: 8.631656^2 =$ `r 8.631656^2`.
