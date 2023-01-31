@@ -1,0 +1,66 @@
+---
+title: "MATH-472: Homework 2"
+author: "Andrew Moore"
+date: "2/9/23"
+knitr:
+  opts_chunk: 
+    echo: true
+    warning: false
+    message: false
+---
+
+# Question 1
+
+<!-- Write an R function to calculate $\Gamma(n)$ for any positive integer $n$. You cannot use the built-in gamma function in R. -->
+
+The definition of the Gamma function where $n \in \mathbb{Z}^{+}$ is
+$$
+\Gamma(n) = (n - 1)!
+$$
+
+This can be replicated in R using the `factorial()` function.
+
+```{r}
+posint_gamma <- function(n) {
+  if (any(!is.integer(n) | n <= 0)) stop("n must be a positive integer.")
+  
+  factorial(n - 1)
+}
+
+all(posint_gamma(1:4) == gamma(1:4))
+```
+
+\newpage
+# Question 2
+
+\newpage
+# Question 3
+
+Let $X$ be a discrete random variable with the following cdf:
+
+|         $X$          | 10   | 30   | 50   | 70   | 90   |
+| :------------------: | :--: | :--: | :--: | :--: | :--: |
+| $F(x) = P(X \leq x)$ | 0.27 | 0.41 | 0.64 | 0.92 | 1.00 |
+
+Now let $x_1 = 10, x_2 = 30, x_3 = 50, x_4 = 70, x_5 = 90.$
+
+```{r}
+x <- c(10, 30, 50, 70, 90)
+
+# the CDF of X
+F_X <- function(x) {
+  cdf <- c('10' = 0.27, '30' = 0.41, '50' = 0.64, '70' = 0.92, '90' = 1)
+  
+  dplyr::case_when(
+    x < 10 ~ 0,
+    x > 90 ~ 1,
+    x %in% c(10, 30, 50, 70, 90) ~ cdf[as.character(x)],
+    TRUE ~ NA_real_
+  )
+}
+
+f <- function(x) {
+  u <- runif(n = length(x), 0, 1)
+
+}
+```
