@@ -193,3 +193,59 @@ summary(fit)
 ```
 
 # 1/26/23
+
+## Summary
+
+## Notes
+
+- data analysis: you have a sample
+  - need to infer *population distribution function*
+  - need to infer *parameters* of the distribution function
+  - together, you use them to 
+
+- MLE: used for parametric inference
+  - MLE requires sample to be random/iid (likelihood function is a joint probability distribution). What if it's not?
+
+- Today we're looking at random number generation?
+
+### Two-parameter MLE
+
+Suppose we have $x_1, x_2, ..., x_n \sim Gamma(\lambda, r)$, with pdf
+$$
+f(x; \lambda, r) = \begin{cases} \frac{\lambda}{\Gamma(r)} x^{r - 1} e^{-\lambda x}  & x \geq 0, r > 0, \lambda > 0 \\ 0, & \text{otherwise} \end{cases}$
+$$
+
+Note:
+$$
+\Gamma(r) = \int_0^\infty t^{r - 1} e^{-t}\ dt, t \geq 0.
+$$
+
+For a positive real number $r$, $\Gamma(r + 1) = r \cdot \Gamma(r).$
+
+Note: $n! = \Gamma(n + 1)$ because $\Gamma(r + 1) = r \cdot \Gamma(r)$.
+
+### the `optim()` function for MLE with >1 parameter
+
+```{r}
+x <- c(0.5928, 3.2048, 2.2281, 4.2292, 1.2096, 3.8371, 1.2670, 1.2042, 2.8182, 3.5173)
+
+ll <- function(theta, sumx, sumlogx, n) {
+  r <- theta[1]
+  lambda <- theta[2]
+  -(n*r*log(lambda) - n*log(gamma(r)) + (r - 1)*sumlogx - lambda*sumx)
+}
+
+optim(c(20, 19), ll, sumx = sum(x), sumlogx = sum(log(x)), n = length(x))
+```
+
+- even when estimating parameters numerically, you still need to be able to derive the log-likelihood function for the sample's distribution (or *assumed* distribution)
+
+### Inverse Transform Method
+
+1. continuous random variables
+
+- $U$ is a uniform r.v. over $(a, b)$ if its pdf is $f_U(u) = \frac{1}{b-1}, a < u < b \text{ and } 0 \text{ otherwise}.$
+
+
+
+2. discrete random variables
