@@ -249,3 +249,137 @@ optim(c(20, 19), ll, sumx = sum(x), sumlogx = sum(log(x)), n = length(x))
 
 
 2. discrete random variables
+
+# 1/31/23
+
+## Summary
+
+## Notes
+
+More on the Inverse Transform Method.
+
+```{r}
+# given an exponential distribution
+lambda <- 10
+exp_pdf <- function(x) lambda*exp(-lambda*x)
+inv_exp <- function(u) -1/lambda * log(1 - u)
+
+u <- runif(100000, 0, 1)
+x <- inv_exp(u)
+
+mean(x) # should be close to 1 / lambda
+var(x) # should be close to 1 / lambda^2
+```
+
+Transformation of a discrete CDF via a quantile:
+
+$y_i$ is the random variable corresponding to $u$ if
+$$
+F_Y(y_{i - 1}) < u \leq F_Y(y_i), u \sim Uniform(0, 1)
+$$
+
+```{r}
+# transformation given a discrete CDF, using quantiles
+g <- function(n) {
+  u <- runif(n, 0, 1)
+  
+  cdf <- c(0.1, 0.36, 0.42, 0.85, 1)
+  
+  dplyr::case_when(
+    u <= cdf[1]              ~ 0,
+    u > cdf[1] & u <= cdf[2] ~ 1,
+    u > cdf[2] & u <= cdf[3] ~ 2,
+    u > cdf[3] & u <= cdf[4] ~ 3,
+    u > cdf[4] & u <= cdf[5] ~ 4,
+    TRUE ~ NA_real_
+  )
+}
+
+prop.table(table(g(10000)))
+cumsum(.Last.value)
+```
+
+# 2/2/2023
+
+## Summary
+
+## Notes
+
+*Process of computational methods*
+
+1. Estimate population distribution
+
+2. Get point estimates of parameters
+
+3. Simulate realizations from the population distribution
+  - These realizations can then be used to test statistical methods/tools, etc.
+
+```{r}
+f <- function(x, p = 0.4) p * (1 - p)^x
+```
+
+What if we can't calculate a closed form of a CDF? Then, we can't do a tidy inverse transform...
+
+### Acceptance-Rejection Method
+
+We want realizations from a r.v. $X$, with pdf $f_X(x)$, but suppose it is hard to generate them. If we can find another pdf $g_X(x)$
+
+1. which is defined on the same support of $f_X(x)$
+
+2. from which it is easy to generate realizations,
+
+and if we can find a constant $c > 1$ such that 
+
+$$
+h(x) = c \cdot g_X(x) \geq f_X(x)
+$$
+
+or
+
+$$
+\frac{f_X(x)}{g_X(x)} \leq c,
+$$
+
+then, we can generate a realization $x$ from $f_X(x)$ using the following algorithm:
+
+1. Generate a realization $y$ from $g_X(x)$.
+2. Generate a uniform random number $u$ from $U(0, 1)$.
+3. Set $y$ to $x$ if $u < \frac{f_X(y)}{c\cdot g_X(y)}.$ Otherwise go back to step 1.
+
+Then, $x$ is a random number with the pdf $f_X(x)$.
+
+Probability that a point from step 1 is rejected is
+
+$$
+P(\text{A point generated from step 1 is rejected}) = \frac{\text{Area between } h(x) \text{and } \f(x)}{\text{Area under } h(x)}
+$$
+
+```{r}
+# demonstrate acception-rejection method using a Beta(2, 1) distribution
+# g(x) = Uniform(0, 1)
+
+f <- function(x) 2*x
+g <- function(x) 1
+C <- 2
+
+gen_beta <- function() {
+  u1 <- runif(1, 0, 1)
+  u2 <- runif(1, 0, 1)
+  
+  # if accepted,
+  r <- f(u1) / (C * g(u1))
+  out <- c( "r" = r, "u1" = u1, "u2" = u2)
+
+  if (u2 < f(u1) / (C * g(u1))) {
+    return(u1)
+  } else {
+    gen_beta()
+  }
+}
+
+x <- replicate(1000, gen_beta())
+x_actual <- rbeta(1000, 2, 1)
+
+hist(x)
+hist(x_actual)
+```
