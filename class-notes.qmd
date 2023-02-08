@@ -383,3 +383,44 @@ x_actual <- rbeta(1000, 2, 1)
 hist(x)
 hist(x_actual)
 ```
+
+# 2/7/2022
+
+## Summary
+
+## Notes
+
+Acceptance-rejection method for discrete random variables.
+
+Let $f_X(x) = \begin{cases} 0.16, x = 1 \\ 0.24, x = 2 \\ 0.33, x = 3 \\ 0.17, x = 4 \\ 0.10, x = 5 \\ 0, \text{ otherwise}. \end{cases}$ Assume we also have $g_X(x) = \frac{1}{5}, x \in \{1, 2, 3, 4, 5\} \text{ and } 0 \text{ otherwise}.$
+
+```{r}
+f <- c(0.16, 0.24, 0.33, 0.17, 0.10)
+g <- c(1, 1, 1, 1, 1) / 5
+C <- max(f / g)
+
+f_x <- function(x) {
+  dplyr::case_when(
+    x == 1 ~ 0.16,
+    x == 2 ~ 0.24,
+    x == 3 ~ 0.33,
+    x == 4 ~ 0.17,
+    x == 5 ~ 0.10,
+      TRUE ~ 0
+  )
+}
+
+gen <- function() {
+  y <- sample(1:5, 1) # draw 1 realization from discrete uniform
+  u <- runif(1, 0, 1) # draw 1 realization from continuous uniform
+
+  if (u <= f_x(y) / (C * 1/5)) {
+    return(y)
+  } else {
+    gen()
+  }
+}
+
+out <- replicate(1000, gen())
+prop.table(table(out))
+```
