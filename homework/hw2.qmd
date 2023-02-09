@@ -7,6 +7,11 @@ knitr:
     echo: true
     warning: false
     message: false
+format:
+  pdf:
+    include-in-header:
+      text: |
+        \usepackage{cancel}
 ---
 
 # Question 1
@@ -167,15 +172,92 @@ gen_density <- function(n = 1000, sigma = 1) {
 \newpage
 # Question 6
 
-$f(x) = \frac{1}{2}e^{-|x|}.$
+We have $f(x) = \frac{1}{2}e^{-|x|}.$ This function is symmetric around 0. So, the resulting cdf $F_X(x)$ will be a piecewise function. If $x < 0,$ we have
+\begin{align*}
+  \int_{-\infty}^x f(t)\ dt &= \int_{-\infty}^x \frac{1}{2} e^{-|t|}\ dt \\
+  &= \frac{1}{2} \int_{-\infty}^x e^t\ dt \tag{because $-\infty < t < 0$} \\
+  &= \frac{1}{2} e^t \Bigg|_{-\infty}^x \\
+  &= \lim_{n \to -\infty} \frac{1}{2} e^t \Bigg|_n^x \\
+  &= \lim_{n \to -\infty} \frac{1}{2}(e^x - e^n) \\
+  &= \lim_{n \to -\infty} \frac{1}{2}e^x - \cancelto{0}{\frac{1}{2}e^n} \\
+  &= \frac{1}{2}e^x.
+\end{align*}
 
-<!-- \begin{align*}
-F(x) &= \int_{-\infty}^{x} f(t)\ dt \\
-     &= \frac{1}{2} \int_0^x e^{-t}\ dt \\
-     &= -\frac{1}{2} e^{-t} \big|_{t = 0}^{t = x} \\
-     &= -\frac{1}{2} (e^{-x} - e^0) \\
-     &= frac{1}{2} - \frac{1}{2}e^{-x}.
-\end{align*} -->
+Note that $\int_{-\infty}^0 f(x)\ dx = \frac{1}{2}$ because
+\begin{align*}
+  \int_{-\infty}^0 f(x)\ dx &= \int_{-\infty}^0 \frac{1}{2} e^{-|x|}\ dx \\
+  &= \frac{1}{2} \int_{-\infty}^0 e^x\ dx \tag{because $-\infty < x < 0$} \\
+  &= \frac{1}{2} e^x \Bigg|_{-\infty}^0 \\
+  &= \lim_{n \to -\infty} \frac{1}{2} e^x \Bigg|_n^0 \\
+  &= \lim_{n \to -\infty} \frac{1}{2}(e^0 - e^n) \\
+  &= \lim_{n \to -\infty} \frac{1}{2} - \cancelto{0}{\frac{1}{2}e^n} \\
+  &= \frac{1}{2}.
+\end{align*}
+
+Now, if $x \geq 0$, we have
+\begin{align*}
+  \int_{-\infty}^0 f(t)\ dt + \int_0^x f(t)\ dt &= \frac{1}{2} + \frac{1}{2}\int_0^x e^{-|t|}\ dt \\
+  &= \frac{1}{2} + \frac{1}{2}\int_0^x e^{-t}\ dt \tag{because $0 \leq t \leq x$} \\
+  &= \frac{1}{2} - \frac{1}{2} e^{-t} \Bigg|_0^x \\
+  &= \frac{1}{2} - \frac{1}{2}(e^{-x} - e^0) \\
+  &= \frac{1}{2} + \frac{1}{2} - \frac{1}{2}e^{-x} \\
+  &= 1 - \frac{1}{2}e^{-x}.
+\end{align*}
+
+Thus, $F_X(x)$ is defined as
+$$
+F_X(x) = \begin{cases}
+  \frac{1}{2}e^x, & x < 0 \\
+  1 - \frac{1}{2}e^{-x}, & x \geq0
+\end{cases}
+$$
+
+and given some $x$, we have $F_X(x) = u$. We now need an inverse $F_X^{-1}(u)$ satisfying $F_X^{-1}(u) = x$. This function will also be piecewise.
+
+If $x < 0$
+\begin{align*}
+  F_X(x) &= \frac{1}{2}e^x = u \\
+         &\implies e^x = 2u \\
+         &\implies x = ln(2u.)
+\end{align*}
+
+If $x \geq 0$
+\begin{align*}
+  F_X(x) &= 1 - \frac{1}{2} e^{-x} = u \\
+         &\implies \frac{1}{2}e^{-x} = 1 - u \\
+         &\implies e^{-x} = 2 - 2u \\
+         &\implies -x = ln(2 - 2u) \\
+         &\implies x = -ln(2 - 2u).
+\end{align*}
+
+So
+$$
+F_X^{-1}(u) = \begin{cases}
+  ln(2u) & u < 0.5 \\
+  -ln(2 - 2u) & u \geq 0.5.
+\end{cases}
+$$
+
+Now we can apply the algorithm
+
+1. Generate $u \sim U(0, 1)$
+2. Compute $X'(u) = F_X^{-1}(u)$ to get realizations from $X$.
+
+Implemented in R code, to generate 1,000 realizations.
+
+```{r}
+finv <- function(u) ifelse(u < 0.5, log(2*u), -log(2 - 2*u))
+lapl <- function(n = 1000) finv(runif(n, 0, 1))
+
+ggplot(tibble(x = lapl())) +
+  geom_density(aes(x = x)) +
+  theme_minimal(base_size = 11) +
+  theme(
+    axis.text.y = element_blank(),
+    panel.grid.minor = element_blank(), panel.grid.major.y = element_blank()
+  ) +
+  labs(y = "", title = "Density plot of 1,000 draws")
+```
 
 \newpage
 # Question 7
