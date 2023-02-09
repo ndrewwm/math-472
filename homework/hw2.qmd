@@ -33,16 +33,32 @@ all(posint_gamma(1:4) == gamma(1:4))
 \newpage
 # Question 2
 
+We have 
+$$
+f(x; p) = \begin{cases}
+  p(1 - p)^x, x = 0, 1, 2, 3, \cdots \\
+  0, \text{ otherwise.}
+\end{cases}
+$$
+
+We want the recursive formula for $f(x + 1; p) = L \cdot f(x; p).$
+
+Solving for $L$, we see
+\begin{align*}
+  f(x + 1; p) &= L \cdot f(x; p) \\
+  p(1 - p)^{(x + 1)} &= L \cdot p(1 - p)^x \\
+  p(1 - p)^x(1 - p)^1 &= L \cdot p(1 - p)^x \\
+  (1 - p) &= L.
+\end{align*}
+
 \newpage
 # Question 3
 
-Let $X$ be a discrete random variable with the following cdf, and pdf:
+Let $X$ be a discrete R.V. where $x_1 = 10, x_2 = 30, x_3 = 50, x_4 = 70, x_5 = 90$, and having the following cdf:
 
 |         $X$          | 10   | 30   | 50   | 70   | 90   |
 | :------------------: | :--: | :--: | :--: | :--: | :--: |
 | $F(x) = P(X \leq x)$ | 0.27 | 0.41 | 0.64 | 0.92 | 1.00 |
-
-Now let $x_1 = 10, x_2 = 30, x_3 = 50, x_4 = 70, x_5 = 90.$
 
 <!-- step 1. generate u ~ U(0, 1) -->
 <!-- step 2. assign X = x_i if F(x_i - 1) < u <= F(x_i) -->
@@ -56,24 +72,15 @@ f <- function(print_check = FALSE) {
   p <- c(0.27, 0.41, 0.64, 0.92, 1)
   keep <- dplyr::lag(p, default = 0) < u & u <= p
 
-  # print the check if requested
   if (print_check) print(data.frame(x, p, u, keep))
 
-  # keep the entry of x that passes the check
   x[keep]
 }
 
-# run once as an example
-f(print_check = TRUE)
+f(print_check = TRUE) # run once as an example
 
-# examine the distribution, take 10k samples
-x <- replicate(10000, f())
-
-x |>
-  table() |>
-  prop.table() |>
-  cumsum() |>
-  round(2)
+x <- replicate(10000, f()) # examine the distribution, take 10k samples
+x |> table() |> prop.table() |> cumsum() |> round(2)
 ```
 
 \newpage
@@ -101,6 +108,65 @@ f_inv(c(0.37, 0.45, 0.82)) |> round(digits = 5)
 \newpage
 # Question 5
 
+<!-- TODO: Q5 Do Exercises 3.4 in textbook. If you use the inverse transform method, you should show all your work
+(calculation of the c.d.f., your algorithm, and an R code.) -->
+
+The Rayleigh density is
+$$
+f(x) = \frac{x}{\sigma^2}e^{-x^2 / 2\sigma^2}, x \geq 0, \sigma > 0.
+$$
+
+Develop an algorithm to generate random samples from a $Rayleigh(\sigma)$ distribution. Generate samples for several choices of $\sigma > 0$ and check that the mode of the generated samples is close to the theoretical mode $\sigma$ (check the histogram).
+
+We will use the inverse-transformation method. First, we need to find the cdf $F_X(x)$:
+\begin{align*}
+  F_X(x) &= \int_{-\infty}^x f(t)\ dt \\
+         &= \int_{-\infty}^0 0\ dt + \int_0^x \frac{t}{\sigma^2} e^{-t^2 / 2\sigma^2}\ dt \\
+         &= \int_0^x \frac{t}{\sigma^2} e^{-t^2 / 2\sigma^2}\ dt \\
+         &= -\int_0^x e^u\ du \tag{let $u = \frac{-t}{2\sigma^2}$ and $du = \frac{-t}{\sigma^2}\ dt$} \\
+         &= -e^u\ \Bigg|_{t=0}^{t=x} \\
+         &= -e^{\frac{-t^2}{2\sigma^2}}\ \Bigg|_{t=0}^{t=x} = \Bigl(-e^{\frac{-x^2}{2\sigma^2}} - (-1) \Bigr) = 1 - e^{\frac{-x^2}{2\sigma^2}}, x \geq 0, \sigma > 0.
+\end{align*}
+
+We now need to find $F_X^{-1}(u) = x$:
+\begin{align*}
+  F_X(x) = u &\implies 1 - e^{-x^2}{2\sigma^2} = u \\
+             &\implies 1 - u = e^{-x^2}{2\sigma^2} \\
+             &\implies -2\sigma^2 ln(1 - u) = x^2 \\
+             &\implies \sqrt{-2\sigma^2 ln(1 - u)} = x \\
+             &\implies F_X^{-1}(u) = x.
+\end{align*}
+
+We can then apply the algorithm:
+
+1. Generate $u \sim U(0, 1)$
+2. Compute $X'(u) = F_X^{-1}(u)$ to get realizations from $X$.
+
+Demonstrations with several values of $\sigma$, using R.
+```{r}
+library(tidyverse)
+library(patchwork)
+
+finv <- function(u, sigma) sqrt(-2*sigma^2 * log(1- u))
+
+gen_density <- function(n = 1000, sigma = 1) {
+  dat <- tibble(u = runif(n, 0, 1), x = finv(u, sigma))
+
+  ggplot(dat, aes(x = x)) +
+    geom_vline(xintercept = sigma, lty = "dotted") +
+    geom_density() +
+    labs(title = str_glue("Sigma = {sigma}"), x = "x", y = "") +
+    theme_minimal(base_size = 11) +
+    theme(
+      axis.text.y = element_blank(),
+      panel.grid.minor = element_blank(), panel.grid.major.y = element_blank()
+    )
+}
+
+(gen_density(sigma = 1) | gen_density(sigma = 2) | gen_density(sigma = 3)) /
+  (gen_density(sigma = 4) | gen_density(sigma = 5) | gen_density(sigma = 6))
+```
+
 \newpage
 # Question 6
 
@@ -116,5 +182,7 @@ F(x) &= \int_{-\infty}^{x} f(t)\ dt \\
 
 \newpage
 # Question 7
+
+<!-- TODO: Q7 -->
 
 
