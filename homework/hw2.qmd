@@ -108,9 +108,6 @@ f_inv(c(0.37, 0.45, 0.82)) |> round(digits = 5)
 \newpage
 # Question 5
 
-<!-- TODO: Q5 Do Exercises 3.4 in textbook. If you use the inverse transform method, you should show all your work
-(calculation of the c.d.f., your algorithm, and an R code.) -->
-
 The Rayleigh density is
 $$
 f(x) = \frac{x}{\sigma^2}e^{-x^2 / 2\sigma^2}, x \geq 0, \sigma > 0.
@@ -183,6 +180,81 @@ F(x) &= \int_{-\infty}^{x} f(t)\ dt \\
 \newpage
 # Question 7
 
-<!-- TODO: Q7 -->
+We will use the Box-Mueller Transform to generate samples from standard normal distributions.
 
+```{r}
+bmt <- function(n) {
+  u1 <- runif(n, 0, 1)
+  u2 <- runif(n, 0, 1)
 
+  r <- sqrt(-2*log(u1))
+  theta <- 2*pi*u2
+  x <- r*cos(theta)
+  y <- r*sin(theta)
+
+  data.frame(x, y)
+}
+```
+
+## (a)
+
+10 values from $\chi^2(5).$
+
+```{r}
+dat <- bmt(25)
+
+indices <- seq(1, 25, 5)
+chi <- numeric()
+for (element in indices) {
+  x2 <- c(sum(dat$x[element:element + 4]^2), sum(dat$y[element:element + 4]^2))
+  chi <- c(chi, x2)
+}
+
+print(chi)
+```
+
+## (b)
+
+10 values from $t(3).$
+
+```{r}
+dat <- bmt(30)
+
+z <- dat$x[1:10]
+v <- numeric()
+q <- 3
+
+indices <- seq(1, q * 10, q)
+for (element in indices) {
+  x2 <- sum(dat$y[element:element + (q - 1)]^2)
+  v <- c(v, x2)
+}
+
+z / sqrt(v / q)
+```
+
+## (c)
+
+10 values from $F(6, 10).$
+
+```{r}
+dat <- bmt(100)
+
+v <- numeric()
+m <- 6
+vind <- seq(1, m * 10, m)
+for (element in vind) {
+  x2 <- sum(dat$x[element:element + (m - 1)]^2)
+  v <- c(v, x2)
+}
+
+w <- numeric()
+n <- 10
+wind <- seq(1, n * 10, n)
+for (element in wind) {
+  x2 <- sum(dat$y[element:element + (n - 1)]^2)
+  w <- c(w, x2)
+} 
+
+(v / m) / (w / n)
+```
