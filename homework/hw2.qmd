@@ -36,7 +36,7 @@ all(posint_gamma(1:4) == gamma(1:4))
 \newpage
 # Question 3
 
-Let $X$ be a discrete random variable with the following cdf:
+Let $X$ be a discrete random variable with the following cdf, and pdf:
 
 |         $X$          | 10   | 30   | 50   | 70   | 90   |
 | :------------------: | :--: | :--: | :--: | :--: | :--: |
@@ -44,25 +44,36 @@ Let $X$ be a discrete random variable with the following cdf:
 
 Now let $x_1 = 10, x_2 = 30, x_3 = 50, x_4 = 70, x_5 = 90.$
 
+<!-- step 1. generate u ~ U(0, 1) -->
+<!-- step 2. assign X = x_i if F(x_i - 1) < u <= F(x_i) -->
+
 ```{r}
-x <- c(10, 30, 50, 70, 90)
+set.seed(20230208)
 
-# the CDF of X
-F_X <- function(x) {  
-  dplyr::case_when(
-    x < 10           ~ 0.00,
-    x >= 10 & x < 30 ~ 0.27,
-    x >= 30 & x < 50 ~ 0.41,
-    x >= 50 & x < 70 ~ 0.64,
-    x >= 70 & x < 90 ~ 0.92,
-    x > 90           ~ 1.00,
-  )
+f <- function(print_check = FALSE) {
+  u <- runif(1, 0, 1)
+  x <- c(10, 30, 50, 70, 90)
+  p <- c(0.27, 0.41, 0.64, 0.92, 1)
+  keep <- dplyr::lag(p, default = 0) < u & u <= p
+
+  # print the check if requested
+  if (print_check) print(data.frame(x, p, u, keep))
+
+  # keep the entry of x that passes the check
+  x[keep]
 }
 
-f <- function(x) {
-  u <- runif(n = length(x), 0, 1)
+# run once as an example
+f(print_check = TRUE)
 
-}
+# examine the distribution, take 10k samples
+x <- replicate(10000, f())
+
+x |>
+  table() |>
+  prop.table() |>
+  cumsum() |>
+  round(2)
 ```
 
 \newpage
