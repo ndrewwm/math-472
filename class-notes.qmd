@@ -424,3 +424,32 @@ gen <- function() {
 out <- replicate(1000, gen())
 prop.table(table(out))
 ```
+
+# 2/9/2023
+
+## Summary
+
+Covering random processes.
+
+## Notes
+
+```{r}
+gen_poisson <- function(t0, lambda) {
+  s <- 0; i <- 0
+
+  while (s <= t0) {
+    u <- runif(1, 0, 1)
+    t <- -log(1 - u) / lambda  # inverse transform to draw from Exp(lambda)
+    s <- s + t
+    i <- i + 1
+  }
+
+  return(i - 1)
+}
+
+gen_poisson(10, 2)
+
+x <- replicate(1000, gen_poisson(8, 3))
+
+hist(x)
+```
