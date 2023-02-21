@@ -196,6 +196,8 @@ summary(fit)
 
 ## Summary
 
+Two parameter MLE, `optim()`, Inverse Transform Method
+
 ## Notes
 
 - data analysis: you have a sample
@@ -254,9 +256,9 @@ optim(c(20, 19), ll, sumx = sum(x), sumlogx = sum(log(x)), n = length(x))
 
 ## Summary
 
-## Notes
-
 More on the Inverse Transform Method.
+
+## Notes
 
 ```{r}
 # given an exponential distribution
@@ -302,6 +304,8 @@ cumsum(.Last.value)
 # 2/2/2023
 
 ## Summary
+
+Process of computational methods, acceptance-rejection method
 
 ## Notes
 
@@ -388,6 +392,8 @@ hist(x_actual)
 
 ## Summary
 
+Acceptance-rejection method for discrete random variables
+
 ## Notes
 
 Acceptance-rejection method for discrete random variables.
@@ -429,7 +435,7 @@ prop.table(table(out))
 
 ## Summary
 
-Covering random processes.
+Covering random processes (counting processes, poisson processes, renewal processes).
 
 ## Notes
 
@@ -453,3 +459,10 @@ x <- replicate(1000, gen_poisson(8, 3))
 
 hist(x)
 ```
+
+# 2/21/23
+
+## Summary
+
+## Notes
+
