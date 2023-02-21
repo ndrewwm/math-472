@@ -439,6 +439,8 @@ Covering random processes (counting processes, poisson processes, renewal proces
 
 ## Notes
 
+- random processes depend on an **index**, often *time*
+
 ```{r}
 gen_poisson <- function(t0, lambda) {
   s <- 0; i <- 0
@@ -466,3 +468,112 @@ hist(x)
 
 ## Notes
 
+- We'll get back the exam results this Thursday.
+  - We'll have a chance to correct scores (if they're really bad?)
+
+- We're skipping chapter 5 (which covers data visualization), and move to chapter 6
+
+- Chapter 6 utilizes the process of generating random numbers (ch. 3), but we won't use methods such as inverse-transform; we'll use built-in methods from R
+
+$x_1, x_2, \cdots, x_n \sim Exp(\lambda)$
+
+$$
+f_X(x) = \begin{cases}
+  \lambda \cdot e^{-\lambda x} & x \geq 0, \lambda > 0 \\
+  0 & \text{ otherwise.}
+\end{cases}
+$$
+
+$u \equiv F_X(x) = 1 - e^{-\lambda x}$
+$x \to -\frac{1}{\lambda}ln(1 - u)$
+
+```{r}
+lambda <- 3
+n <- 10
+x <- 1
+p <- 0.7
+
+rexp(n, lambda) # x_i ~ f(x)             -- random draws
+pexp(x, lambda) # P(X <= x)              -- CDF, cumulative probability
+dexp(x, lambda) # P(X == x)?             -- density
+qexp(p, lambda) # x* s.t. P(X <= x*) = p -- quantile
+```
+
+```{r}
+mu <- 5
+sd <- 3
+
+rnorm(1, mu, sd)
+pnorm(5, mu, sd)
+qnorm(0.75, mu, sd)
+```
+
+- covering use of `set.seed()`
+
+Example. Suppose $u \sim U(0, 1)$, and
+$$
+F_u(u^*) \equiv P(U \leq u^*) = \int_0^{u^*} f_u(u)\ du = \int_0^{u^*} 1\ du = u^*
+$$
+
+Demonstration of theorem, using $punif()$.
+
+```{r}
+punif(0.6, 0, 1)
+```
+
+### Monte Carlo Integration
+
+<!-- hell yea, new topics -->
+
+$$
+\int_0^1 e^{-x}\ dx
+$$
+
+In numerical integration (Simpson's rule, midpoint rule, etc.), you can learn to integrate something like the above.
+
+However, in statistics, we accomplish this by generating random numbers.
+
+```{r}
+u <- runif(1000000, 0, 1)
+mean(exp(-u))
+
+1 - exp(-1)
+```
+
+Monte Carlo integration relies on the *Strong Law of Large Numbers.*
+
+Let $g(x)$ be a function of random variable $X$ with pdf $f_X(x)$. Then let
+$$
+\theta = E(g(X)) = \int_{-\infty}^{\infty} g(x)f_X(x)\ dx
+$$
+
+If one has a random sample of size $n$, $x_1, x_2, \cdots, x_n$ from $f_X(x)$, then $\hat{\theta} = \sum_{i = 1}^{n} g(x_i) / n$ converges to $\theta$ with probability 1 by the Strong Law of Large Numbers.
+
+Example:
+
+$$
+\theta = E(g(X)) = \int_0^1 x\ dx = \int_0^1 x \cdot \frac{1}{1 - 0}\ dx = \frac{1}{2}
+$$
+
+```{r}
+n1 <- 500
+n2 <- 5000
+
+u1 <- runif(n1, 0, 1)
+u2 <- runif(n2, 0, 1)
+
+# g(x) = x
+mean(u1)
+mean(u2)
+```
+
+$$
+\theta = \int_a^b g(x)\ dx = (b - a) \cdot \int_a^b g(x) \cdot \frac{1}{b - a}\ dx
+$$
+
+```{r}
+-exp(-5) - (-exp(-2))
+
+u <- runif(1000, 2, 5)
+(5 - 2) * mean(exp(-u))
+```
