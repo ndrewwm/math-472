@@ -466,6 +466,8 @@ hist(x)
 
 ## Summary
 
+Monte-Carlo Integration, `rnorm()`, `qnorm()`, etc.
+
 ## Notes
 
 - We'll get back the exam results this Thursday.
@@ -577,3 +579,39 @@ $$
 u <- runif(1000, 2, 5)
 (5 - 2) * mean(exp(-u))
 ```
+
+# 2/23/23
+
+## Summary
+
+## Notes
+
+- turn in corrections to your exam to Dr. Ko's office, by 12pm tomorrow.
+
+- Why do we like the sample mean (for estimating $\mu$)?
+  - it uses the same formula! this is why the strong law of large numbers is powerful
+  - sample median won't necessarily converge to population mean, e.g. when th epopulation distribution isn't symmetric
+
+```{r}
+library(purrr)
+
+mc_integrate <- function(g, a = 0, b = 1, n) {
+  u <- runif(n, a, b)
+  (b - a) * mean(g(u))
+}
+
+f <- function(x) exp(-x)
+
+map_dbl(c(10, 100, 1000, 10000, 100000), ~mc_integrate(f, 2, 4, .))
+
+# true value
+exp(-2) - exp(-4)
+
+h <- function(x) 10 * exp(-10 * x)
+map_dbl(c(10, 1000, 1000000), ~mc_integrate(h, 0, 2, .))
+
+# true value
+integrate(h, 0, 2)
+```
+
+Currently, we've been checking the difference between our estimates and the true value. This is a measure of *bias* against true parameter values. However, we'll discuss measurements of variance in a future class.
