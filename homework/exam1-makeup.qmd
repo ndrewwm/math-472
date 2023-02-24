@@ -1,0 +1,90 @@
+---
+title: "MATH-472: Exam 1 Makeup"
+author: "Andrew Moore"
+date: "2/23/23"
+knitr:
+  opts_chunk: 
+    echo: true
+    warning: false
+    message: false
+format:
+  pdf:
+    include-in-header:
+      text: |
+        \usepackage{physics}
+---
+
+# Question 2 (a)
+
+Let $f(x) = \frac{1}{\sqrt{2\pi}}\ e^{-x^2 / 2}$ and $g(x) = \frac{1}{\pi(1 + x^2)}$. Then
+$\frac{f(x)}{g(x)} = \frac{\pi}{\sqrt{2\pi}} \cdot (1 + x^2) \cdot e^{-x^2 / 2}.$
+
+We want to find the maximum of $\frac{f(x)}{g(x)}$. Taking the derivative, we have
+\begin{align*}
+  \dv{x}\Bigl[ \frac{f(x)}{g(x)} \Bigr] &= \frac{\pi}{\sqrt{2\pi}} \Bigl( \dv{x}\Bigl[ e^{-x^2 / 2} \Bigr] + \dv{x}\Bigl[x^2 e^{-x^2 / 2} \Bigr] \Bigr) \\
+  &= \frac{\pi}{\sqrt{2\pi}} (-x e^{-x^2 / 2}) + \frac{\pi}{\sqrt{2\pi}} (2x e^{-x^2 / 2} - x^3 e^{-x^2 / 2}) \\
+  &= \frac{\pi}{\sqrt{2\pi}} (x e^{-x^2 / 2} - x^3 e^{-x^2 / 2}).
+\end{align*}
+
+Setting the derivative equal to zero, we see that
+\begin{align*}
+  \dv{x}\Bigl[ \frac{f(x)}{g(x)} \Bigr] &= 0 \\
+   \frac{\pi}{\sqrt{2\pi}} (x e^{-x^2 / 2} - x^3 e^{-x^2 / 2}) &= 0 \\
+   x e^{-x^2 / 2} - x^3 e^{-x^2 / 2}  &= 0 \\
+   x e^{-x^2 / 2} &= x^3 e^{-x^2 / 2} \\
+   x &= x^3 \\
+   1 &= x^2 \\
+   \text{thus, } x &= -1, 1.
+\end{align*}
+
+Evaluating $\frac{f(x)}{g(x)}$ at the maximum to determine $c$, we have
+$$
+c = \frac{f(-1)}{g(-1)} = \frac{f(1)}{g(1)} = \frac{\pi}{\sqrt{2\pi}} \cdot 2 \cdot e^{-1/2} \approx 1.5203.
+$$
+
+Thus, the probability of acceptance is
+$$
+Pr(\text{Accept}) = \frac{1}{c} \approx \frac{1}{1.5203} \approx 0.6577.
+$$
+
+# Question 2 (b)
+
+The probability of rejection for a single iteration is
+$$
+Pr(\text{Reject}) = 1 - \frac{1}{c} \approx 1 - 0.6577 \approx 0.3423.
+$$
+
+Thus, approximately 34 of 100 simulated numbers will be rejected, on average.
+
+# Question 3
+
+In determining the c.d.f. of $X$, I was too hasty and differentiated at key point instead of taking the anti-derivative. Here is a hopefully correct version of $F_X(x)$ and its inverse:
+
+\begin{align*}
+  F_X(x) &= \int_{-\infty}^x f_X(t)\ dt  \\
+         &= \int_0^x \theta t^{\theta - 1}\ dt \\
+         &= \theta \cdot \frac{1}{\theta} \cdot t^{\theta} \Big|_{t = 0}^{t = x} \\
+         &= (x^{\theta} - 0^{\theta}) \\
+         &= x^{\theta}, \text{ where } 0 \leq x \leq 1, 0 < \theta < \infty.
+\end{align*}
+
+\begin{align*}
+  F_X(x) = u &\Rightarrow u = x^{\theta} \\
+             &\Rightarrow ln(u) = \theta ln(x) \\
+             &\Rightarrow \frac{ln(u)}{\theta} = ln(x) \\
+             &\Rightarrow u \cdot e^{-\theta} = x \\
+             &\Rightarrow u \cdot e^{-\theta} = F^{-1}_X(u).
+\end{align*}
+
+# Question 4 (b) ii.
+
+```{r}
+x <- c(0.9746, 0.8314, 0.9658, 0.8702, 0.8508, 0.6498, 0.7398, 0.9439)
+
+neglog <- function(theta) -(8 * log(theta) + (theta - 1) * sum(log(x)))
+
+fit <- stats4::mle(neglog, start = 5)
+print(fit)
+
+print(8 / 1.336)
+```
