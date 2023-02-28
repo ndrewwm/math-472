@@ -584,13 +584,15 @@ u <- runif(1000, 2, 5)
 
 ## Summary
 
+More on Monte-Carlo integration, discussion of why sample mean is preferred vs. other estimators wrt the law of large numbers.
+
 ## Notes
 
 - turn in corrections to your exam to Dr. Ko's office, by 12pm tomorrow.
 
 - Why do we like the sample mean (for estimating $\mu$)?
   - it uses the same formula! this is why the strong law of large numbers is powerful
-  - sample median won't necessarily converge to population mean, e.g. when th epopulation distribution isn't symmetric
+  - sample median won't necessarily converge to population mean, e.g. when the population distribution isn't symmetric
 
 ```{r}
 library(purrr)
@@ -615,3 +617,66 @@ integrate(h, 0, 2)
 ```
 
 Currently, we've been checking the difference between our estimates and the true value. This is a measure of *bias* against true parameter values. However, we'll discuss measurements of variance in a future class.
+
+# 2/28/23
+
+## Summary
+
+## Notes
+
+- Homework 3 assigned
+- Exam corrections returned (I got 89%?)
+
+###
+
+$Pr(0 \leq x \leq 5)$ where
+$$
+f_X(x) = \begin{cases}
+10 \cdot e^{-10x}, & x \geq 0 \\
+0, & \text{ otherwise}
+\end{cases}
+$$
+
+```{r}
+f <- function(x) 10 * exp(-10 * x)
+mc_integrate(f, 0, 5, 100000)
+```
+
+```{r}
+cdf_exp_b <- function(x, lambda, n) {
+  u <- runif(n, 0, 1)
+  x * mean(lambda * exp(-lambda * x * u))
+}
+
+u <- cdf_exp_b(6, 20, 100)
+l <- cdf_exp_b(2, 20, 100)
+
+u - l
+
+pexp(6, 1/20) - pexp(2, 1/20)
+```
+
+### Example from class: write a function to generate a Z-table
+
+```{r}
+# Compare results to textbook example 6.3
+
+# density of Z ~ N(0, 1), 
+theta <- function(x, u) {
+  mean(1 / sqrt(2 * pi) * x * exp((-x^2 * u^2) / 2))
+}
+
+z_cdf <- function(x, n) {
+  u <- runif(n, 0, 1)
+
+  # Z ~ N(0, 1) is symmetric about 0
+  if (x >= 0) {
+    0.5 + theta(x, u)
+  } else {
+    1 - 0.5 - theta(-x, u)
+  }
+}
+
+z_cdf(2, 100000)
+pnorm(2)
+```
