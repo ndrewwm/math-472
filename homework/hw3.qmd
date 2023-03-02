@@ -1,0 +1,23 @@
+---
+title: "MATH-472: Homework 3"
+author: "Andrew Moore"
+date: "3/9/23"
+knitr:
+  opts_chunk: 
+    echo: true
+    warning: false
+    message: false
+format:
+  html: default
+  pdf:
+    include-in-header:
+      text: |
+        \usepackage{cancel}
+---
+
+# Question 1
+
+Do 6.1, 6.3, 6.6, 6.9, 6.10 in the exercises of Chapter 6.
+
+\newpage
+# Question 2

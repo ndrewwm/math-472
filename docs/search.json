@@ -1,0 +1,233 @@
+[
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "MATH-472: Homework 1\n\n\n\n\n\n\n\n\n\n\n\n\nJan 25, 2023\n\n\nAndrew Moore\n\n\n\n\n\n\n\n\nMATH-472: Homework 2\n\n\n\n\n\n\n\n\n\n\n\n\nFeb 9, 2023\n\n\nAndrew Moore\n\n\n\n\n\n\n\n\nMATH-472: Exam 1 Makeup\n\n\n\n\n\n\n\n\n\n\n\n\nFeb 23, 2023\n\n\nAndrew Moore\n\n\n\n\n\n\n\n\nMATH-472: Homework 3\n\n\n\n\n\n\n\n\n\n\n\n\nMar 9, 2023\n\n\nAndrew Moore\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "math-472",
+    "section": "",
+    "text": "This is my course website for MATH-472, Computational Statistics. I took this course during Spring 2023; it was taught by Dr. Ko at Boise State University.\nAs much as possible, I tried to keep good notes in LaTeX format during the lectures, although they’re somewhat incomplete. Some of what was discussed I noted by hand. These notes can be found here.\nI also host my homework submissions on this site. They can be found here. I plan on uploading feedback and corrections, if I have time."
+  },
+  {
+    "objectID": "homework/hw1.html",
+    "href": "homework/hw1.html",
+    "title": "MATH-472: Homework 1",
+    "section": "",
+    "text": "Question 1\nLet \\(U\\) be a random variable with support \\(\\mathbb{R}_U = (0, 1).\\)\nDefine the pdf and cdf of \\(U\\) respectively as \\[\nf_U(u) = \\begin{cases}\n  \\frac{1}{1} & 0 < u < 1 \\\\\n  0 & \\text{otherwise}\n\\end{cases}\n\\]\n\\[\nF_U(u) = \\begin{cases}\n  0 & 0 \\leq 0 \\\\\n  u & 0 < u < 1 \\\\\n  1 & u \\geq 1\n\\end{cases}\n\\]\nLet \\(T = e^U.\\) Then, \\(g(u) = e^u\\) is strictly increasing on \\((0, 1).\\) So, we then have \\(g^{-1}(t) = ln(t).\\)\nDefine \\(F_T(t)\\) and \\(f_T(t)\\) as \\[\nF_T(t) = \\begin{cases}\n  0 & t \\leq 1 \\\\\n  F_U(g^{-1}(t)) = ln(t) & 1 < t < e \\\\\n  1 & t \\geq e.\n\\end{cases}\n\\]\n\\[\nf_T(t) = \\frac{d}{dt} F_T(t) = \\begin{cases}\n  ln(t) \\cdot \\frac{1}{t} & t \\in (0, 1) \\\\\n  0 & \\text{otherwise}.\n\\end{cases}\n\\]\n\\[\\begin{align*}\nE[T] &= \\int_{-\\infty}^{\\infty} t f(t)\\ dt \\\\\n  &= \\int_{1}^{e} t \\frac{ln(t)}{t}\\ dt \\\\\n  &= \\int_{1}^{e} ln(t)\\ dt \\\\\n  &= t ln(t) \\Big|_1^e - \\int_1^e \\ dt \\\\\n  &= (e ln(e) - ln(1)) - t \\Big|_1^e \\\\\n  &= e - e + 1 \\\\\n  &= 1.\n\\end{align*}\\]\n\\[\\begin{align*}\nE[T^2] &= \\int_{-\\infty}^{\\infty} t^2 f(t)\\ dt \\\\\n  &= \\int_{1}^{e} t^2 \\frac{ln(t)}{t}\\ dt \\\\\n  &= \\int_1^e t ln(t)\\ dt \\\\\n  & \\int_1^e u\\ dv = uv\\Big|_1^e - \\int_1^e v\\ du \\\\\n  & \\text{let } u = ln(t), du = \\frac{1}{t}\\ dt, v = \\frac{1}{2} t^2, dv = t\\ dt \\\\\n  &= \\frac{1}{2} t^2 ln(t) \\Big|_1^e - \\frac{1}{2} \\int_1^e t\\ dt \\\\\n  &= \\frac{1}{2}e^2 - \\frac{1}{4} t^2 \\Big|_1^e \\\\\n  &= \\frac{1}{2}e^2 - \\frac{1}{4}(e^2 - 1) \\\\\n  &= \\frac{1}{2}e^2 - \\frac{1}{4}e^2 + \\frac{1}{4} \\\\\n  &= \\frac{1}{4}e^2 + \\frac{1}{4} \\\\\n  &= \\frac{1}{4}(e^2 + 1).\n\\end{align*}\\]\n\\[\nVar(T) = E[T^2] - (E[T])^2 = \\frac{1}{4}(e^2 + 1) - 1 = \\frac{1}{4}e^2 - \\frac{3}{4}.\n\\]\nLet \\(l(u) = u.\\)\n\\[\nE[l(u)] = \\int_{-\\infty}^\\infty u l(u)\\ du = \\int_0^1 u\\ du = \\frac{1}{2}u^2 \\Big|_0^1 = \\frac{1}{2}\n\\]\n\\[\nE[l(u)^2] = \\int_{-\\infty}^\\infty u^2 l(u)\\ du = \\int_0^1 u^2\\ du = \\frac{1}{3} u^3 \\Big|_0^1 = \\frac{1}{3}\n\\]\n\\[\nVar(l(u)) = E[l(u)^2] - (E[l(u)])^2 = \\frac{1}{2} - \\frac{1}{3} = \\frac{1}{6}\n\\]\n\n\n\nQuestion 2\nLet \\(I(x) = \\begin{cases} 1 & 0 < X < 0.5 \\\\ 0 & \\text{otherwise} \\end{cases}\\), where \\(X \\sim Uniform(0, 1)\\).\n\\[\\begin{align*}\nP(X \\leq 0.5) &= F(0.5) = \\int_{0}^{0.5} \\frac{1}{1 - 0}\\ dx = x\\Big|_{0}^{0.5} \\\\\n  &= (0.5 - 0) \\\\\n  &= 0.5 \\\\\n  &= 1 \\cdot (0.5) + 0 \\cdot (0.5) \\\\\n  &= P(I(x) = 1) + P(I(x) = 0) \\\\\n  &= E[I(x)].\n\\end{align*}\\]\n\\[\n\\int_0^c 1\\ dx = x \\Big|_0^c = (c - 0) = c(1 - 0) = c\\Bigl[ y \\Bigr]_0^1 = \\int_0^1 c\\ dy\n\\]\n\n\n\nQuestion 3\nLet \\(x_1, x_2, \\cdots, x_{10} \\stackrel{i.i.d.}{\\sim} f(x_i; \\sigma^2) = \\begin{cases} \\frac{x}{\\sigma^2} e^{\\frac{-x^2}{2\\sigma^2}} & x > 0, \\sigma^2 > 0 \\\\ 0 & \\text{otherwise} \\end{cases}.\\)\nFirst, we find the likelihood function \\(L(\\sigma^2)\\) and the log-likelihood function \\(\\ell(\\sigma^2)\\).\n\\[\\begin{align*}\nL(\\sigma^2) = \\prod_{i=1}^{10} f(x_i ; \\sigma^2) &= \\prod_{i=1}^{10} \\frac{x_i}{\\sigma^2} e^{\\frac{-x^2_i}{2\\sigma^2}} \\\\\n  &= \\bigl( \\prod_{i=1}^{10} \\frac{x_i}{\\sigma^2} \\bigr)\\bigl( \\prod_{i=1}^{10} e^{\\frac{-x^2_i}{2\\sigma^2}} \\bigr) \\\\\n  &= \\bigl( \\prod_{i=1}^{10} \\frac{x_i}{\\sigma^2} \\bigr) e^{\\frac{-1}{2\\sigma^2} \\sum_{i = 1}^{10} x^2_i}.\n\\end{align*}\\]\n\\[\\begin{align*}\n\\ell(\\sigma^2) = ln[L(\\sigma^2)] &= ln\\Bigl[ \\bigl( \\prod_{i=1}^{10} \\frac{x_i}{\\sigma^2} \\bigr) e^{\\frac{-1}{2\\sigma^2} \\sum_{i = 1}^{10} x^2_i} \\Bigr] \\\\\n  &= ln\\bigl( \\prod_{i=1}^{10} \\frac{x_i}{\\sigma^2} \\bigr) + ln\\bigl( e^{\\frac{-1}{2\\sigma^2} \\sum_{i = 1}^{10} x^2_i} \\bigr) \\\\\n  &= \\sum_{i = 1}^{10} ln(\\frac{x_i}{\\sigma^2}) - \\frac{1}{2\\sigma^2}\\sum_{i=1}^{10} x^2_i \\\\\n  &= \\sum_{i = 1}^{10} (ln(\\frac{1}{\\sigma^2}) + ln(x_i)) - \\frac{1}{2\\sigma^2}\\sum_{i=1}^{10} x^2_i \\\\\n  &= 10ln(\\frac{1}{\\sigma^2}) + \\sum_{i=1}^{10} ln(x_i) - \\frac{1}{2\\sigma^2}\\sum_{i=1}^{10} x^2_i\n\\end{align*}\\]\nTaking the derivative and setting it equal to zero, we solve for \\(\\hat{\\sigma^2}\\):\n\\[\\begin{align*}\n  \\frac{d}{d\\sigma} [\\ell(\\sigma^2)] &= \\frac{-20}{\\sigma} + \\frac{1}{\\sigma^3}\\sum_{i=1}^{10} x^2_i \\\\\n  0 &\\stackrel{set}{=} \\frac{-20}{\\sigma} + \\frac{1}{\\sigma^3}\\sum_{i=1}^{10} x^2_i  \\\\\n  \\implies \\frac{20}{\\sigma} &= \\frac{1}{\\sigma^3}\\sum_{i=1}^{10} x^2_i \\\\\n  \\implies \\hat{\\sigma^2} &= \\frac{\\sum_{i=1}^{10} x^2_i}{20} \\\\\n  \\implies \\hat{\\sigma^2} &\\approx 74.50549.\n\\end{align*}\\]\nEvaluating the second derivative at \\(\\hat{\\sigma^2}\\) we see\n\\[\\begin{align*}\n  \\frac{d^2}{d\\sigma^2}[\\ell(\\sigma^2)]_{\\sigma^2 = 74.50549} &= \\frac{d}{d\\sigma} \\Bigl[\\frac{-20}{\\sigma} + \\frac{1}{\\sigma^3}\\sum_{i=1}^{10} x^2_i \\Bigr]_{\\sigma^2 = 74.50549} \\\\\n   &= \\frac{20}{\\sigma^2} - \\frac{3}{\\sigma^4} \\sum_{i=1}^{10} x^2_i \\Big|_{\\sigma^2 = 74.50549} \\\\\n   &\\approx 0.2684366 - 0.8053076 \\\\\n   &< 0 \\\\\n   &\\therefore \\sigma^2 \\text{ is a local maximum.}\n\\end{align*}\\]\nWe now confirm these results numerically.\n\nx <- c(16.88, 10.23, 4.59, 6.66, 13.68, 14.23, 19.87, 9.40, 6.51, 10.95)\n\nll <- function(sigma) {\n  -(10 * log(1 / sigma^2) + sum(log(x)) - (1 / (2*sigma^2)) * sum(x^2))\n}\n\nstats4::mle(ll, 10)\n\n\nCall:\nstats4::mle(minuslogl = ll, start = 10)\n\nCoefficients:\n   sigma \n8.631656 \n\n\nSquaring the coefficient (approximately) matches our analytical calculation for \\(\\hat{\\sigma^2}: 8.631656^2 =\\) 74.5054853."
+  },
+  {
+    "objectID": "homework/hw2.html",
+    "href": "homework/hw2.html",
+    "title": "MATH-472: Homework 2",
+    "section": "",
+    "text": "The definition of the Gamma function where \\(n \\in \\mathbb{Z}^{+}\\) is \\[\n\\Gamma(n) = (n - 1)!\n\\]\nThis can be replicated in R using the factorial() function.\n\nposint_gamma <- function(n) {\n  if (any(!is.integer(n) | n <= 0)) stop(\"n must be a positive integer.\")\n  \n  factorial(n - 1)\n}\n\nall(posint_gamma(1:4) == gamma(1:4))\n\n[1] TRUE"
+  },
+  {
+    "objectID": "homework/hw2.html#a",
+    "href": "homework/hw2.html#a",
+    "title": "MATH-472: Homework 2",
+    "section": "(a)",
+    "text": "(a)\n10 values from \\(\\chi^2(5).\\)\n\ndat <- bmt(25)\n\nindices <- seq(1, 25, 5)\nchi <- numeric()\nfor (element in indices) {\n  x2 <- c(sum(dat$x[element:element + 4]^2), sum(dat$y[element:element + 4]^2))\n  chi <- c(chi, x2)\n}\n\nprint(chi)\n\n [1] 0.768997559 0.380225654 3.472371432 1.704080166 0.008472789 0.255175259\n [7] 0.002790484 0.320066156 1.301886762 0.842165637"
+  },
+  {
+    "objectID": "homework/hw2.html#b",
+    "href": "homework/hw2.html#b",
+    "title": "MATH-472: Homework 2",
+    "section": "(b)",
+    "text": "(b)\n10 values from \\(t(3).\\)\n\ndat <- bmt(30)\n\nz <- dat$x[1:10]\nv <- numeric()\nq <- 3\n\nindices <- seq(1, q * 10, q)\nfor (element in indices) {\n  x2 <- sum(dat$y[element:element + (q - 1)]^2)\n  v <- c(v, x2)\n}\n\nz / sqrt(v / q)\n\n [1] -16.35420125  -1.80444116   1.41025368   4.11248280  -2.87063397\n [6]   3.13739856   0.55614796   0.55255069   0.02208829  -0.09158468"
+  },
+  {
+    "objectID": "homework/hw2.html#c",
+    "href": "homework/hw2.html#c",
+    "title": "MATH-472: Homework 2",
+    "section": "(c)",
+    "text": "(c)\n10 values from \\(F(6, 10).\\)\n\ndat <- bmt(100)\n\nv <- numeric()\nm <- 6\nvind <- seq(1, m * 10, m)\nfor (element in vind) {\n  x2 <- sum(dat$x[element:element + (m - 1)]^2)\n  v <- c(v, x2)\n}\n\nw <- numeric()\nn <- 10\nwind <- seq(1, n * 10, n)\nfor (element in wind) {\n  x2 <- sum(dat$y[element:element + (n - 1)]^2)\n  w <- c(w, x2)\n} \n\n(v / m) / (w / n)\n\n [1] 2.057290e+03 5.044342e-01 3.006081e+00 3.935956e-01 9.975536e+01\n [6] 3.793622e+00 5.699611e-03 3.505360e+00 2.946466e+03 1.257410e+01"
+  },
+  {
+    "objectID": "homework/exam1-makeup.html",
+    "href": "homework/exam1-makeup.html",
+    "title": "MATH-472: Exam 1 Makeup",
+    "section": "",
+    "text": "Question 2 (a)\nLet \\(f(x) = \\frac{1}{\\sqrt{2\\pi}}\\ e^{-x^2 / 2}\\) and \\(g(x) = \\frac{1}{\\pi(1 + x^2)}\\). Then \\(\\frac{f(x)}{g(x)} = \\frac{\\pi}{\\sqrt{2\\pi}} \\cdot (1 + x^2) \\cdot e^{-x^2 / 2}.\\)\nWe want to find the maximum of \\(\\frac{f(x)}{g(x)}\\). Taking the derivative, we have \\[\\begin{align*}\n  \\dv{x}\\Bigl[ \\frac{f(x)}{g(x)} \\Bigr] &= \\frac{\\pi}{\\sqrt{2\\pi}} \\Bigl( \\dv{x}\\Bigl[ e^{-x^2 / 2} \\Bigr] + \\dv{x}\\Bigl[x^2 e^{-x^2 / 2} \\Bigr] \\Bigr) \\\\\n  &= \\frac{\\pi}{\\sqrt{2\\pi}} (-x e^{-x^2 / 2}) + \\frac{\\pi}{\\sqrt{2\\pi}} (2x e^{-x^2 / 2} - x^3 e^{-x^2 / 2}) \\\\\n  &= \\frac{\\pi}{\\sqrt{2\\pi}} (x e^{-x^2 / 2} - x^3 e^{-x^2 / 2}).\n\\end{align*}\\]\nSetting the derivative equal to zero, we see that \\[\\begin{align*}\n  \\dv{x}\\Bigl[ \\frac{f(x)}{g(x)} \\Bigr] &= 0 \\\\\n   \\frac{\\pi}{\\sqrt{2\\pi}} (x e^{-x^2 / 2} - x^3 e^{-x^2 / 2}) &= 0 \\\\\n   x e^{-x^2 / 2} - x^3 e^{-x^2 / 2}  &= 0 \\\\\n   x e^{-x^2 / 2} &= x^3 e^{-x^2 / 2} \\\\\n   x &= x^3 \\\\\n   1 &= x^2 \\\\\n   \\text{thus, } x &= -1, 1.\n\\end{align*}\\]\nEvaluating \\(\\frac{f(x)}{g(x)}\\) at the maximum to determine \\(c\\), we have \\[\nc = \\frac{f(-1)}{g(-1)} = \\frac{f(1)}{g(1)} = \\frac{\\pi}{\\sqrt{2\\pi}} \\cdot 2 \\cdot e^{-1/2} \\approx 1.5203.\n\\]\nThus, the probability of acceptance is \\[\nPr(\\text{Accept}) = \\frac{1}{c} \\approx \\frac{1}{1.5203} \\approx 0.6577.\n\\]\n\n\nQuestion 2 (b)\nThe probability of rejection for a single iteration is \\[\nPr(\\text{Reject}) = 1 - \\frac{1}{c} \\approx 1 - 0.6577 \\approx 0.3423.\n\\]\nThus, approximately 34 of 100 simulated numbers will be rejected, on average.\n\n\nQuestion 3\nIn determining the c.d.f. of \\(X\\), I was too hasty and differentiated at key point instead of taking the anti-derivative. Here is a hopefully correct version of \\(F_X(x)\\) and its inverse:\n\\[\\begin{align*}\n  F_X(x) &= \\int_{-\\infty}^x f_X(t)\\ dt  \\\\\n         &= \\int_0^x \\theta t^{\\theta - 1}\\ dt \\\\\n         &= \\theta \\cdot \\frac{1}{\\theta} \\cdot t^{\\theta} \\Big|_{t = 0}^{t = x} \\\\\n         &= (x^{\\theta} - 0^{\\theta}) \\\\\n         &= x^{\\theta}, \\text{ where } 0 \\leq x \\leq 1, 0 < \\theta < \\infty.\n\\end{align*}\\]\n\\[\\begin{align*}\n  F_X(x) = u &\\Rightarrow u = x^{\\theta} \\\\\n             &\\Rightarrow ln(u) = \\theta ln(x) \\\\\n             &\\Rightarrow \\frac{ln(u)}{\\theta} = ln(x) \\\\\n             &\\Rightarrow u \\cdot e^{-\\theta} = x \\\\\n             &\\Rightarrow u \\cdot e^{-\\theta} = F^{-1}_X(u).\n\\end{align*}\\]\n\n\nQuestion 4 (b) ii.\n\nx <- c(0.9746, 0.8314, 0.9658, 0.8702, 0.8508, 0.6498, 0.7398, 0.9439)\n\nneglog <- function(theta) -(8 * log(theta) + (theta - 1) * sum(log(x)))\n\nfit <- stats4::mle(neglog, start = 5)\nprint(fit)\n\n\nCall:\nstats4::mle(minuslogl = neglog, start = 5)\n\nCoefficients:\n   theta \n5.988103 \n\nprint(8 / 1.336)\n\n[1] 5.988024"
+  },
+  {
+    "objectID": "homework/hw3.html",
+    "href": "homework/hw3.html",
+    "title": "MATH-472: Homework 3",
+    "section": "",
+    "text": "Question 1\nDo 6.1, 6.3, 6.6, 6.9, 6.10 in the exercises of Chapter 6.\n\n\n\nQuestion 2"
+  },
+  {
+    "objectID": "class-notes.html#summary",
+    "href": "class-notes.html#summary",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary\nOverview of syllabus. Covered introduction to R."
+  },
+  {
+    "objectID": "class-notes.html#notes",
+    "href": "class-notes.html#notes",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\n\nbasic operators\n\n+ / - * ^ = <-\n\nlogical operators\nassignment (Dr. Ko prefers <-)\nsum(), length(), c()\ndefinition of functions\nif/then"
+  },
+  {
+    "objectID": "class-notes.html#summary-1",
+    "href": "class-notes.html#summary-1",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary\nMore preamble. Should’ve skipped, no new material, painful."
+  },
+  {
+    "objectID": "class-notes.html#notes-1",
+    "href": "class-notes.html#notes-1",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\nContinuing where we left off. If/else statements.\n\nifelse()\n\nyou can do assignment inside of this (wild, seems inadvisible, but neat)\ne.g. ifelse(1 > 2, x <- 1, x <- 0)\n\n\n\nex2 <- 76\nifelse(\n  ex2 >= 90, grade <- 'A',\n  ifelse(\n    ex2 >= 80, grade <- 'B',\n    ifelse(ex2 >= 70, grade <- 'C', '')\n  )\n)\n\n[1] \"C\"\n\n\n\nArrays: used to store results of computations\n\none dimension: vectors e.g. x <- numeric(k) for a numeric vector of size k\ntwo dimensions: matrices\n\n\\(A_{2 \\times 3}\\)\ne.g. y <- matrix(0, nrow = m, ncol = n) for a m x n 0 matrix.\n\nmore dimensions\n\ne.g. l <- array(0, dim = c(m, n, ...))\n\n\ncovered indexing with matrices using bracket notation\n\n\nLoops\nFor loops\n\nk <- 0\nfor (i in 1:10) {\n  k <- k + i\n}\n\nk\n\n[1] 55\n\nx <- 1:10\nk <- 0\n\nfor (i in x) {\n  k <- k + x[i]\n}\n\nk\n\n[1] 55\n\n\nWhile loops\n\nk <- 0\ni <- 0\n\nwhile (i <= 10) {\n  k <- k + i\n  i <- i + 1\n}\n\nk; i\n\n[1] 55\n\n\n[1] 11\n\n\n\n\nPractice, create a function that computes an average without using sum() or mean()\n\navg <- function(x) {\n  s <- 0\n  for (i in x) s <- s + i\n\n  s / i\n}\n\nx <- 1:10\n\navg(x) == 5.5\n\n[1] TRUE\n\n\n\n\nifelse() is vectorized, if is not\n\nscore <- c(76, 92, 83)\ngrade <- ifelse(\n  score >= 90, 'A',\n  ifelse(score >= 80, 'B',\n    ifelse(score >= 70, 'C')\n  )\n)\ngrade\n\n[1] \"C\" \"A\" \"B\"\n\n# will fail-- length(score) > 1\n# if (score >= 90) {\n#   grade <- 'A'\n# } else if (score >= 80) {\n#   grade <- 'B'\n# } else {\n#   grade <- 'C'\n# }\n\n\n\nNote on statistical software\n\nR adapted from S Plus.\nDr. Ko says this should be enough for us to cover the programming we’ll use this semester.\n\nrecommends learning branching and loop syntax for adapting to other languages.\n\n\n\n\nTextbook chapter 2, Probability and Statistics Review\n\nRandom variable: assigns outcomes in a sample space \\(\\rightarrow\\) Real numbers\n\ndescribes behavior of population elements\nProbability Density Function (pdf)\n\n\\(f_X(x)\\)\n\nCumulative Distribution Function (cdf)\n\n\\(F_X(x) \\equiv P[X \\leq x]\\)\nnon-decreasing function: \\(x_1 < x_2 \\iff F_X(x_1) \\leq F_X(x_2)\\)\nright-continuous: \\(\\lim_{\\epsilon \\to 0^{+}} F_X(x + \\epsilon) = F_X(x), x \\in \\mathbb{R}\\)\n\\(\\lim_{x \\to \\infty} F_X(x) = 1, \\lim_{x \\to -\\infty} F_X(x) = 0\\).\nCDFs for discrete functions are step functions."
+  },
+  {
+    "objectID": "class-notes.html#summary-2",
+    "href": "class-notes.html#summary-2",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary\nDiscussing MLE, analytical solutions vs. numerical solutions."
+  },
+  {
+    "objectID": "class-notes.html#notes-2",
+    "href": "class-notes.html#notes-2",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\nReview of analytical MLE is done in my notebook. Numerical estimation can be done using the mle() function, which is from the stats4 package. This approach is only possible if we know the definition of the negative-loglik function. Also, depending on the starting value, it may take time for mle() to produce an estimate.\nWhat kind of search is mle() using? It depends on optim()… which uses an implementation of Nelder and Mead (1965).\n\nlibrary(stats4)\n\n# y <- c(0.04304550, 0.50263474)\ny <- 1:4\n\nmlogl <- function(theta) -(length(y)*log(theta) - theta*sum(y))\n\nfit <- mle(mlogl, 1.4)\nsummary(fit)\n\nMaximum likelihood estimation\n\nCall:\nmle(minuslogl = mlogl, start = 1.4)\n\nCoefficients:\n      Estimate Std. Error\n[1,] 0.4000004  0.1999989\n\n-2 log L: 15.33033 \n\n1 / mean(y)\n\n[1] 0.4"
+  },
+  {
+    "objectID": "class-notes.html#summary-3",
+    "href": "class-notes.html#summary-3",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary\nTwo parameter MLE, optim(), Inverse Transform Method"
+  },
+  {
+    "objectID": "class-notes.html#notes-3",
+    "href": "class-notes.html#notes-3",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\n\ndata analysis: you have a sample\n\nneed to infer population distribution function\nneed to infer parameters of the distribution function\ntogether, you use them to\n\nMLE: used for parametric inference\n\nMLE requires sample to be random/iid (likelihood function is a joint probability distribution). What if it’s not?\n\nToday we’re looking at random number generation?\n\n\nTwo-parameter MLE\nSuppose we have \\(x_1, x_2, ..., x_n \\sim Gamma(\\lambda, r)\\), with pdf \\[\nf(x; \\lambda, r) = \\begin{cases} \\frac{\\lambda}{\\Gamma(r)} x^{r - 1} e^{-\\lambda x}  & x \\geq 0, r > 0, \\lambda > 0 \\\\ 0, & \\text{otherwise} \\end{cases}$\n\\]\nNote: \\[\n\\Gamma(r) = \\int_0^\\infty t^{r - 1} e^{-t}\\ dt, t \\geq 0.\n\\]\nFor a positive real number \\(r\\), \\(\\Gamma(r + 1) = r \\cdot \\Gamma(r).\\)\nNote: \\(n! = \\Gamma(n + 1)\\) because \\(\\Gamma(r + 1) = r \\cdot \\Gamma(r)\\).\n\n\nthe optim() function for MLE with >1 parameter\n\nx <- c(0.5928, 3.2048, 2.2281, 4.2292, 1.2096, 3.8371, 1.2670, 1.2042, 2.8182, 3.5173)\n\nll <- function(theta, sumx, sumlogx, n) {\n  r <- theta[1]\n  lambda <- theta[2]\n  -(n*r*log(lambda) - n*log(gamma(r)) + (r - 1)*sumlogx - lambda*sumx)\n}\n\noptim(c(20, 19), ll, sumx = sum(x), sumlogx = sum(log(x)), n = length(x))\n\n$par\n[1] 3.161073 1.311199\n\n$value\n[1] 16.09232\n\n$counts\nfunction gradient \n      81       NA \n\n$convergence\n[1] 0\n\n$message\nNULL\n\n\n\neven when estimating parameters numerically, you still need to be able to derive the log-likelihood function for the sample’s distribution (or assumed distribution)\n\n\n\nInverse Transform Method\n\ncontinuous random variables\n\n\n\\(U\\) is a uniform r.v. over \\((a, b)\\) if its pdf is \\(f_U(u) = \\frac{1}{b-1}, a < u < b \\text{ and } 0 \\text{ otherwise}.\\)\n\n\ndiscrete random variables"
+  },
+  {
+    "objectID": "class-notes.html#summary-4",
+    "href": "class-notes.html#summary-4",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary\nMore on the Inverse Transform Method."
+  },
+  {
+    "objectID": "class-notes.html#notes-4",
+    "href": "class-notes.html#notes-4",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\n\n# given an exponential distribution\nlambda <- 10\nexp_pdf <- function(x) lambda*exp(-lambda*x)\ninv_exp <- function(u) -1/lambda * log(1 - u)\n\nu <- runif(100000, 0, 1)\nx <- inv_exp(u)\n\nmean(x) # should be close to 1 / lambda\n\n[1] 0.100038\n\nvar(x) # should be close to 1 / lambda^2\n\n[1] 0.01004768\n\n\nTransformation of a discrete CDF via a quantile:\n\\(y_i\\) is the random variable corresponding to \\(u\\) if \\[\nF_Y(y_{i - 1}) < u \\leq F_Y(y_i), u \\sim Uniform(0, 1)\n\\]\n\n# transformation given a discrete CDF, using quantiles\ng <- function(n) {\n  u <- runif(n, 0, 1)\n  \n  cdf <- c(0.1, 0.36, 0.42, 0.85, 1)\n  \n  dplyr::case_when(\n    u <= cdf[1]              ~ 0,\n    u > cdf[1] & u <= cdf[2] ~ 1,\n    u > cdf[2] & u <= cdf[3] ~ 2,\n    u > cdf[3] & u <= cdf[4] ~ 3,\n    u > cdf[4] & u <= cdf[5] ~ 4,\n    TRUE ~ NA_real_\n  )\n}\n\np <- prop.table(table(g(10000)))\ncumsum(p)\n\n     0      1      2      3      4 \n0.1036 0.3573 0.4191 0.8552 1.0000"
+  },
+  {
+    "objectID": "class-notes.html#summary-5",
+    "href": "class-notes.html#summary-5",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary\nProcess of computational methods, acceptance-rejection method"
+  },
+  {
+    "objectID": "class-notes.html#notes-5",
+    "href": "class-notes.html#notes-5",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\nProcess of computational methods\n\nEstimate population distribution\nGet point estimates of parameters\nSimulate realizations from the population distribution\n\n\nThese realizations can then be used to test statistical methods/tools, etc.\n\n\nf <- function(x, p = 0.4) p * (1 - p)^x\n\nWhat if we can’t calculate a closed form of a CDF? Then, we can’t do a tidy inverse transform…\n\nAcceptance-Rejection Method\nWe want realizations from a r.v. \\(X\\), with pdf \\(f_X(x)\\), but suppose it is hard to generate them. If we can find another pdf \\(g_X(x)\\)\n\nwhich is defined on the same support of \\(f_X(x)\\)\nfrom which it is easy to generate realizations,\n\nand if we can find a constant \\(c > 1\\) such that\n\\[\nh(x) = c \\cdot g_X(x) \\geq f_X(x)\n\\]\nor\n\\[\n\\frac{f_X(x)}{g_X(x)} \\leq c,\n\\]\nthen, we can generate a realization \\(x\\) from \\(f_X(x)\\) using the following algorithm:\n\nGenerate a realization \\(y\\) from \\(g_X(x)\\).\nGenerate a uniform random number \\(u\\) from \\(U(0, 1)\\).\nSet \\(y\\) to \\(x\\) if \\(u < \\frac{f_X(y)}{c\\cdot g_X(y)}.\\) Otherwise go back to step 1.\n\nThen, \\(x\\) is a random number with the pdf \\(f_X(x)\\).\nProbability that a point from step 1 is rejected is\n\\[\nP(\\text{A point generated from step 1 is rejected}) = \\frac{\\text{Area between } h(x) \\text{and } \\f(x)}{\\text{Area under } h(x)}\n\\]\n\n# demonstrate acception-rejection method using a Beta(2, 1) distribution\n# g(x) = Uniform(0, 1)\n\nf <- function(x) 2*x\ng <- function(x) 1\nC <- 2\n\ngen_beta <- function() {\n  u1 <- runif(1, 0, 1)\n  u2 <- runif(1, 0, 1)\n  \n  # if accepted,\n  r <- f(u1) / (C * g(u1))\n  out <- c( \"r\" = r, \"u1\" = u1, \"u2\" = u2)\n\n  if (u2 < f(u1) / (C * g(u1))) {\n    return(u1)\n  } else {\n    gen_beta()\n  }\n}\n\nx <- replicate(1000, gen_beta())\nx_actual <- rbeta(1000, 2, 1)\n\nhist(x)\n\n\n\nhist(x_actual)"
+  },
+  {
+    "objectID": "class-notes.html#summary-6",
+    "href": "class-notes.html#summary-6",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary\nAcceptance-rejection method for discrete random variables"
+  },
+  {
+    "objectID": "class-notes.html#notes-6",
+    "href": "class-notes.html#notes-6",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\nAcceptance-rejection method for discrete random variables.\nLet \\(f_X(x) = \\begin{cases} 0.16, x = 1 \\\\ 0.24, x = 2 \\\\ 0.33, x = 3 \\\\ 0.17, x = 4 \\\\ 0.10, x = 5 \\\\ 0, \\text{ otherwise}. \\end{cases}\\) Assume we also have \\(g_X(x) = \\frac{1}{5}, x \\in \\{1, 2, 3, 4, 5\\} \\text{ and } 0 \\text{ otherwise}.\\)\n\nf <- c(0.16, 0.24, 0.33, 0.17, 0.10)\ng <- c(1, 1, 1, 1, 1) / 5\nC <- max(f / g)\n\nf_x <- function(x) {\n  dplyr::case_when(\n    x == 1 ~ 0.16,\n    x == 2 ~ 0.24,\n    x == 3 ~ 0.33,\n    x == 4 ~ 0.17,\n    x == 5 ~ 0.10,\n      TRUE ~ 0\n  )\n}\n\ngen <- function() {\n  y <- sample(1:5, 1) # draw 1 realization from discrete uniform\n  u <- runif(1, 0, 1) # draw 1 realization from continuous uniform\n\n  if (u <= f_x(y) / (C * 1/5)) {\n    return(y)\n  } else {\n    gen()\n  }\n}\n\nout <- replicate(1000, gen())\nprop.table(table(out))\n\nout\n    1     2     3     4     5 \n0.151 0.237 0.318 0.177 0.117"
+  },
+  {
+    "objectID": "class-notes.html#summary-7",
+    "href": "class-notes.html#summary-7",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary\nCovering random processes (counting processes, poisson processes, renewal processes)."
+  },
+  {
+    "objectID": "class-notes.html#notes-7",
+    "href": "class-notes.html#notes-7",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\n\nrandom processes depend on an index, often time\n\n\ngen_poisson <- function(t0, lambda) {\n  s <- 0; i <- 0\n\n  while (s <= t0) {\n    u <- runif(1, 0, 1)\n    t <- -log(1 - u) / lambda  # inverse transform to draw from Exp(lambda)\n    s <- s + t\n    i <- i + 1\n  }\n\n  return(i - 1)\n}\n\ngen_poisson(10, 2)\n\n[1] 28\n\nx <- replicate(1000, gen_poisson(8, 3))\n\nhist(x)"
+  },
+  {
+    "objectID": "class-notes.html#summary-8",
+    "href": "class-notes.html#summary-8",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary\nMonte-Carlo Integration, rnorm(), qnorm(), etc."
+  },
+  {
+    "objectID": "class-notes.html#notes-8",
+    "href": "class-notes.html#notes-8",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\n\nWe’ll get back the exam results this Thursday.\n\nWe’ll have a chance to correct scores (if they’re really bad?)\n\nWe’re skipping chapter 5 (which covers data visualization), and move to chapter 6\nChapter 6 utilizes the process of generating random numbers (ch. 3), but we won’t use methods such as inverse-transform; we’ll use built-in methods from R\n\n\\(x_1, x_2, \\cdots, x_n \\sim Exp(\\lambda)\\)\n\\[\nf_X(x) = \\begin{cases}\n  \\lambda \\cdot e^{-\\lambda x} & x \\geq 0, \\lambda > 0 \\\\\n  0 & \\text{ otherwise.}\n\\end{cases}\n\\]\n\\(u \\equiv F_X(x) = 1 - e^{-\\lambda x}\\) \\(x \\to -\\frac{1}{\\lambda}ln(1 - u)\\)\n\nlambda <- 3\nn <- 10\nx <- 1\np <- 0.7\n\nrexp(n, lambda) # x_i ~ f(x)             -- random draws\n\n [1] 0.34281666 0.33043108 0.53373096 0.60647510 0.13902413 0.29434770\n [7] 0.74290279 0.33271993 0.61320502 0.05719413\n\npexp(x, lambda) # P(X <= x)              -- CDF, cumulative probability\n\n[1] 0.9502129\n\ndexp(x, lambda) # P(X == x)?             -- density\n\n[1] 0.1493612\n\nqexp(p, lambda) # x* s.t. P(X <= x*) = p -- quantile\n\n[1] 0.4013243\n\n\n\nmu <- 5\nsd <- 3\n\nrnorm(1, mu, sd)\n\n[1] 5.399977\n\npnorm(5, mu, sd)\n\n[1] 0.5\n\nqnorm(0.75, mu, sd)\n\n[1] 7.023469\n\n\n\ncovering use of set.seed()\n\nExample. Suppose \\(u \\sim U(0, 1)\\), and \\[\nF_u(u^*) \\equiv P(U \\leq u^*) = \\int_0^{u^*} f_u(u)\\ du = \\int_0^{u^*} 1\\ du = u^*\n\\]\nDemonstration of theorem, using \\(punif()\\).\n\npunif(0.6, 0, 1)\n\n[1] 0.6\n\n\n\nMonte Carlo Integration\n\n\\[\n\\int_0^1 e^{-x}\\ dx\n\\]\nIn numerical integration (Simpson’s rule, midpoint rule, etc.), you can learn to integrate something like the above.\nHowever, in statistics, we accomplish this by generating random numbers.\n\nu <- runif(1000000, 0, 1)\nmean(exp(-u))\n\n[1] 0.6321629\n\n1 - exp(-1)\n\n[1] 0.6321206\n\n\nMonte Carlo integration relies on the Strong Law of Large Numbers.\nLet \\(g(x)\\) be a function of random variable \\(X\\) with pdf \\(f_X(x)\\). Then let \\[\n\\theta = E(g(X)) = \\int_{-\\infty}^{\\infty} g(x)f_X(x)\\ dx\n\\]\nIf one has a random sample of size \\(n\\), \\(x_1, x_2, \\cdots, x_n\\) from \\(f_X(x)\\), then \\(\\hat{\\theta} = \\sum_{i = 1}^{n} g(x_i) / n\\) converges to \\(\\theta\\) with probability 1 by the Strong Law of Large Numbers.\nExample:\n\\[\n\\theta = E(g(X)) = \\int_0^1 x\\ dx = \\int_0^1 x \\cdot \\frac{1}{1 - 0}\\ dx = \\frac{1}{2}\n\\]\n\nn1 <- 500\nn2 <- 5000\n\nu1 <- runif(n1, 0, 1)\nu2 <- runif(n2, 0, 1)\n\n# g(x) = x\nmean(u1)\n\n[1] 0.4857288\n\nmean(u2)\n\n[1] 0.5040348\n\n\n\\[\n\\theta = \\int_a^b g(x)\\ dx = (b - a) \\cdot \\int_a^b g(x) \\cdot \\frac{1}{b - a}\\ dx\n\\]\n\n-exp(-5) - (-exp(-2))\n\n[1] 0.1285973\n\nu <- runif(1000, 2, 5)\n(5 - 2) * mean(exp(-u))\n\n[1] 0.1308512"
+  },
+  {
+    "objectID": "class-notes.html#summary-9",
+    "href": "class-notes.html#summary-9",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary\nMore on Monte-Carlo integration, discussion of why sample mean is preferred vs. other estimators wrt the law of large numbers."
+  },
+  {
+    "objectID": "class-notes.html#notes-9",
+    "href": "class-notes.html#notes-9",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\n\nturn in corrections to your exam to Dr. Ko’s office, by 12pm tomorrow.\nWhy do we like the sample mean (for estimating \\(\\mu\\))?\n\nit uses the same formula! this is why the strong law of large numbers is powerful\nsample median won’t necessarily converge to population mean, e.g. when the population distribution isn’t symmetric\n\n\n\nlibrary(purrr)\n\nmc_integrate <- function(g, a = 0, b = 1, n) {\n  u <- runif(n, a, b)\n  (b - a) * mean(g(u))\n}\n\nf <- function(x) exp(-x)\n\nmap_dbl(c(10, 100, 1000, 10000, 100000), ~mc_integrate(f, 2, 4, .))\n\n[1] 0.07002953 0.11930481 0.11592688 0.11709257 0.11704338\n\n# true value\nexp(-2) - exp(-4)\n\n[1] 0.1170196\n\nh <- function(x) 10 * exp(-10 * x)\nmap_dbl(c(10, 1000, 1000000), ~mc_integrate(h, 0, 2, .))\n\n[1] 0.4772796 0.9569867 0.9962637\n\n# true value\nintegrate(h, 0, 2)\n\n1 with absolute error < 1.5e-07\n\n\nCurrently, we’ve been checking the difference between our estimates and the true value. This is a measure of bias against true parameter values. However, we’ll discuss measurements of variance in a future class."
+  },
+  {
+    "objectID": "class-notes.html#summary-10",
+    "href": "class-notes.html#summary-10",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary"
+  },
+  {
+    "objectID": "class-notes.html#notes-10",
+    "href": "class-notes.html#notes-10",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\n\nHomework 3 assigned\nExam corrections returned (I got 89%?)\n\n\n\n\\(Pr(0 \\leq x \\leq 5)\\) where \\[\nf_X(x) = \\begin{cases}\n10 \\cdot e^{-10x}, & x \\geq 0 \\\\\n0, & \\text{ otherwise}\n\\end{cases}\n\\]\n\nf <- function(x) 10 * exp(-10 * x)\nmc_integrate(f, 0, 5, 100000)\n\n[1] 1.016846\n\n\n\ncdf_exp_b <- function(x, lambda, n) {\n  u <- runif(n, 0, 1)\n  x * mean(lambda * exp(-lambda * x * u))\n}\n\nu <- cdf_exp_b(6, 20, 100)\nl <- cdf_exp_b(2, 20, 100)\n\nu - l\n\n[1] -0.577214\n\npexp(6, 1/20) - pexp(2, 1/20)\n\n[1] 0.1640192\n\n\n\n\nExample from class: write a function to generate a Z-table\n\n# Compare results to textbook example 6.3\n\n\n\nz_cdf <- function(x, n = 1000) {\n  u <- runif(n, 0, 1)\n\n  # density of Z ~ N(0, 1)?\n  theta <- function(x, u) {\n    mean(1 / sqrt(2 * pi) * x * exp((-x^2 * u^2) / 2))\n  }\n\n  # Z ~ N(0, 1) is symmetric about 0\n  if (x >= 0) {\n    0.5 + theta(x, u)\n  } else {\n    1 - 0.5 - theta(-x, u)\n  }\n}\n\nz_cdf(2, 100000)\n\n[1] 0.9775238\n\npnorm(2)\n\n[1] 0.9772499"
+  },
+  {
+    "objectID": "class-notes.html#summary-11",
+    "href": "class-notes.html#summary-11",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary"
+  },
+  {
+    "objectID": "class-notes.html#notes-11",
+    "href": "class-notes.html#notes-11",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\nToday: An easier way to generate CDFs for random variables?\n“Hit or Miss” approach for Monte Carlo Integration.\nLet \\(f(x)\\) be the pdf of a random variable \\(X\\). To estimate \\(F(x) = \\int_{-\\infty}^x f(t)\\ dt\\) is\n\nGenerate a random sample \\(X_1, X_2, \\cdots, X_m\\) from \\(f(x)\\).\nFor each \\(X_i\\), compute \\(g(x) = I(X_i \\leq x) = \\begin{cases} 1, & X_i \\leq x \\\\ 0, & X_i > x\\end{cases}\\).\nCompute \\(\\hat{F}(x) = \\bar{g(X)} = \\frac{1}{m} \\sum_{i = 1}^m I(X_i \\leq x)\\) as an estimate of \\(F(x)\\).\n\nNote: \\(\\hat{F}(x)\\) is called the empirical distribution of \\(F(x)\\).\nWhy does this work?\n\\(E(x) = 1 \\cdot P(X \\leq x) + 0 \\cdot p(X > x) = P(X \\leq x) = F(x)\\).\n\n# the \"Hit-or-Miss\" method:\n\n# step 1.\nx <- rnorm(10000)\n\n# step 2. (an indicator function)\ni <- x <= 1.96\n\n# step 3.\nmean(i)\n\n[1] 0.976\n\nnorm_cdf <- function(x, n = 10000, mu = 0, sigma = 1) {\n  X <- rnorm(n, mu, sigma)\n  i <- X <= x\n  mean(i)\n}\n\nexp_cdf <- function(x, n = 10000, lambda = 5) {\n  X <- rexp(n, lambda)\n  i <- X <= x\n  mean(i)\n}\n\nexp_cdf(7.6, n = 1000, lambda = 5)\n\n[1] 1\n\npexp(7.6, 5)\n\n[1] 1\n\nbeta_cdf <- function(x, n = 10000, a = 2, b = 3) {\n  X <- rbeta(n, a, b)\n  i <- X <= x\n  mean(i)\n}\n\nbeta_cdf(0.7, a = 2, b = 3)\n\n[1] 0.9163\n\npbeta(0.7, 2, 3)\n\n[1] 0.9163\n\n\nHow do we choose between competing estimates for parameters \\(\\hat{\\theta}\\)?\nSay we have \\(\\hat{\\theta_1}\\) and \\(\\hat{\\theta_2}\\) as estimators (?) of \\(\\theta\\). We care about:\n\nUnbiasedness: if \\(E(\\hat{\\theta}) = \\theta\\), then \\(\\hat{\\theta}\\) is an unbiased estimate.\nMinimum Variance: if \\(Var(\\hat{\\theta_1}) < Var(\\hat{\\theta_2})\\), we would prefer \\(\\hat{\\theta_1}\\), other properties being equivalent.\n\nDeveloped estimators should satisfy these properties.\n“Uniformly Most powerful Variance among Unbiased Estimates”: “UMVUE”.\nPapers can be published based on whether a new estimator has less variance than an existing estimator.\nHow do we compare the variance of an estimator? Samples of samples.\n\n# compare hit or miss vs. simple monte-carlo\n# theta_1 is simple monte-carlo\n# theta_2 is indicator\n# estimating F_Z(1.96) where Z ~ N(0, 1).\n# generate 100 estimates of theta_1 and theta_2 (n = 10,000)\n# then, take the variance of each\n\n# for theta_1\nz_cdf <- function(x, n = 1000) {\n  u <- runif(n, 0, 1)\n\n  # density of Z ~ N(0, 1)?\n  theta <- function(x, u) {\n    mean(1 / sqrt(2 * pi) * x * exp((-x^2 * u^2) / 2))\n  }\n\n  # Z ~ N(0, 1) is symmetric about 0\n  if (x >= 0) {\n    0.5 + theta(x, u)\n  } else {\n    1 - 0.5 - theta(-x, u)\n  }\n}\n\n# for theta_2\nz_cdf2 <- function(x, n = 1000, mu = 0, sigma = 1) {\n  X <- rnorm(n, mu, sigma)\n  i <- X <= x\n  mean(i)\n}\n\n# wrap the 2 functions, and collect results\ncomparison <- function(x = 1.96, n = 100) {\n  t1 <- numeric(n)\n  t2 <- numeric(n)\n  for (i in 1:n) {\n    t1[i] <- z_cdf(x)\n    t2[i] <- z_cdf2(x)\n  }\n  c(theta1 = var(t1), theta2 = var(t2))\n}\n\ncomparison()\n\n      theta1       theta2 \n4.669904e-05 2.570212e-05 \n\n\n\nAccording to Dr. Ko, three flavors of journals in statistics:\n\ntheoretical journals\nsimulation-based journals\napplied journals?"
+  }
+]

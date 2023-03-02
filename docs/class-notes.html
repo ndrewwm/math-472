@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Andrew Moore">
+<meta name="description" content="My running notes during MATH-472 lectures.">
+
+<title>math-472 - MATH-472: Class Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">math-472</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./class-notes.html" aria-current="page">
+ <span class="menu-text">Class Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./homework.html">
+ <span class="menu-text">Homework</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">1/10/23</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  </ul></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">1/12/23</a>
+  <ul class="collapse">
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">Summary</a></li>
+  <li><a href="#notes-1" id="toc-notes-1" class="nav-link" data-scroll-target="#notes-1">Notes</a>
+  <ul class="collapse">
+  <li><a href="#loops" id="toc-loops" class="nav-link" data-scroll-target="#loops">Loops</a></li>
+  <li><a href="#practice-create-a-function-that-computes-an-average-without-using-sum-or-mean" id="toc-practice-create-a-function-that-computes-an-average-without-using-sum-or-mean" class="nav-link" data-scroll-target="#practice-create-a-function-that-computes-an-average-without-using-sum-or-mean">Practice, create a function that computes an average without using <code>sum()</code> or <code>mean()</code></a></li>
+  <li><a href="#ifelse-is-vectorized-if-is-not" id="toc-ifelse-is-vectorized-if-is-not" class="nav-link" data-scroll-target="#ifelse-is-vectorized-if-is-not"><code>ifelse()</code> is vectorized, <code>if</code> is not</a></li>
+  <li><a href="#note-on-statistical-software" id="toc-note-on-statistical-software" class="nav-link" data-scroll-target="#note-on-statistical-software">Note on statistical software</a></li>
+  <li><a href="#textbook-chapter-2-probability-and-statistics-review" id="toc-textbook-chapter-2-probability-and-statistics-review" class="nav-link" data-scroll-target="#textbook-chapter-2-probability-and-statistics-review">Textbook chapter 2, Probability and Statistics Review</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">1/17/23</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">1/19/23</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">1/24/23</a>
+  <ul class="collapse">
+  <li><a href="#summary-2" id="toc-summary-2" class="nav-link" data-scroll-target="#summary-2">Summary</a></li>
+  <li><a href="#notes-2" id="toc-notes-2" class="nav-link" data-scroll-target="#notes-2">Notes</a></li>
+  </ul></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">1/26/23</a>
+  <ul class="collapse">
+  <li><a href="#summary-3" id="toc-summary-3" class="nav-link" data-scroll-target="#summary-3">Summary</a></li>
+  <li><a href="#notes-3" id="toc-notes-3" class="nav-link" data-scroll-target="#notes-3">Notes</a>
+  <ul class="collapse">
+  <li><a href="#two-parameter-mle" id="toc-two-parameter-mle" class="nav-link" data-scroll-target="#two-parameter-mle">Two-parameter MLE</a></li>
+  <li><a href="#the-optim-function-for-mle-with-1-parameter" id="toc-the-optim-function-for-mle-with-1-parameter" class="nav-link" data-scroll-target="#the-optim-function-for-mle-with-1-parameter">the <code>optim()</code> function for MLE with &gt;1 parameter</a></li>
+  <li><a href="#inverse-transform-method" id="toc-inverse-transform-method" class="nav-link" data-scroll-target="#inverse-transform-method">Inverse Transform Method</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">1/31/23</a>
+  <ul class="collapse">
+  <li><a href="#summary-4" id="toc-summary-4" class="nav-link" data-scroll-target="#summary-4">Summary</a></li>
+  <li><a href="#notes-4" id="toc-notes-4" class="nav-link" data-scroll-target="#notes-4">Notes</a></li>
+  </ul></li>
+  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7">2/2/2023</a>
+  <ul class="collapse">
+  <li><a href="#summary-5" id="toc-summary-5" class="nav-link" data-scroll-target="#summary-5">Summary</a></li>
+  <li><a href="#notes-5" id="toc-notes-5" class="nav-link" data-scroll-target="#notes-5">Notes</a>
+  <ul class="collapse">
+  <li><a href="#acceptance-rejection-method" id="toc-acceptance-rejection-method" class="nav-link" data-scroll-target="#acceptance-rejection-method">Acceptance-Rejection Method</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8">2/7/2022</a>
+  <ul class="collapse">
+  <li><a href="#summary-6" id="toc-summary-6" class="nav-link" data-scroll-target="#summary-6">Summary</a></li>
+  <li><a href="#notes-6" id="toc-notes-6" class="nav-link" data-scroll-target="#notes-6">Notes</a></li>
+  </ul></li>
+  <li><a href="#section-9" id="toc-section-9" class="nav-link" data-scroll-target="#section-9">2/9/2023</a>
+  <ul class="collapse">
+  <li><a href="#summary-7" id="toc-summary-7" class="nav-link" data-scroll-target="#summary-7">Summary</a></li>
+  <li><a href="#notes-7" id="toc-notes-7" class="nav-link" data-scroll-target="#notes-7">Notes</a></li>
+  </ul></li>
+  <li><a href="#section-10" id="toc-section-10" class="nav-link" data-scroll-target="#section-10">2/21/23</a>
+  <ul class="collapse">
+  <li><a href="#summary-8" id="toc-summary-8" class="nav-link" data-scroll-target="#summary-8">Summary</a></li>
+  <li><a href="#notes-8" id="toc-notes-8" class="nav-link" data-scroll-target="#notes-8">Notes</a>
+  <ul class="collapse">
+  <li><a href="#monte-carlo-integration" id="toc-monte-carlo-integration" class="nav-link" data-scroll-target="#monte-carlo-integration">Monte Carlo Integration</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#section-11" id="toc-section-11" class="nav-link" data-scroll-target="#section-11">2/23/23</a>
+  <ul class="collapse">
+  <li><a href="#summary-9" id="toc-summary-9" class="nav-link" data-scroll-target="#summary-9">Summary</a></li>
+  <li><a href="#notes-9" id="toc-notes-9" class="nav-link" data-scroll-target="#notes-9">Notes</a></li>
+  </ul></li>
+  <li><a href="#section-12" id="toc-section-12" class="nav-link" data-scroll-target="#section-12">2/28/23</a>
+  <ul class="collapse">
+  <li><a href="#summary-10" id="toc-summary-10" class="nav-link" data-scroll-target="#summary-10">Summary</a></li>
+  <li><a href="#notes-10" id="toc-notes-10" class="nav-link" data-scroll-target="#notes-10">Notes</a>
+  <ul class="collapse">
+  <li><a href="#section-13" id="toc-section-13" class="nav-link" data-scroll-target="#section-13"></a></li>
+  <li><a href="#example-from-class-write-a-function-to-generate-a-z-table" id="toc-example-from-class-write-a-function-to-generate-a-z-table" class="nav-link" data-scroll-target="#example-from-class-write-a-function-to-generate-a-z-table">Example from class: write a function to generate a Z-table</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#section-14" id="toc-section-14" class="nav-link" data-scroll-target="#section-14">3/2/23</a>
+  <ul class="collapse">
+  <li><a href="#summary-11" id="toc-summary-11" class="nav-link" data-scroll-target="#summary-11">Summary</a></li>
+  <li><a href="#notes-11" id="toc-notes-11" class="nav-link" data-scroll-target="#notes-11">Notes</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">MATH-472: Class Notes</h1>
+</div>
+
+<div>
+  <div class="description">
+    <p>My running notes during MATH-472 lectures.</p>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Andrew Moore </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<section id="section" class="level1">
+<h1>1/10/23</h1>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Overview of syllabus. Covered introduction to R.</p>
+</section>
+<section id="notes" class="level2">
+<h2 class="anchored" data-anchor-id="notes">Notes</h2>
+<ul>
+<li>basic operators
+<ul>
+<li><code>+ / - * ^ = &lt;-</code></li>
+</ul></li>
+<li>logical operators</li>
+<li>assignment (Dr.&nbsp;Ko prefers <code>&lt;-</code>)</li>
+<li><code>sum()</code>, <code>length()</code>, <code>c()</code></li>
+<li>definition of functions</li>
+<li>if/then</li>
+</ul>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1>1/12/23</h1>
+<section id="summary-1" class="level2">
+<h2 class="anchored" data-anchor-id="summary-1">Summary</h2>
+<p>More preamble. Should’ve skipped, no new material, painful.</p>
+</section>
+<section id="notes-1" class="level2">
+<h2 class="anchored" data-anchor-id="notes-1">Notes</h2>
+<p>Continuing where we left off. If/else statements.</p>
+<ul>
+<li><code>ifelse()</code>
+<ul>
+<li>you can do assignment inside of this (wild, seems inadvisible, but neat)</li>
+<li>e.g.&nbsp;<code>ifelse(1 &gt; 2, x &lt;- 1, x &lt;- 0)</code></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ex2 <span class="ot">&lt;-</span> <span class="dv">76</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  ex2 <span class="sc">&gt;=</span> <span class="dv">90</span>, grade <span class="ot">&lt;-</span> <span class="st">'A'</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    ex2 <span class="sc">&gt;=</span> <span class="dv">80</span>, grade <span class="ot">&lt;-</span> <span class="st">'B'</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ifelse</span>(ex2 <span class="sc">&gt;=</span> <span class="dv">70</span>, grade <span class="ot">&lt;-</span> <span class="st">'C'</span>, <span class="st">''</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C"</code></pre>
+</div>
+</div>
+<ul>
+<li>Arrays: used to store results of computations
+<ul>
+<li>one dimension: vectors e.g.&nbsp;<code>x &lt;- numeric(k)</code> for a numeric vector of size <code>k</code></li>
+<li>two dimensions: matrices
+<ul>
+<li><span class="math inline">\(A_{2 \times 3}\)</span></li>
+<li>e.g.&nbsp;<code>y &lt;- matrix(0, nrow = m, ncol = n)</code> for a <code>m</code> x <code>n</code> 0 matrix.</li>
+</ul></li>
+<li>more dimensions
+<ul>
+<li>e.g.&nbsp;<code>l &lt;- array(0, dim = c(m, n, ...))</code></li>
+</ul></li>
+</ul></li>
+<li>covered indexing with matrices using bracket notation</li>
+</ul>
+<section id="loops" class="level3">
+<h3 class="anchored" data-anchor-id="loops">Loops</h3>
+<p>For loops</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> k <span class="sc">+</span> i</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> x) {</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> k <span class="sc">+</span> x[i]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55</code></pre>
+</div>
+</div>
+<p>While loops</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (i <span class="sc">&lt;=</span> <span class="dv">10</span>) {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> k <span class="sc">+</span> i</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>k; i</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div>
+</section>
+<section id="practice-create-a-function-that-computes-an-average-without-using-sum-or-mean" class="level3">
+<h3 class="anchored" data-anchor-id="practice-create-a-function-that-computes-an-average-without-using-sum-or-mean">Practice, create a function that computes an average without using <code>sum()</code> or <code>mean()</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>avg <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> x) s <span class="ot">&lt;-</span> s <span class="sc">+</span> i</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  s <span class="sc">/</span> i</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">avg</span>(x) <span class="sc">==</span> <span class="fl">5.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="ifelse-is-vectorized-if-is-not" class="level3">
+<h3 class="anchored" data-anchor-id="ifelse-is-vectorized-if-is-not"><code>ifelse()</code> is vectorized, <code>if</code> is not</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>score <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">76</span>, <span class="dv">92</span>, <span class="dv">83</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>grade <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  score <span class="sc">&gt;=</span> <span class="dv">90</span>, <span class="st">'A'</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(score <span class="sc">&gt;=</span> <span class="dv">80</span>, <span class="st">'B'</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ifelse</span>(score <span class="sc">&gt;=</span> <span class="dv">70</span>, <span class="st">'C'</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>grade</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C" "A" "B"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># will fail-- length(score) &gt; 1</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># if (score &gt;= 90) {</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   grade &lt;- 'A'</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># } else if (score &gt;= 80) {</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   grade &lt;- 'B'</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># } else {</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   grade &lt;- 'C'</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="note-on-statistical-software" class="level3">
+<h3 class="anchored" data-anchor-id="note-on-statistical-software">Note on statistical software</h3>
+<ul>
+<li><p>R adapted from S Plus.</p></li>
+<li><p>Dr.&nbsp;Ko says this should be enough for us to cover the programming we’ll use this semester.</p>
+<ul>
+<li>recommends learning branching and loop syntax for adapting to other languages.</li>
+</ul></li>
+</ul>
+</section>
+<section id="textbook-chapter-2-probability-and-statistics-review" class="level3">
+<h3 class="anchored" data-anchor-id="textbook-chapter-2-probability-and-statistics-review">Textbook chapter 2, Probability and Statistics Review</h3>
+<ul>
+<li><strong>Random variable</strong>: assigns outcomes in a sample space <span class="math inline">\(\rightarrow\)</span> Real numbers
+<ul>
+<li>describes behavior of population elements</li>
+<li><strong>Probability Density Function</strong> (pdf)
+<ul>
+<li><span class="math inline">\(f_X(x)\)</span></li>
+</ul></li>
+<li><strong>Cumulative Distribution Function</strong> (cdf)
+<ul>
+<li><span class="math inline">\(F_X(x) \equiv P[X \leq x]\)</span></li>
+<li>non-decreasing function: <span class="math inline">\(x_1 &lt; x_2 \iff F_X(x_1) \leq F_X(x_2)\)</span></li>
+<li>right-continuous: <span class="math inline">\(\lim_{\epsilon \to 0^{+}} F_X(x + \epsilon) = F_X(x), x \in \mathbb{R}\)</span></li>
+<li><span class="math inline">\(\lim_{x \to \infty} F_X(x) = 1, \lim_{x \to -\infty} F_X(x) = 0\)</span>.</li>
+<li>CDFs for discrete functions are step functions.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1>1/17/23</h1>
+</section>
+<section id="section-3" class="level1">
+<h1>1/19/23</h1>
+</section>
+<section id="section-4" class="level1">
+<h1>1/24/23</h1>
+<section id="summary-2" class="level2">
+<h2 class="anchored" data-anchor-id="summary-2">Summary</h2>
+<p>Discussing MLE, analytical solutions vs.&nbsp;numerical solutions.</p>
+</section>
+<section id="notes-2" class="level2">
+<h2 class="anchored" data-anchor-id="notes-2">Notes</h2>
+<p>Review of analytical MLE is done in my notebook. Numerical estimation can be done using the <code>mle()</code> function, which is from the <code>stats4</code> package. This approach is only possible if we know the definition of the negative-loglik function. Also, depending on the starting value, it may take time for <code>mle()</code> to produce an estimate.</p>
+<p>What kind of search is <code>mle()</code> using? It depends on <code>optim()</code>… which uses an implementation of <em>Nelder and Mead (1965).</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats4)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># y &lt;- c(0.04304550, 0.50263474)</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>mlogl <span class="ot">&lt;-</span> <span class="cf">function</span>(theta) <span class="sc">-</span>(<span class="fu">length</span>(y)<span class="sc">*</span><span class="fu">log</span>(theta) <span class="sc">-</span> theta<span class="sc">*</span><span class="fu">sum</span>(y))</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">mle</span>(mlogl, <span class="fl">1.4</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Maximum likelihood estimation
+
+Call:
+mle(minuslogl = mlogl, start = 1.4)
+
+Coefficients:
+      Estimate Std. Error
+[1,] 0.4000004  0.1999989
+
+-2 log L: 15.33033 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">/</span> <span class="fu">mean</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="section-5" class="level1">
+<h1>1/26/23</h1>
+<section id="summary-3" class="level2">
+<h2 class="anchored" data-anchor-id="summary-3">Summary</h2>
+<p>Two parameter MLE, <code>optim()</code>, Inverse Transform Method</p>
+</section>
+<section id="notes-3" class="level2">
+<h2 class="anchored" data-anchor-id="notes-3">Notes</h2>
+<ul>
+<li>data analysis: you have a sample
+<ul>
+<li>need to infer <em>population distribution function</em></li>
+<li>need to infer <em>parameters</em> of the distribution function</li>
+<li>together, you use them to</li>
+</ul></li>
+<li>MLE: used for parametric inference
+<ul>
+<li>MLE requires sample to be random/iid (likelihood function is a joint probability distribution). What if it’s not?</li>
+</ul></li>
+<li>Today we’re looking at random number generation?</li>
+</ul>
+<section id="two-parameter-mle" class="level3">
+<h3 class="anchored" data-anchor-id="two-parameter-mle">Two-parameter MLE</h3>
+<p>Suppose we have <span class="math inline">\(x_1, x_2, ..., x_n \sim Gamma(\lambda, r)\)</span>, with pdf <span class="math display">\[
+f(x; \lambda, r) = \begin{cases} \frac{\lambda}{\Gamma(r)} x^{r - 1} e^{-\lambda x}  &amp; x \geq 0, r &gt; 0, \lambda &gt; 0 \\ 0, &amp; \text{otherwise} \end{cases}$
+\]</span></p>
+<p>Note: <span class="math display">\[
+\Gamma(r) = \int_0^\infty t^{r - 1} e^{-t}\ dt, t \geq 0.
+\]</span></p>
+<p>For a positive real number <span class="math inline">\(r\)</span>, <span class="math inline">\(\Gamma(r + 1) = r \cdot \Gamma(r).\)</span></p>
+<p>Note: <span class="math inline">\(n! = \Gamma(n + 1)\)</span> because <span class="math inline">\(\Gamma(r + 1) = r \cdot \Gamma(r)\)</span>.</p>
+</section>
+<section id="the-optim-function-for-mle-with-1-parameter" class="level3">
+<h3 class="anchored" data-anchor-id="the-optim-function-for-mle-with-1-parameter">the <code>optim()</code> function for MLE with &gt;1 parameter</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5928</span>, <span class="fl">3.2048</span>, <span class="fl">2.2281</span>, <span class="fl">4.2292</span>, <span class="fl">1.2096</span>, <span class="fl">3.8371</span>, <span class="fl">1.2670</span>, <span class="fl">1.2042</span>, <span class="fl">2.8182</span>, <span class="fl">3.5173</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>ll <span class="ot">&lt;-</span> <span class="cf">function</span>(theta, sumx, sumlogx, n) {</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> theta[<span class="dv">1</span>]</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  lambda <span class="ot">&lt;-</span> theta[<span class="dv">2</span>]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span>(n<span class="sc">*</span>r<span class="sc">*</span><span class="fu">log</span>(lambda) <span class="sc">-</span> n<span class="sc">*</span><span class="fu">log</span>(<span class="fu">gamma</span>(r)) <span class="sc">+</span> (r <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>sumlogx <span class="sc">-</span> lambda<span class="sc">*</span>sumx)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">optim</span>(<span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">19</span>), ll, <span class="at">sumx =</span> <span class="fu">sum</span>(x), <span class="at">sumlogx =</span> <span class="fu">sum</span>(<span class="fu">log</span>(x)), <span class="at">n =</span> <span class="fu">length</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$par
+[1] 3.161073 1.311199
+
+$value
+[1] 16.09232
+
+$counts
+function gradient 
+      81       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
+</div>
+</div>
+<ul>
+<li>even when estimating parameters numerically, you still need to be able to derive the log-likelihood function for the sample’s distribution (or <em>assumed</em> distribution)</li>
+</ul>
+</section>
+<section id="inverse-transform-method" class="level3">
+<h3 class="anchored" data-anchor-id="inverse-transform-method">Inverse Transform Method</h3>
+<ol type="1">
+<li>continuous random variables</li>
+</ol>
+<ul>
+<li><span class="math inline">\(U\)</span> is a uniform r.v. over <span class="math inline">\((a, b)\)</span> if its pdf is <span class="math inline">\(f_U(u) = \frac{1}{b-1}, a &lt; u &lt; b \text{ and } 0 \text{ otherwise}.\)</span></li>
+</ul>
+<ol start="2" type="1">
+<li>discrete random variables</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="section-6" class="level1">
+<h1>1/31/23</h1>
+<section id="summary-4" class="level2">
+<h2 class="anchored" data-anchor-id="summary-4">Summary</h2>
+<p>More on the Inverse Transform Method.</p>
+</section>
+<section id="notes-4" class="level2">
+<h2 class="anchored" data-anchor-id="notes-4">Notes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># given an exponential distribution</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>exp_pdf <span class="ot">&lt;-</span> <span class="cf">function</span>(x) lambda<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>lambda<span class="sc">*</span>x)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>inv_exp <span class="ot">&lt;-</span> <span class="cf">function</span>(u) <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>lambda <span class="sc">*</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> u)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">inv_exp</span>(u)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x) <span class="co"># should be close to 1 / lambda</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.100038</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x) <span class="co"># should be close to 1 / lambda^2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01004768</code></pre>
+</div>
+</div>
+<p>Transformation of a discrete CDF via a quantile:</p>
+<p><span class="math inline">\(y_i\)</span> is the random variable corresponding to <span class="math inline">\(u\)</span> if <span class="math display">\[
+F_Y(y_{i - 1}) &lt; u \leq F_Y(y_i), u \sim Uniform(0, 1)
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transformation given a discrete CDF, using quantiles</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  cdf <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.36</span>, <span class="fl">0.42</span>, <span class="fl">0.85</span>, <span class="dv">1</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    u <span class="sc">&lt;=</span> cdf[<span class="dv">1</span>]              <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    u <span class="sc">&gt;</span> cdf[<span class="dv">1</span>] <span class="sc">&amp;</span> u <span class="sc">&lt;=</span> cdf[<span class="dv">2</span>] <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    u <span class="sc">&gt;</span> cdf[<span class="dv">2</span>] <span class="sc">&amp;</span> u <span class="sc">&lt;=</span> cdf[<span class="dv">3</span>] <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    u <span class="sc">&gt;</span> cdf[<span class="dv">3</span>] <span class="sc">&amp;</span> u <span class="sc">&lt;=</span> cdf[<span class="dv">4</span>] <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    u <span class="sc">&gt;</span> cdf[<span class="dv">4</span>] <span class="sc">&amp;</span> u <span class="sc">&lt;=</span> cdf[<span class="dv">5</span>] <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="fu">g</span>(<span class="dv">10000</span>)))</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     0      1      2      3      4 
+0.1036 0.3573 0.4191 0.8552 1.0000 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="section-7" class="level1">
+<h1>2/2/2023</h1>
+<section id="summary-5" class="level2">
+<h2 class="anchored" data-anchor-id="summary-5">Summary</h2>
+<p>Process of computational methods, acceptance-rejection method</p>
+</section>
+<section id="notes-5" class="level2">
+<h2 class="anchored" data-anchor-id="notes-5">Notes</h2>
+<p><em>Process of computational methods</em></p>
+<ol type="1">
+<li><p>Estimate population distribution</p></li>
+<li><p>Get point estimates of parameters</p></li>
+<li><p>Simulate realizations from the population distribution</p></li>
+</ol>
+<ul>
+<li>These realizations can then be used to test statistical methods/tools, etc.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">p =</span> <span class="fl">0.4</span>) p <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p)<span class="sc">^</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What if we can’t calculate a closed form of a CDF? Then, we can’t do a tidy inverse transform…</p>
+<section id="acceptance-rejection-method" class="level3">
+<h3 class="anchored" data-anchor-id="acceptance-rejection-method">Acceptance-Rejection Method</h3>
+<p>We want realizations from a r.v. <span class="math inline">\(X\)</span>, with pdf <span class="math inline">\(f_X(x)\)</span>, but suppose it is hard to generate them. If we can find another pdf <span class="math inline">\(g_X(x)\)</span></p>
+<ol type="1">
+<li><p>which is defined on the same support of <span class="math inline">\(f_X(x)\)</span></p></li>
+<li><p>from which it is easy to generate realizations,</p></li>
+</ol>
+<p>and if we can find a constant <span class="math inline">\(c &gt; 1\)</span> such that</p>
+<p><span class="math display">\[
+h(x) = c \cdot g_X(x) \geq f_X(x)
+\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+\frac{f_X(x)}{g_X(x)} \leq c,
+\]</span></p>
+<p>then, we can generate a realization <span class="math inline">\(x\)</span> from <span class="math inline">\(f_X(x)\)</span> using the following algorithm:</p>
+<ol type="1">
+<li>Generate a realization <span class="math inline">\(y\)</span> from <span class="math inline">\(g_X(x)\)</span>.</li>
+<li>Generate a uniform random number <span class="math inline">\(u\)</span> from <span class="math inline">\(U(0, 1)\)</span>.</li>
+<li>Set <span class="math inline">\(y\)</span> to <span class="math inline">\(x\)</span> if <span class="math inline">\(u &lt; \frac{f_X(y)}{c\cdot g_X(y)}.\)</span> Otherwise go back to step 1.</li>
+</ol>
+<p>Then, <span class="math inline">\(x\)</span> is a random number with the pdf <span class="math inline">\(f_X(x)\)</span>.</p>
+<p>Probability that a point from step 1 is rejected is</p>
+<p><span class="math display">\[
+P(\text{A point generated from step 1 is rejected}) = \frac{\text{Area between } h(x) \text{and } \f(x)}{\text{Area under } h(x)}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># demonstrate acception-rejection method using a Beta(2, 1) distribution</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># g(x) = Uniform(0, 1)</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">2</span><span class="sc">*</span>x</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>gen_beta <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  u1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  u2 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if accepted,</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> <span class="fu">f</span>(u1) <span class="sc">/</span> (C <span class="sc">*</span> <span class="fu">g</span>(u1))</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"r"</span> <span class="ot">=</span> r, <span class="st">"u1"</span> <span class="ot">=</span> u1, <span class="st">"u2"</span> <span class="ot">=</span> u2)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (u2 <span class="sc">&lt;</span> <span class="fu">f</span>(u1) <span class="sc">/</span> (C <span class="sc">*</span> <span class="fu">g</span>(u1))) {</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(u1)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gen_beta</span>()</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">gen_beta</span>())</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>x_actual <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1000</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="class-notes_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x_actual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="class-notes_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="section-8" class="level1">
+<h1>2/7/2022</h1>
+<section id="summary-6" class="level2">
+<h2 class="anchored" data-anchor-id="summary-6">Summary</h2>
+<p>Acceptance-rejection method for discrete random variables</p>
+</section>
+<section id="notes-6" class="level2">
+<h2 class="anchored" data-anchor-id="notes-6">Notes</h2>
+<p>Acceptance-rejection method for discrete random variables.</p>
+<p>Let <span class="math inline">\(f_X(x) = \begin{cases} 0.16, x = 1 \\ 0.24, x = 2 \\ 0.33, x = 3 \\ 0.17, x = 4 \\ 0.10, x = 5 \\ 0, \text{ otherwise}. \end{cases}\)</span> Assume we also have <span class="math inline">\(g_X(x) = \frac{1}{5}, x \in \{1, 2, 3, 4, 5\} \text{ and } 0 \text{ otherwise}.\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.16</span>, <span class="fl">0.24</span>, <span class="fl">0.33</span>, <span class="fl">0.17</span>, <span class="fl">0.10</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">/</span> <span class="dv">5</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">max</span>(f <span class="sc">/</span> g)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>f_x <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fl">0.16</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="fl">0.24</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="fl">0.33</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="fl">0.17</span>,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="fl">0.10</span>,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>gen <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span>) <span class="co"># draw 1 realization from discrete uniform</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># draw 1 realization from continuous uniform</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (u <span class="sc">&lt;=</span> <span class="fu">f_x</span>(y) <span class="sc">/</span> (C <span class="sc">*</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>)) {</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(y)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gen</span>()</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">gen</span>())</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(out))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>out
+    1     2     3     4     5 
+0.151 0.237 0.318 0.177 0.117 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="section-9" class="level1">
+<h1>2/9/2023</h1>
+<section id="summary-7" class="level2">
+<h2 class="anchored" data-anchor-id="summary-7">Summary</h2>
+<p>Covering random processes (counting processes, poisson processes, renewal processes).</p>
+</section>
+<section id="notes-7" class="level2">
+<h2 class="anchored" data-anchor-id="notes-7">Notes</h2>
+<ul>
+<li>random processes depend on an <strong>index</strong>, often <em>time</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>gen_poisson <span class="ot">&lt;-</span> <span class="cf">function</span>(t0, lambda) {</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="dv">0</span>; i <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (s <span class="sc">&lt;=</span> t0) {</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    t <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> u) <span class="sc">/</span> lambda  <span class="co"># inverse transform to draw from Exp(lambda)</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">&lt;-</span> s <span class="sc">+</span> t</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(i <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="fu">gen_poisson</span>(<span class="dv">10</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 28</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">gen_poisson</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="class-notes_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="section-10" class="level1">
+<h1>2/21/23</h1>
+<section id="summary-8" class="level2">
+<h2 class="anchored" data-anchor-id="summary-8">Summary</h2>
+<p>Monte-Carlo Integration, <code>rnorm()</code>, <code>qnorm()</code>, etc.</p>
+</section>
+<section id="notes-8" class="level2">
+<h2 class="anchored" data-anchor-id="notes-8">Notes</h2>
+<ul>
+<li><p>We’ll get back the exam results this Thursday.</p>
+<ul>
+<li>We’ll have a chance to correct scores (if they’re really bad?)</li>
+</ul></li>
+<li><p>We’re skipping chapter 5 (which covers data visualization), and move to chapter 6</p></li>
+<li><p>Chapter 6 utilizes the process of generating random numbers (ch.&nbsp;3), but we won’t use methods such as inverse-transform; we’ll use built-in methods from R</p></li>
+</ul>
+<p><span class="math inline">\(x_1, x_2, \cdots, x_n \sim Exp(\lambda)\)</span></p>
+<p><span class="math display">\[
+f_X(x) = \begin{cases}
+  \lambda \cdot e^{-\lambda x} &amp; x \geq 0, \lambda &gt; 0 \\
+  0 &amp; \text{ otherwise.}
+\end{cases}
+\]</span></p>
+<p><span class="math inline">\(u \equiv F_X(x) = 1 - e^{-\lambda x}\)</span> <span class="math inline">\(x \to -\frac{1}{\lambda}ln(1 - u)\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rexp</span>(n, lambda) <span class="co"># x_i ~ f(x)             -- random draws</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.34281666 0.33043108 0.53373096 0.60647510 0.13902413 0.29434770
+ [7] 0.74290279 0.33271993 0.61320502 0.05719413</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(x, lambda) <span class="co"># P(X &lt;= x)              -- CDF, cumulative probability</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9502129</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dexp</span>(x, lambda) <span class="co"># P(X == x)?             -- density</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1493612</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qexp</span>(p, lambda) <span class="co"># x* s.t. P(X &lt;= x*) = p -- quantile</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4013243</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>, mu, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.399977</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">5</span>, mu, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.75</span>, mu, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.023469</code></pre>
+</div>
+</div>
+<ul>
+<li>covering use of <code>set.seed()</code></li>
+</ul>
+<p>Example. Suppose <span class="math inline">\(u \sim U(0, 1)\)</span>, and <span class="math display">\[
+F_u(u^*) \equiv P(U \leq u^*) = \int_0^{u^*} f_u(u)\ du = \int_0^{u^*} 1\ du = u^*
+\]</span></p>
+<p>Demonstration of theorem, using <span class="math inline">\(punif()\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">punif</span>(<span class="fl">0.6</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6</code></pre>
+</div>
+</div>
+<section id="monte-carlo-integration" class="level3">
+<h3 class="anchored" data-anchor-id="monte-carlo-integration">Monte Carlo Integration</h3>
+<!-- hell yea, new topics -->
+<p><span class="math display">\[
+\int_0^1 e^{-x}\ dx
+\]</span></p>
+<p>In numerical integration (Simpson’s rule, midpoint rule, etc.), you can learn to integrate something like the above.</p>
+<p>However, in statistics, we accomplish this by generating random numbers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">exp</span>(<span class="sc">-</span>u))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6321629</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6321206</code></pre>
+</div>
+</div>
+<p>Monte Carlo integration relies on the <em>Strong Law of Large Numbers.</em></p>
+<p>Let <span class="math inline">\(g(x)\)</span> be a function of random variable <span class="math inline">\(X\)</span> with pdf <span class="math inline">\(f_X(x)\)</span>. Then let <span class="math display">\[
+\theta = E(g(X)) = \int_{-\infty}^{\infty} g(x)f_X(x)\ dx
+\]</span></p>
+<p>If one has a random sample of size <span class="math inline">\(n\)</span>, <span class="math inline">\(x_1, x_2, \cdots, x_n\)</span> from <span class="math inline">\(f_X(x)\)</span>, then <span class="math inline">\(\hat{\theta} = \sum_{i = 1}^{n} g(x_i) / n\)</span> converges to <span class="math inline">\(\theta\)</span> with probability 1 by the Strong Law of Large Numbers.</p>
+<p>Example:</p>
+<p><span class="math display">\[
+\theta = E(g(X)) = \int_0^1 x\ dx = \int_0^1 x \cdot \frac{1}{1 - 0}\ dx = \frac{1}{2}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>u1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(n1, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>u2 <span class="ot">&lt;-</span> <span class="fu">runif</span>(n2, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="co"># g(x) = x</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(u1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4857288</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(u2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5040348</code></pre>
+</div>
+</div>
+<p><span class="math display">\[
+\theta = \int_a^b g(x)\ dx = (b - a) \cdot \int_a^b g(x) \cdot \frac{1}{b - a}\ dx
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">5</span>) <span class="sc">-</span> (<span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1285973</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">5</span> <span class="sc">-</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="fu">mean</span>(<span class="fu">exp</span>(<span class="sc">-</span>u))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1308512</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="section-11" class="level1">
+<h1>2/23/23</h1>
+<section id="summary-9" class="level2">
+<h2 class="anchored" data-anchor-id="summary-9">Summary</h2>
+<p>More on Monte-Carlo integration, discussion of why sample mean is preferred vs.&nbsp;other estimators wrt the law of large numbers.</p>
+</section>
+<section id="notes-9" class="level2">
+<h2 class="anchored" data-anchor-id="notes-9">Notes</h2>
+<ul>
+<li><p>turn in corrections to your exam to Dr.&nbsp;Ko’s office, by 12pm tomorrow.</p></li>
+<li><p>Why do we like the sample mean (for estimating <span class="math inline">\(\mu\)</span>)?</p>
+<ul>
+<li>it uses the same formula! this is why the strong law of large numbers is powerful</li>
+<li>sample median won’t necessarily converge to population mean, e.g.&nbsp;when the population distribution isn’t symmetric</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>mc_integrate <span class="ot">&lt;-</span> <span class="cf">function</span>(g, <span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>, n) {</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, a, b)</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>  (b <span class="sc">-</span> a) <span class="sc">*</span> <span class="fu">mean</span>(<span class="fu">g</span>(u))</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">exp</span>(<span class="sc">-</span>x)</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>), <span class="sc">~</span><span class="fu">mc_integrate</span>(f, <span class="dv">2</span>, <span class="dv">4</span>, .))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07002953 0.11930481 0.11592688 0.11709257 0.11704338</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># true value</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span>) <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1170196</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">10</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">10</span> <span class="sc">*</span> x)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">1000</span>, <span class="dv">1000000</span>), <span class="sc">~</span><span class="fu">mc_integrate</span>(h, <span class="dv">0</span>, <span class="dv">2</span>, .))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4772796 0.9569867 0.9962637</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># true value</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(h, <span class="dv">0</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 with absolute error &lt; 1.5e-07</code></pre>
+</div>
+</div>
+<p>Currently, we’ve been checking the difference between our estimates and the true value. This is a measure of <em>bias</em> against true parameter values. However, we’ll discuss measurements of variance in a future class.</p>
+</section>
+</section>
+<section id="section-12" class="level1">
+<h1>2/28/23</h1>
+<section id="summary-10" class="level2">
+<h2 class="anchored" data-anchor-id="summary-10">Summary</h2>
+</section>
+<section id="notes-10" class="level2">
+<h2 class="anchored" data-anchor-id="notes-10">Notes</h2>
+<ul>
+<li>Homework 3 assigned</li>
+<li>Exam corrections returned (I got 89%?)</li>
+</ul>
+<section id="section-13" class="level3">
+<h3 class="anchored" data-anchor-id="section-13"></h3>
+<p><span class="math inline">\(Pr(0 \leq x \leq 5)\)</span> where <span class="math display">\[
+f_X(x) = \begin{cases}
+10 \cdot e^{-10x}, &amp; x \geq 0 \\
+0, &amp; \text{ otherwise}
+\end{cases}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">10</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">10</span> <span class="sc">*</span> x)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mc_integrate</span>(f, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">100000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.016846</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>cdf_exp_b <span class="ot">&lt;-</span> <span class="cf">function</span>(x, lambda, n) {</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">*</span> <span class="fu">mean</span>(lambda <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>lambda <span class="sc">*</span> x <span class="sc">*</span> u))</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">cdf_exp_b</span>(<span class="dv">6</span>, <span class="dv">20</span>, <span class="dv">100</span>)</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">cdf_exp_b</span>(<span class="dv">2</span>, <span class="dv">20</span>, <span class="dv">100</span>)</span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>u <span class="sc">-</span> l</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.577214</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="dv">6</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">20</span>) <span class="sc">-</span> <span class="fu">pexp</span>(<span class="dv">2</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1640192</code></pre>
+</div>
+</div>
+</section>
+<section id="example-from-class-write-a-function-to-generate-a-z-table" class="level3">
+<h3 class="anchored" data-anchor-id="example-from-class-write-a-function-to-generate-a-z-table">Example from class: write a function to generate a Z-table</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare results to textbook example 6.3</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>z_cdf <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">n =</span> <span class="dv">1000</span>) {</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># density of Z ~ N(0, 1)?</span></span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>  theta <span class="ot">&lt;-</span> <span class="cf">function</span>(x, u) {</span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> pi) <span class="sc">*</span> x <span class="sc">*</span> <span class="fu">exp</span>((<span class="sc">-</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> u<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="dv">2</span>))</span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Z ~ N(0, 1) is symmetric about 0</span></span>
+<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&gt;=</span> <span class="dv">0</span>) {</span>
+<span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.5</span> <span class="sc">+</span> <span class="fu">theta</span>(x, u)</span>
+<span id="cb77-16"><a href="#cb77-16" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb77-17"><a href="#cb77-17" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">-</span> <span class="fu">theta</span>(<span class="sc">-</span>x, u)</span>
+<span id="cb77-18"><a href="#cb77-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb77-19"><a href="#cb77-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb77-20"><a href="#cb77-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-21"><a href="#cb77-21" aria-hidden="true" tabindex="-1"></a><span class="fu">z_cdf</span>(<span class="dv">2</span>, <span class="dv">100000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9775238</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9772499</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="section-14" class="level1">
+<h1>3/2/23</h1>
+<section id="summary-11" class="level2">
+<h2 class="anchored" data-anchor-id="summary-11">Summary</h2>
+</section>
+<section id="notes-11" class="level2">
+<h2 class="anchored" data-anchor-id="notes-11">Notes</h2>
+<p>Today: An easier way to generate CDFs for random variables?</p>
+<p>“Hit or Miss” approach for Monte Carlo Integration.</p>
+<p>Let <span class="math inline">\(f(x)\)</span> be the pdf of a random variable <span class="math inline">\(X\)</span>. To estimate <span class="math inline">\(F(x) = \int_{-\infty}^x f(t)\ dt\)</span> is</p>
+<ol type="1">
+<li>Generate a random sample <span class="math inline">\(X_1, X_2, \cdots, X_m\)</span> from <span class="math inline">\(f(x)\)</span>.</li>
+<li>For each <span class="math inline">\(X_i\)</span>, compute <span class="math inline">\(g(x) = I(X_i \leq x) = \begin{cases} 1, &amp; X_i \leq x \\ 0, &amp; X_i &gt; x\end{cases}\)</span>.</li>
+<li>Compute <span class="math inline">\(\hat{F}(x) = \bar{g(X)} = \frac{1}{m} \sum_{i = 1}^m I(X_i \leq x)\)</span> as an estimate of <span class="math inline">\(F(x)\)</span>.</li>
+</ol>
+<p>Note: <span class="math inline">\(\hat{F}(x)\)</span> is called the <em>empirical distribution</em> of <span class="math inline">\(F(x)\)</span>.</p>
+<p>Why does this work?</p>
+<p><span class="math inline">\(E(x) = 1 \cdot P(X \leq x) + 0 \cdot p(X &gt; x) = P(X \leq x) = F(x)\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the "Hit-or-Miss" method:</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="co"># step 1.</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>)</span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step 2. (an indicator function)</span></span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> x <span class="sc">&lt;=</span> <span class="fl">1.96</span></span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a><span class="co"># step 3.</span></span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.976</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>norm_cdf <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">n =</span> <span class="dv">10000</span>, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>) {</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> X <span class="sc">&lt;=</span> x</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(i)</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>exp_cdf <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">n =</span> <span class="dv">10000</span>, <span class="at">lambda =</span> <span class="dv">5</span>) {</span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">rexp</span>(n, lambda)</span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> X <span class="sc">&lt;=</span> x</span>
+<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(i)</span>
+<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a><span class="fu">exp_cdf</span>(<span class="fl">7.6</span>, <span class="at">n =</span> <span class="dv">1000</span>, <span class="at">lambda =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="fl">7.6</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>beta_cdf <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">n =</span> <span class="dv">10000</span>, <span class="at">a =</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">3</span>) {</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(n, a, b)</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> X <span class="sc">&lt;=</span> x</span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(i)</span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a><span class="fu">beta_cdf</span>(<span class="fl">0.7</span>, <span class="at">a =</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9163</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbeta</span>(<span class="fl">0.7</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9163</code></pre>
+</div>
+</div>
+<p>How do we choose between competing estimates for parameters <span class="math inline">\(\hat{\theta}\)</span>?</p>
+<p>Say we have <span class="math inline">\(\hat{\theta_1}\)</span> and <span class="math inline">\(\hat{\theta_2}\)</span> as estimators (?) of <span class="math inline">\(\theta\)</span>. We care about:</p>
+<ol type="1">
+<li><em>Unbiasedness:</em> if <span class="math inline">\(E(\hat{\theta}) = \theta\)</span>, then <span class="math inline">\(\hat{\theta}\)</span> is an unbiased estimate.</li>
+<li><em>Minimum Variance:</em> if <span class="math inline">\(Var(\hat{\theta_1}) &lt; Var(\hat{\theta_2})\)</span>, we would prefer <span class="math inline">\(\hat{\theta_1}\)</span>, other properties being equivalent.</li>
+</ol>
+<p>Developed estimators should satisfy these properties.</p>
+<p>“Uniformly Most powerful Variance among Unbiased Estimates”: “UMVUE”.</p>
+<p>Papers can be published based on whether a new estimator has less variance than an existing estimator.</p>
+<p>How do we compare the variance of an estimator? Samples of samples.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare hit or miss vs. simple monte-carlo</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="co"># theta_1 is simple monte-carlo</span></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="co"># theta_2 is indicator</span></span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="co"># estimating F_Z(1.96) where Z ~ N(0, 1).</span></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="co"># generate 100 estimates of theta_1 and theta_2 (n = 10,000)</span></span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a><span class="co"># then, take the variance of each</span></span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a><span class="co"># for theta_1</span></span>
+<span id="cb91-9"><a href="#cb91-9" aria-hidden="true" tabindex="-1"></a>z_cdf <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">n =</span> <span class="dv">1000</span>) {</span>
+<span id="cb91-10"><a href="#cb91-10" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb91-11"><a href="#cb91-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-12"><a href="#cb91-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># density of Z ~ N(0, 1)?</span></span>
+<span id="cb91-13"><a href="#cb91-13" aria-hidden="true" tabindex="-1"></a>  theta <span class="ot">&lt;-</span> <span class="cf">function</span>(x, u) {</span>
+<span id="cb91-14"><a href="#cb91-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> pi) <span class="sc">*</span> x <span class="sc">*</span> <span class="fu">exp</span>((<span class="sc">-</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> u<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="dv">2</span>))</span>
+<span id="cb91-15"><a href="#cb91-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb91-16"><a href="#cb91-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-17"><a href="#cb91-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Z ~ N(0, 1) is symmetric about 0</span></span>
+<span id="cb91-18"><a href="#cb91-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&gt;=</span> <span class="dv">0</span>) {</span>
+<span id="cb91-19"><a href="#cb91-19" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.5</span> <span class="sc">+</span> <span class="fu">theta</span>(x, u)</span>
+<span id="cb91-20"><a href="#cb91-20" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb91-21"><a href="#cb91-21" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">-</span> <span class="fu">theta</span>(<span class="sc">-</span>x, u)</span>
+<span id="cb91-22"><a href="#cb91-22" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb91-23"><a href="#cb91-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb91-24"><a href="#cb91-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-25"><a href="#cb91-25" aria-hidden="true" tabindex="-1"></a><span class="co"># for theta_2</span></span>
+<span id="cb91-26"><a href="#cb91-26" aria-hidden="true" tabindex="-1"></a>z_cdf2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">n =</span> <span class="dv">1000</span>, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>) {</span>
+<span id="cb91-27"><a href="#cb91-27" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb91-28"><a href="#cb91-28" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> X <span class="sc">&lt;=</span> x</span>
+<span id="cb91-29"><a href="#cb91-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(i)</span>
+<span id="cb91-30"><a href="#cb91-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb91-31"><a href="#cb91-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-32"><a href="#cb91-32" aria-hidden="true" tabindex="-1"></a><span class="co"># wrap the 2 functions, and collect results</span></span>
+<span id="cb91-33"><a href="#cb91-33" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">x =</span> <span class="fl">1.96</span>, <span class="at">n =</span> <span class="dv">100</span>) {</span>
+<span id="cb91-34"><a href="#cb91-34" aria-hidden="true" tabindex="-1"></a>  t1 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb91-35"><a href="#cb91-35" aria-hidden="true" tabindex="-1"></a>  t2 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb91-36"><a href="#cb91-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb91-37"><a href="#cb91-37" aria-hidden="true" tabindex="-1"></a>    t1[i] <span class="ot">&lt;-</span> <span class="fu">z_cdf</span>(x)</span>
+<span id="cb91-38"><a href="#cb91-38" aria-hidden="true" tabindex="-1"></a>    t2[i] <span class="ot">&lt;-</span> <span class="fu">z_cdf2</span>(x)</span>
+<span id="cb91-39"><a href="#cb91-39" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb91-40"><a href="#cb91-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">theta1 =</span> <span class="fu">var</span>(t1), <span class="at">theta2 =</span> <span class="fu">var</span>(t2))</span>
+<span id="cb91-41"><a href="#cb91-41" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb91-42"><a href="#cb91-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-43"><a href="#cb91-43" aria-hidden="true" tabindex="-1"></a><span class="fu">comparison</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      theta1       theta2 
+4.669904e-05 2.570212e-05 </code></pre>
+</div>
+</div>
+<ul>
+<li>According to Dr.&nbsp;Ko, three flavors of journals in statistics:
+<ul>
+<li>theoretical journals</li>
+<li>simulation-based journals</li>
+<li>applied journals?</li>
+</ul></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

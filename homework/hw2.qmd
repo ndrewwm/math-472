@@ -8,6 +8,7 @@ knitr:
     warning: false
     message: false
 format:
+  html: default
   pdf:
     include-in-header:
       text: |

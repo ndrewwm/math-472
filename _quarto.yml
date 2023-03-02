@@ -1,0 +1,22 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "math-472"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: class-notes.qmd
+        text: Class Notes
+      - href: homework.qmd
+
+format:
+  html:
+    theme: pulse
+    css: styles.css
+    toc: true
+
+
+

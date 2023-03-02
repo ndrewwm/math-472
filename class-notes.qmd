@@ -1,8 +1,9 @@
 ---
 title: "MATH-472: Class Notes"
 description: |
-  Running qmd to keep notes during MATH-472 lectures.
+  My running notes during MATH-472 lectures.
 author: "Andrew Moore"
+format: html
 knitr:
   opts_chunk: 
     echo: true
@@ -131,13 +132,13 @@ grade <- ifelse(
 grade
 
 # will fail-- length(score) > 1
-if (score >= 90) {
-  grade <- 'A'
-} else if (score >= 80) {
-  grade <- 'B'
-} else {
-  grade <- 'C'
-}
+# if (score >= 90) {
+#   grade <- 'A'
+# } else if (score >= 80) {
+#   grade <- 'B'
+# } else {
+#   grade <- 'C'
+# }
 ```
 
 ### Note on statistical software
@@ -297,8 +298,8 @@ g <- function(n) {
   )
 }
 
-prop.table(table(g(10000)))
-cumsum(.Last.value)
+p <- prop.table(table(g(10000)))
+cumsum(p)
 ```
 
 # 2/2/2023
@@ -661,13 +662,15 @@ pexp(6, 1/20) - pexp(2, 1/20)
 ```{r}
 # Compare results to textbook example 6.3
 
-# density of Z ~ N(0, 1), 
-theta <- function(x, u) {
-  mean(1 / sqrt(2 * pi) * x * exp((-x^2 * u^2) / 2))
-}
 
-z_cdf <- function(x, n) {
+
+z_cdf <- function(x, n = 1000) {
   u <- runif(n, 0, 1)
+
+  # density of Z ~ N(0, 1)?
+  theta <- function(x, u) {
+    mean(1 / sqrt(2 * pi) * x * exp((-x^2 * u^2) / 2))
+  }
 
   # Z ~ N(0, 1) is symmetric about 0
   if (x >= 0) {
@@ -680,3 +683,129 @@ z_cdf <- function(x, n) {
 z_cdf(2, 100000)
 pnorm(2)
 ```
+
+
+# 3/2/23
+
+## Summary
+
+## Notes
+
+Today: An easier way to generate CDFs for random variables?
+
+"Hit or Miss" approach for Monte Carlo Integration.
+
+Let $f(x)$ be the pdf of a random variable $X$. To estimate $F(x) = \int_{-\infty}^x f(t)\ dt$ is
+
+1. Generate a random sample $X_1, X_2, \cdots, X_m$ from $f(x)$.
+2. For each $X_i$, compute $g(x) = I(X_i \leq x) = \begin{cases} 1, & X_i \leq x \\ 0, & X_i > x\end{cases}$.
+3. Compute $\hat{F}(x) = \bar{g(X)} = \frac{1}{m} \sum_{i = 1}^m I(X_i \leq x)$ as an estimate of $F(x)$.
+
+Note: $\hat{F}(x)$ is called the *empirical distribution* of $F(x)$.
+
+Why does this work?
+
+$E(x) = 1 \cdot P(X \leq x) + 0 \cdot p(X > x) = P(X \leq x) = F(x)$.
+
+```{r}
+# the "Hit-or-Miss" method:
+
+# step 1.
+x <- rnorm(10000)
+
+# step 2. (an indicator function)
+i <- x <= 1.96
+
+# step 3.
+mean(i)
+
+norm_cdf <- function(x, n = 10000, mu = 0, sigma = 1) {
+  X <- rnorm(n, mu, sigma)
+  i <- X <= x
+  mean(i)
+}
+
+exp_cdf <- function(x, n = 10000, lambda = 5) {
+  X <- rexp(n, lambda)
+  i <- X <= x
+  mean(i)
+}
+
+exp_cdf(7.6, n = 1000, lambda = 5)
+pexp(7.6, 5)
+
+beta_cdf <- function(x, n = 10000, a = 2, b = 3) {
+  X <- rbeta(n, a, b)
+  i <- X <= x
+  mean(i)
+}
+
+beta_cdf(0.7, a = 2, b = 3)
+pbeta(0.7, 2, 3)
+```
+
+How do we choose between competing estimates for parameters $\hat{\theta}$?
+
+Say we have $\hat{\theta_1}$ and $\hat{\theta_2}$ as estimators (?) of $\theta$. We care about:
+
+1. *Unbiasedness:* if $E(\hat{\theta}) = \theta$, then $\hat{\theta}$ is an unbiased estimate.
+2. *Minimum Variance:* if $Var(\hat{\theta_1}) < Var(\hat{\theta_2})$, we would prefer $\hat{\theta_1}$, other properties being equivalent.
+
+Developed estimators should satisfy these properties.
+
+"Uniformly Most powerful Variance among Unbiased Estimates": "UMVUE". 
+
+Papers can be published based on whether a new estimator has less variance than an existing estimator.
+
+How do we compare the variance of an estimator? Samples of samples.
+
+```{r}
+# compare hit or miss vs. simple monte-carlo
+# theta_1 is simple monte-carlo
+# theta_2 is indicator
+# estimating F_Z(1.96) where Z ~ N(0, 1).
+# generate 100 estimates of theta_1 and theta_2 (n = 10,000)
+# then, take the variance of each
+
+# for theta_1
+z_cdf <- function(x, n = 1000) {
+  u <- runif(n, 0, 1)
+
+  # density of Z ~ N(0, 1)?
+  theta <- function(x, u) {
+    mean(1 / sqrt(2 * pi) * x * exp((-x^2 * u^2) / 2))
+  }
+
+  # Z ~ N(0, 1) is symmetric about 0
+  if (x >= 0) {
+    0.5 + theta(x, u)
+  } else {
+    1 - 0.5 - theta(-x, u)
+  }
+}
+
+# for theta_2
+z_cdf2 <- function(x, n = 1000, mu = 0, sigma = 1) {
+  X <- rnorm(n, mu, sigma)
+  i <- X <= x
+  mean(i)
+}
+
+# wrap the 2 functions, and collect results
+comparison <- function(x = 1.96, n = 100) {
+  t1 <- numeric(n)
+  t2 <- numeric(n)
+  for (i in 1:n) {
+    t1[i] <- z_cdf(x)
+    t2[i] <- z_cdf2(x)
+  }
+  c(theta1 = var(t1), theta2 = var(t2))
+}
+
+comparison()
+```
+
+- According to Dr. Ko, three flavors of journals in statistics:
+  - theoretical journals
+  - simulation-based journals
+  - applied journals?

@@ -1,0 +1,6 @@
+---
+title: "Homework"
+listing:
+  contents: homework
+  sort: "date"
+---
