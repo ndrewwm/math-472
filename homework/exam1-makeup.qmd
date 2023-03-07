@@ -8,7 +8,12 @@ knitr:
     warning: false
     message: false
 format:
-  html: default
+  html:
+    include-in-header:
+      text: |
+        $$
+        \require{physics}
+        $$
   pdf:
     include-in-header:
       text: |
