@@ -163,7 +163,11 @@ grade
 
 # 1/17/23
 
+- Absent
+
 # 1/19/23
+
+- Absent
 
 # 1/24/23
 
@@ -689,6 +693,9 @@ pnorm(2)
 
 ## Summary
 
+- "Hit or Miss" approach to Monte Carlo Integration
+
+
 ## Notes
 
 Today: An easier way to generate CDFs for random variables?
@@ -809,3 +816,118 @@ comparison()
   - theoretical journals
   - simulation-based journals
   - applied journals?
+
+# 3/7/2023
+
+## Summary
+
+Variance reduction methods, the Antithetic Variable Method
+
+## Notes
+
+Suppose our goal is to estimate a parameter $\theta$. Could be population mean, median, variance, etc.
+
+*Point Estimation:* use sample data to calculate a single estimate $\hat{\theta}$ of the population value.
+
+If you have competing estimators, we would choose the one that satisfies the following two criteria:
+
+1. $E(\hat{\theta}) = \theta$; unbiasedness
+2. Minimum variance 
+
+This is called a Uniformly Minimum Variance Estimate among Unbiased Estimates: UMVUE.
+
+We can apply Monte-Carlo integration to competing estimators to determine which among them have the lowest variance. We demonstrated this in the last class with the Normal CDF.
+
+### Antithetic Variable Method
+
+Suppose we have two random variables $X$ and $Y$. Then, $Var(aX \pm bY) = a^2 \cdot Var(X) + b^2 \cdot Var(Y) \pm 2 \cdot a \cdot b \cdot Cov(X, Y)$ where $a$ and $b$ are numbers, and $Cov(X, Y) = E(XY) - E(X) \cdot E(Y)$.
+
+Ex. $Var(2X + 0.5Y)$
+
+We have shown that 
+$$
+\frac{1}{m}\sum_{i=1}^n g(u_i) \leftarrow \theta = \int_a^b g(x)\ dx
+$$
+
+by the law of large numbers.
+
+Now, let $a = b = \frac{1}{2}$, and thus
+$$
+Var(\frac{X + Y}{2}) = Var(\frac{1}{2}X + \frac{1}{2}Y) = (\frac{1}{2})^2Var(X) + (\frac{1}{2})^2Var(Y) + 2 \cdot \frac{1}{2} \cdot \frac{1}{2} \cdot Cov(X, Y)
+$$
+
+Then, let $u_1, u_2 \sim U(0, 1)$ and consider a function $h(\cdot).$
+
+(a) if $u_1 \perp u_2$, then $h(u_1) \perp h(u_2)$ and 
+$$
+Var\Bigl(\frac{h(u_1) + h(u_2)}{2} \Bigr) = \frac{1}{4}(Var(h(u_1)) + Var(h(u_2)))
+$$
+
+```{r}
+u <- runif(1000)
+v <- 1 - u
+
+# Cov(u, v) < 0!
+cov(u, v)
+```
+
+Comparison between simple monte-carlo and antithetic variable approach.
+
+```{r}
+norm_cdf_anti <- function(x, n) {
+  u <- runif(n / 2)
+  v <- 1 - u
+  y <- c(u, v)
+  
+  pos_cdf <- (1 / sqrt(2 * pi)) * abs(x) * exp(-x^2 * y^2 / 2) + 0.5
+  
+  if (x >= 0) {
+    cdf <- pos_cdf
+  } else {
+    cdf <- 1 - pos_cdf
+  }
+  
+  return(mean(cdf))
+}
+
+norm_cdf <- function(x, n) {
+  u <- runif(n)
+  
+  pos_cdf <- (1 / sqrt(2 * pi)) * abs(x) * exp(-x^2 * u^2 / 2) + 0.5
+  
+  if (x >= 0) {
+    cdf <- pos_cdf
+  } else {
+    cdf <- 1 - pos_cdf
+  }
+  
+  return(mean(cdf))
+}
+
+s <- numeric(100)
+a <- numeric(100)
+
+for (i in 1:100) {
+  s[i] <- norm_cdf(1.96, 100)
+  a[i] <- norm_cdf_anti(1.96, 100)
+}
+
+var(s)
+var(a)
+```
+
+### Control Variate Method
+
+Let $\theta = E(g(X))$. An estimate of $\theta$ by control variate method $\hat{\theta}_c$ can be obtained by 
+
+(a) finding a function $l(x)$ of a random variable such that (i) $\mu = E(l(x))$ is known and (ii) $l(x)$ is correlated with $g(x)$ and
+
+(b) setting $\hat{\theta}_c = g(x) + c[l(x) - \mu]$.
+
+Note that the random variable $l(x)$ is called a *control variate* and does not need to be a pdf. It is just a function of $x$.
+
+So, how do we find $c$?
+
+$$
+\min_c Var(\hat{\theta}_c) = \min_c Var(1 \cdot g(x) + c \cdot [l(x) - \mu])
+$$
