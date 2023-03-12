@@ -15,6 +15,7 @@ knitr:
 #| echo: false
 
 library(tidyverse)
+set.seed(8686)
 ```
 
 # 1/10/23
@@ -931,3 +932,123 @@ So, how do we find $c$?
 $$
 \min_c Var(\hat{\theta}_c) = \min_c Var(1 \cdot g(x) + c \cdot [l(x) - \mu])
 $$
+
+
+# 3/9/2023
+
+## Summary
+
+More on the control variate method.
+
+## Notes
+
+- Homework 3 is due on 3/16 (next Thursday)
+
+**Question from last class:** why are we able to use the SLLN with the antithetic variable method? Aren't we violating the assumption of i.i.d. draws used for estimation?
+
+Standard Monte Carlo:
+
+1. $u_1, u_2, u_3, u_4 \sim U(0, 1)$
+
+2. $\hat{\theta}_4 = \frac{1}{4} \sum_{i = 1}^4 g(u_i)$
+
+Antithetic Variable Method:
+
+1. $u_1, u_2 \sim U(0, 1); u_3 = 1 - u_1, u_4 = 1 - u_2.$
+    - Note that $Cov(u_1, u_3) < 0$ and $Cov(u_2, u_4) < 0.$
+
+2. We then  estimate a new sample mean
+
+\begin{align*}
+  \theta \leftarrow \frac{1}{4} \sum_{i = 1}^4 g(u_i) &= \frac{g(u_1) + g(u_2) + g(u_3) + g(u_4)}{4} \\
+  &= \frac{g(u_1) + g(1 - u_1) + g(u_2) + g(1 - u_2)}{4} \\ \\
+  &= \frac{\frac{g(u_1) + g(1 - u_2)}{2} + \frac{g(u_2) + g(1 - u_2)}{2}}{2} \\
+  &= \frac{1}{2} \sum_{i = 1}^2 g^*(u_i).
+\end{align*}
+
+So, you end up with half the number of realizations, but $\frac{g(u_1) + g(1 - u_2)}{2}$ and $\frac{g(u_2) + g(1 - u_2)}{2}$ are independent from each other. So, for estimation, they constitute independent and identical draws, and thus we can rely on the SLLN to know that our estimate of $\theta$ converges to the true value as the number of realizations used increases.
+
+### Control Variate Method
+
+Picking up where we left off.
+
+$$
+\min_c Var(\hat{\theta}_c) = \min_c Var(1 \cdot g(x) + c \cdot [l(x) - \mu])
+$$
+
+We assume $\mu$, the mean of $l(x)$ is known. In practice, we can estimate it empirically from simulated data?
+
+::: {.column-margin}
+Note that $Var(X + a) = Var(X)$
+:::
+\begin{align*}
+  \min_c Var(\hat{\theta}_c) &\implies \min_c Var(1 \cdot g(x) + c \cdot [l(x) - \mu]) \\
+  &\implies \min_c 1 \cdot Var(g(x)) + c^2 \cdot Var[l(x) - \mu] + 2 \cdot 1 \cdot c \cdot Cov(g(x), l(x)) \\ 
+  &\implies \min_c Var(l(x) - \mu) \cdot c^2  + 2 \cdot Cov(g(x), l(x)) \cdot c + Var(g(x)) \\
+  &\implies \frac{d}{dc} \Biggl[ Var(l(x) - \mu) \cdot c^2  + 2 \cdot Cov(g(x), l(x)) \cdot c + Var(g(x)) \Biggr] \equiv 0 \\
+  &\implies 2 \cdot Var(l(x) - \mu) \cdot c^* + 2 \cdot Cov(g(x), l(x)) \equiv 0 \\
+  &\implies c^* = -\frac{Cov(g(x), l(x))}{Var(l(x))} \\
+  & \frac{d^2}{dx^2} Var(\hat{\theta}_c) \Big|_{c = c^*} > 0.
+\end{align*}
+
+Variance is always positive by definition, so we know that the value found for $c^*$ is the minimum.
+
+$$
+c^* = -\frac{Cov(g(x), l(x))}{Var(l(x))}
+$$
+
+**Example:**
+
+$$
+\theta = E(e^u) = \int_0^1 e^u\ du
+$$
+
+So $g(u) = e^u.$ First, we need a candidate for $l(x)$.
+
+How about $l(u) = u$ where $u \sim U(0, 1).$ So, $E(U) = 0.5$ and $Var(U) = \frac{1}{12}$.
+
+::: {.column-margin}
+We solved for these values in Homework 1.
+:::
+
+Then
+$$
+\hat{\theta}_c = e^u + c \cdot [u - \frac{1}{2}]
+$$
+where
+$$
+  c = -\frac{Cov(e^u, u)}{Var(u)} = -0.1409 / (1/12).
+$$
+
+```{r}
+u <- runif(100)
+C <- -cov(exp(u), u) / var(u)
+C
+
+-0.1409 / (1/12)
+```
+
+**Trying on our own:**
+
+Estimate $\theta = \int_0^1 e^{-x} / (1 + x^2)\ dx$ using the control variate method with $l(x) = e^{-0.5} / (1 + x^2)$ and an emperical value of $c^*$.
+
+
+```{r}
+g <- function(x) exp(-x) / (1 + x^2)
+l <- function(x) exp(-0.5) / (1 + x^2)
+
+# estimating C
+u <- runif(10000)
+C <- -cov(g(u), l(u)) / var(l(u))
+
+# simple monte-carlo vs. control variate
+u <- runif(1000)
+smc <- mean(g(u))
+hat <- mean(g(u) + C * (l(u) - mean(l(u))))
+
+integrate(g, 0, 1)
+print(smc)
+print(hat)
+print(var(g(u)))
+print(var(g(u) + C * (l(u) - mean(l(u)))))
+```

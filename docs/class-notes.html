@@ -265,11 +265,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#control-variate-method" id="toc-control-variate-method" class="nav-link" data-scroll-target="#control-variate-method">Control Variate Method</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#section-16" id="toc-section-16" class="nav-link" data-scroll-target="#section-16">3/9/2023</a>
+  <ul class="collapse">
+  <li><a href="#summary-13" id="toc-summary-13" class="nav-link" data-scroll-target="#summary-13">Summary</a></li>
+  <li><a href="#notes-13" id="toc-notes-13" class="nav-link" data-scroll-target="#notes-13">Notes</a>
+  <ul class="collapse">
+  <li><a href="#control-variate-method-1" id="toc-control-variate-method-1" class="nav-link" data-scroll-target="#control-variate-method-1">Control Variate Method</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -637,11 +645,11 @@ NULL</code></pre>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x) <span class="co"># should be close to 1 / lambda</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.09999598</code></pre>
+<pre><code>[1] 0.09966128</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x) <span class="co"># should be close to 1 / lambda^2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.01008169</code></pre>
+<pre><code>[1] 0.01001022</code></pre>
 </div>
 </div>
 <p>Transformation of a discrete CDF via a quantile:</p>
@@ -669,7 +677,7 @@ F_Y(y_{i - 1}) &lt; u \leq F_Y(y_i), u \sim Uniform(0, 1)
 <span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     0      1      2      3      4 
-0.0979 0.3522 0.4158 0.8436 1.0000 </code></pre>
+0.0945 0.3614 0.4230 0.8509 1.0000 </code></pre>
 </div>
 </div>
 </section>
@@ -801,7 +809,7 @@ P(\text{A point generated from step 1 is rejected}) = \frac{\text{Area between }
 <div class="cell-output cell-output-stdout">
 <pre><code>out
     1     2     3     4     5 
-0.147 0.236 0.343 0.170 0.104 </code></pre>
+0.148 0.243 0.334 0.174 0.101 </code></pre>
 </div>
 </div>
 </section>
@@ -833,7 +841,7 @@ P(\text{A point generated from step 1 is rejected}) = \frac{\text{Area between }
 <span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="fu">gen_poisson</span>(<span class="dv">10</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 21</code></pre>
+<pre><code>[1] 17</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">gen_poisson</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -876,8 +884,8 @@ f_X(x) = \begin{cases}
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rexp</span>(n, lambda) <span class="co"># x_i ~ f(x)             -- random draws</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.04821275 0.86568726 0.27535527 0.17550007 1.05623876 0.47881280
- [7] 0.23792943 0.02182196 0.97558406 0.06310353</code></pre>
+<pre><code> [1] 0.16743738 0.11545642 0.77955957 0.19226185 0.92408510 1.19061335
+ [7] 0.06183609 1.14527279 0.56107668 0.13444328</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(x, lambda) <span class="co"># P(X &lt;= x)              -- CDF, cumulative probability</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -898,7 +906,7 @@ f_X(x) = \begin{cases}
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1</span>, mu, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.8994936</code></pre>
+<pre><code>[1] -0.1788599</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">5</span>, mu, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -934,7 +942,7 @@ F_u(u^*) \equiv P(U \leq u^*) = \int_0^{u^*} f_u(u)\ du = \int_0^{u^*} 1\ du = u
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">exp</span>(<span class="sc">-</span>u))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6322463</code></pre>
+<pre><code>[1] 0.6319535</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -960,11 +968,11 @@ F_u(u^*) \equiv P(U \leq u^*) = \int_0^{u^*} f_u(u)\ du = \int_0^{u^*} 1\ du = u
 <span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="co"># g(x) = x</span></span>
 <span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(u1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5079939</code></pre>
+<pre><code>[1] 0.4879659</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(u2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4957338</code></pre>
+<pre><code>[1] 0.4989732</code></pre>
 </div>
 </div>
 <p><span class="math display">\[
@@ -978,7 +986,7 @@ F_u(u^*) \equiv P(U \leq u^*) = \int_0^{u^*} f_u(u)\ du = \int_0^{u^*} 1\ du = u
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">2</span>, <span class="dv">5</span>)</span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">5</span> <span class="sc">-</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="fu">mean</span>(<span class="fu">exp</span>(<span class="sc">-</span>u))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.129262</code></pre>
+<pre><code>[1] 0.1299476</code></pre>
 </div>
 </div>
 </section>
@@ -1012,7 +1020,7 @@ F_u(u^*) \equiv P(U \leq u^*) = \int_0^{u^*} f_u(u)\ du = \int_0^{u^*} 1\ du = u
 <span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>), <span class="sc">~</span><span class="fu">mc_integrate</span>(f, <span class="dv">2</span>, <span class="dv">4</span>, .))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.08838609 0.11961412 0.11612834 0.11636998 0.11701864</code></pre>
+<pre><code>[1] 0.09562651 0.10850361 0.11208910 0.11700866 0.11717136</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># true value</span></span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span>) <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1022,7 +1030,7 @@ F_u(u^*) \equiv P(U \leq u^*) = \int_0^{u^*} f_u(u)\ du = \int_0^{u^*} 1\ du = u
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">10</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">10</span> <span class="sc">*</span> x)</span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">1000</span>, <span class="dv">1000000</span>), <span class="sc">~</span><span class="fu">mc_integrate</span>(h, <span class="dv">0</span>, <span class="dv">2</span>, .))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.8051326 0.9667228 1.0014344</code></pre>
+<pre><code>[1] 0.01468095 0.98138915 1.00302424</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># true value</span></span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(h, <span class="dv">0</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1056,7 +1064,7 @@ f_X(x) = \begin{cases}
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">10</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">10</span> <span class="sc">*</span> x)</span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mc_integrate</span>(f, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">100000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9933802</code></pre>
+<pre><code>[1] 1.009759</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1070,7 +1078,7 @@ f_X(x) = \begin{cases}
 <span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>u <span class="sc">-</span> l</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.307096</code></pre>
+<pre><code>[1] -0.5129175</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="dv">6</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">20</span>) <span class="sc">-</span> <span class="fu">pexp</span>(<span class="dv">2</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1103,7 +1111,7 @@ f_X(x) = \begin{cases}
 <span id="cb77-20"><a href="#cb77-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb77-21"><a href="#cb77-21" aria-hidden="true" tabindex="-1"></a><span class="fu">z_cdf</span>(<span class="dv">2</span>, <span class="dv">100000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.977499</code></pre>
+<pre><code>[1] 0.977421</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1146,7 +1154,7 @@ f_X(x) = \begin{cases}
 <span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a><span class="co"># step 3.</span></span>
 <span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9718</code></pre>
+<pre><code>[1] 0.9797</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>norm_cdf <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">n =</span> <span class="dv">10000</span>, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>) {</span>
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
@@ -1239,7 +1247,7 @@ f_X(x) = \begin{cases}
 <span id="cb91-43"><a href="#cb91-43" aria-hidden="true" tabindex="-1"></a><span class="fu">comparison</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      theta1       theta2 
-5.163935e-05 2.602778e-05 </code></pre>
+3.999127e-05 2.826263e-05 </code></pre>
 </div>
 </div>
 <ul>
@@ -1293,7 +1301,7 @@ Var\Bigl(\frac{h(u_1) + h(u_2)}{2} \Bigr) = \frac{1}{4}(Var(h(u_1)) + Var(h(u_2)
 <span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cov(u, v) &lt; 0!</span></span>
 <span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(u, v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.0836544</code></pre>
+<pre><code>[1] -0.08566134</code></pre>
 </div>
 </div>
 <p>Comparison between simple monte-carlo and antithetic variable approach.</p>
@@ -1338,11 +1346,11 @@ Var\Bigl(\frac{h(u_1) + h(u_2)}{2} \Bigr) = \frac{1}{4}(Var(h(u_1)) + Var(h(u_2)
 <span id="cb95-38"><a href="#cb95-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb95-39"><a href="#cb95-39" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0005662214</code></pre>
+<pre><code>[1] 0.0005521252</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.778401e-06</code></pre>
+<pre><code>[1] 1.982865e-06</code></pre>
 </div>
 </div>
 </section>
@@ -1358,6 +1366,126 @@ Var\Bigl(\frac{h(u_1) + h(u_2)}{2} \Bigr) = \frac{1}{4}(Var(h(u_1)) + Var(h(u_2)
 <p><span class="math display">\[
 \min_c Var(\hat{\theta}_c) = \min_c Var(1 \cdot g(x) + c \cdot [l(x) - \mu])
 \]</span></p>
+</section>
+</section>
+</section>
+<section id="section-16" class="level1 page-columns page-full">
+<h1>3/9/2023</h1>
+<section id="summary-13" class="level2">
+<h2 class="anchored" data-anchor-id="summary-13">Summary</h2>
+<p>More on the control variate method.</p>
+</section>
+<section id="notes-13" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="notes-13">Notes</h2>
+<ul>
+<li>Homework 3 is due on 3/16 (next Thursday)</li>
+</ul>
+<p><strong>Question from last class:</strong> why are we able to use the SLLN with the antithetic variable method? Aren’t we violating the assumption of i.i.d. draws used for estimation?</p>
+<p>Standard Monte Carlo:</p>
+<ol type="1">
+<li><p><span class="math inline">\(u_1, u_2, u_3, u_4 \sim U(0, 1)\)</span></p></li>
+<li><p><span class="math inline">\(\hat{\theta}_4 = \frac{1}{4} \sum_{i = 1}^4 g(u_i)\)</span></p></li>
+</ol>
+<p>Antithetic Variable Method:</p>
+<ol type="1">
+<li><span class="math inline">\(u_1, u_2 \sim U(0, 1); u_3 = 1 - u_1, u_4 = 1 - u_2.\)</span>
+<ul>
+<li>Note that <span class="math inline">\(Cov(u_1, u_3) &lt; 0\)</span> and <span class="math inline">\(Cov(u_2, u_4) &lt; 0.\)</span></li>
+</ul></li>
+<li>We then estimate a new sample mean</li>
+</ol>
+<p><span class="math display">\[\begin{align*}
+  \theta \leftarrow \frac{1}{4} \sum_{i = 1}^4 g(u_i) &amp;= \frac{g(u_1) + g(u_2) + g(u_3) + g(u_4)}{4} \\
+  &amp;= \frac{g(u_1) + g(1 - u_1) + g(u_2) + g(1 - u_2)}{4} \\ \\
+  &amp;= \frac{\frac{g(u_1) + g(1 - u_2)}{2} + \frac{g(u_2) + g(1 - u_2)}{2}}{2} \\
+  &amp;= \frac{1}{2} \sum_{i = 1}^2 g^*(u_i).
+\end{align*}\]</span></p>
+<p>So, you end up with half the number of realizations, but <span class="math inline">\(\frac{g(u_1) + g(1 - u_2)}{2}\)</span> and <span class="math inline">\(\frac{g(u_2) + g(1 - u_2)}{2}\)</span> are independent from each other. So, for estimation, they constitute independent and identical draws, and thus we can rely on the SLLN to know that our estimate of <span class="math inline">\(\theta\)</span> converges to the true value as the number of realizations used increases.</p>
+<section id="control-variate-method-1" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="control-variate-method-1">Control Variate Method</h3>
+<p>Picking up where we left off.</p>
+<p><span class="math display">\[
+\min_c Var(\hat{\theta}_c) = \min_c Var(1 \cdot g(x) + c \cdot [l(x) - \mu])
+\]</span></p>
+<p>We assume <span class="math inline">\(\mu\)</span>, the mean of <span class="math inline">\(l(x)\)</span> is known. In practice, we can estimate it empirically from simulated data?</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Note that <span class="math inline">\(Var(X + a) = Var(X)\)</span></p>
+</div></div><p><span class="math display">\[\begin{align*}
+  \min_c Var(\hat{\theta}_c) &amp;\implies \min_c Var(1 \cdot g(x) + c \cdot [l(x) - \mu]) \\
+  &amp;\implies \min_c 1 \cdot Var(g(x)) + c^2 \cdot Var[l(x) - \mu] + 2 \cdot 1 \cdot c \cdot Cov(g(x), l(x)) \\
+  &amp;\implies \min_c Var(l(x) - \mu) \cdot c^2  + 2 \cdot Cov(g(x), l(x)) \cdot c + Var(g(x)) \\
+  &amp;\implies \frac{d}{dc} \Biggl[ Var(l(x) - \mu) \cdot c^2  + 2 \cdot Cov(g(x), l(x)) \cdot c + Var(g(x)) \Biggr] \equiv 0 \\
+  &amp;\implies 2 \cdot Var(l(x) - \mu) \cdot c^* + 2 \cdot Cov(g(x), l(x)) \equiv 0 \\
+  &amp;\implies c^* = -\frac{Cov(g(x), l(x))}{Var(l(x))} \\
+  &amp; \frac{d^2}{dx^2} Var(\hat{\theta}_c) \Big|_{c = c^*} &gt; 0.
+\end{align*}\]</span></p>
+<p>Variance is always positive by definition, so we know that the value found for <span class="math inline">\(c^*\)</span> is the minimum.</p>
+<p><span class="math display">\[
+c^* = -\frac{Cov(g(x), l(x))}{Var(l(x))}
+\]</span></p>
+<p><strong>Example:</strong></p>
+<p><span class="math display">\[
+\theta = E(e^u) = \int_0^1 e^u\ du
+\]</span></p>
+<p>So <span class="math inline">\(g(u) = e^u.\)</span> First, we need a candidate for <span class="math inline">\(l(x)\)</span>.</p>
+<p>How about <span class="math inline">\(l(u) = u\)</span> where <span class="math inline">\(u \sim U(0, 1).\)</span> So, <span class="math inline">\(E(U) = 0.5\)</span> and <span class="math inline">\(Var(U) = \frac{1}{12}\)</span>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>We solved for these values in Homework 1.</p>
+</div></div><p>Then <span class="math display">\[
+\hat{\theta}_c = e^u + c \cdot [u - \frac{1}{2}]
+\]</span> where <span class="math display">\[
+  c = -\frac{Cov(e^u, u)}{Var(u)} = -0.1409 / (1/12).
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>)</span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">cov</span>(<span class="fu">exp</span>(u), u) <span class="sc">/</span> <span class="fu">var</span>(u)</span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.707418</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">0.1409</span> <span class="sc">/</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.6908</code></pre>
+</div>
+</div>
+<p><strong>Trying on our own:</strong></p>
+<p>Estimate <span class="math inline">\(\theta = \int_0^1 e^{-x} / (1 + x^2)\ dx\)</span> using the control variate method with <span class="math inline">\(l(x) = e^{-0.5} / (1 + x^2)\)</span> and an emperical value of <span class="math inline">\(c^*\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">exp</span>(<span class="sc">-</span>x) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> x<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.5</span>) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> x<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="co"># estimating C</span></span>
+<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10000</span>)</span>
+<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">cov</span>(<span class="fu">g</span>(u), <span class="fu">l</span>(u)) <span class="sc">/</span> <span class="fu">var</span>(<span class="fu">l</span>(u))</span>
+<span id="cb103-7"><a href="#cb103-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-8"><a href="#cb103-8" aria-hidden="true" tabindex="-1"></a><span class="co"># simple monte-carlo vs. control variate</span></span>
+<span id="cb103-9"><a href="#cb103-9" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>)</span>
+<span id="cb103-10"><a href="#cb103-10" aria-hidden="true" tabindex="-1"></a>smc <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">g</span>(u))</span>
+<span id="cb103-11"><a href="#cb103-11" aria-hidden="true" tabindex="-1"></a>hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">g</span>(u) <span class="sc">+</span> C <span class="sc">*</span> (<span class="fu">l</span>(u) <span class="sc">-</span> <span class="fu">mean</span>(<span class="fu">l</span>(u))))</span>
+<span id="cb103-12"><a href="#cb103-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-13"><a href="#cb103-13" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(g, <span class="dv">0</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.5247971 with absolute error &lt; 5.8e-15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(smc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.538403</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(hat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.538403</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">var</span>(<span class="fu">g</span>(u)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05989671</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">var</span>(<span class="fu">g</span>(u) <span class="sc">+</span> C <span class="sc">*</span> (<span class="fu">l</span>(u) <span class="sc">-</span> <span class="fu">mean</span>(<span class="fu">l</span>(u)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.002997046</code></pre>
+</div>
+</div>
 
 
 </section>
