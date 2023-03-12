@@ -2,7 +2,7 @@
 title: "math-472"
 ---
 
-This is my course website for MATH-472, Computational Statistics. I took this course during Spring 2023; it was taught by Dr. Kyungduk Ko at Boise State University.
+This is my course website for MATH-472, Computational Statistics. I took this course during Spring 2023; it was cotaught with MATH-572 (its MS equivalent), instructed by Dr. Kyungduk Ko at Boise State University.
 
 As much as possible, I tried to keep good notes in LaTeX format during the lectures, although they're somewhat incomplete. Some of what was discussed I noted by hand. These notes can be found [here.](class-notes.qmd)
 
