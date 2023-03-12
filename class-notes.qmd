@@ -3,7 +3,9 @@ title: "MATH-472: Class Notes"
 description: |
   My running notes during MATH-472 lectures.
 author: "Andrew Moore"
-format: html
+format:
+  html:
+    toc-depth: 2
 knitr:
   opts_chunk: 
     echo: true
@@ -361,7 +363,7 @@ Then, $x$ is a random number with the pdf $f_X(x)$.
 Probability that a point from step 1 is rejected is
 
 $$
-P(\text{A point generated from step 1 is rejected}) = \frac{\text{Area between } h(x) \text{and } \f(x)}{\text{Area under } h(x)}
+P(\text{A point generated from step 1 is rejected}) = \frac{\text{Area between } h(x) \text{and } f(x)}{\text{Area under } h(x)}
 $$
 
 ```{r}
@@ -992,7 +994,7 @@ Note that $Var(X + a) = Var(X)$
 
 Is $c^*$ the minimum? Yes:
 $$
- \frac{d^2}{dx^2} Var(\hat{\theta}_c) \Big|_{c = c^*} > 0.
+ \frac{d^2}{dc^2} Var(\hat{\theta}_c) \Big|_{c = c^*} > 0.
  $$
 
 Variance is always positive by definition, so we know that the value found for $c^*$ is the minimum.
