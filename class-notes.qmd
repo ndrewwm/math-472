@@ -982,14 +982,18 @@ We assume $\mu$, the mean of $l(x)$ is known. In practice, we can estimate it em
 Note that $Var(X + a) = Var(X)$
 :::
 \begin{align*}
-  \min_c Var(\hat{\theta}_c) &\implies \min_c Var(1 \cdot g(x) + c \cdot [l(x) - \mu]) \\
+  \min_c Var(\hat{\theta}_c) &= \min_c Var(1 \cdot g(x) + c \cdot [l(x) - \mu]) \\
   &\implies \min_c 1 \cdot Var(g(x)) + c^2 \cdot Var[l(x) - \mu] + 2 \cdot 1 \cdot c \cdot Cov(g(x), l(x)) \\ 
   &\implies \min_c Var(l(x) - \mu) \cdot c^2  + 2 \cdot Cov(g(x), l(x)) \cdot c + Var(g(x)) \\
   &\implies \frac{d}{dc} \Biggl[ Var(l(x) - \mu) \cdot c^2  + 2 \cdot Cov(g(x), l(x)) \cdot c + Var(g(x)) \Biggr] \equiv 0 \\
   &\implies 2 \cdot Var(l(x) - \mu) \cdot c^* + 2 \cdot Cov(g(x), l(x)) \equiv 0 \\
-  &\implies c^* = -\frac{Cov(g(x), l(x))}{Var(l(x))} \\
-  & \frac{d^2}{dx^2} Var(\hat{\theta}_c) \Big|_{c = c^*} > 0.
+  &\implies c^* = -\frac{Cov(g(x), l(x))}{Var(l(x))}
 \end{align*}
+
+Is $c^*$ the minimum? Yes:
+$$
+ \frac{d^2}{dx^2} Var(\hat{\theta}_c) \Big|_{c = c^*} > 0.
+ $$
 
 Variance is always positive by definition, so we know that the value found for $c^*$ is the minimum.
 
