@@ -292,5 +292,19 @@
     "title": "MATH-472: Homework 3",
     "section": "6.10",
     "text": "6.10\nUse Monte Carlo integration with antithetic variables to estimate \\[\n\\int_0^1 \\frac{e^{-x}}{1 + x^2}\\ dx,\n\\] and find the approximate reduction in variance as a percentage of the variance without variance reduction."
+  },
+  {
+    "objectID": "class-notes.html#summary-14",
+    "href": "class-notes.html#summary-14",
+    "title": "MATH-472: Class Notes",
+    "section": "Summary",
+    "text": "Summary\nImportance sampling. Should refer to Dr. Ko’s notes and finish this section."
+  },
+  {
+    "objectID": "class-notes.html#notes-14",
+    "href": "class-notes.html#notes-14",
+    "title": "MATH-472: Class Notes",
+    "section": "Notes",
+    "text": "Notes\nSee example 6.7.\nLet \\(x_1, x_2, \\cdots, x_n \\sim (\\mu, \\sigma^2)\\)\n\\[\nVar(\\bar{X}) = Var(\\frac{1}{n} \\sum_{i = 1}^n x_i) = Var(\\frac{1}{n}x_1 + \\frac{1}{n}x_2 + \\cdots + \\frac{1}{n}x_n) =\n\\]\nBetter to use \\(Var(g(x_i)) / n\\)? rather than \\(Var(\\hat{\\theta}_1, \\hat{\\theta}_2, \\cdots, \\hat{\\theta}_m).\\)\n\nn <- 10000\nu <- runif(n)\n# u1, u2, ..., u10k --> e^u1, e^u2, ... e^u10k\n\nhat_theta <- mean(exp(u))\nest_var <- var(exp(u))\n\nhat_theta <- numeric(100)\nfor (i in 1:100) {\n  u <- runif(10000)\n  hat_theta[i] <- mean(exp(u))\n}\n\nvar(hat_theta)\n\n[1] 2.413377e-05\n\n\n\n\nDr. Ko: once you’ve taken MATH-462, you should be able to study new topics in statistics on your own.\n\nImportance Sampling\n\\[\n\\theta = \\int_0^1 g(x)\\ dx\n\\]\nSimple Monte-Carlo\n\nGenerate \\(u_1, u_2, ..., u_n \\sim U(0, 1)\\)\n\\(\\hat{\\theta} = \\frac{1}{n} \\sum_{i=1}^n g(u_i)\\)\n\nImportance sampling\n\nGenerate \\(x_1, x_2, ..., x_n \\sim f_X(x)\\)\n\\(\\hat{\\theta} \\leftarrow \\frac{1}{n} \\sum_{i = 1}^n (g(xi) / f(xi))\\)\n\nHere, \\(f(x)\\) is known as an importance function; it is a PDF. We need it to be easy to generate numbers from the importance function. Note a key assumption: \\(f(x) > 0\\) wherever \\(g(x) > 0\\). That is, support of \\(f(x)\\) is not necessarily the same as that of \\(g(x)\\).\nLet \\(\\theta = \\int g(x)dx\\) and \\(X\\) be a random variable with pdf \\(f(x)\\) such that \\(f(x) > 0\\) on the set \\(\\{x: g(x) > 0 \\}\\).\n…\nHow to pick \\(f(X)\\)?\n\n$Var(_I) =\n\n\n\n# Example 6.11\nx <- seq(0, 1, 0.01)\ng <- exp(-x) / (1 + x^2)\nf3 <- exp(-x) / (1 - exp(-1))\n\nplot(x, g, type = \"l\", ylim = c(0, 2))\nlines(x, f3, lty = 3)"
   }
 ]

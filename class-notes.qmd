@@ -1058,3 +1058,80 @@ print(hat)
 print(var(g(u)))
 print(var(g(u) + C * (l(u) - mean(l(u)))))
 ```
+
+# 3/14/23
+
+## Summary
+
+Importance sampling. Should refer to Dr. Ko's notes and finish this section.
+
+## Notes
+
+See example 6.7.
+
+Let $x_1, x_2, \cdots, x_n \sim (\mu, \sigma^2)$
+
+$$
+Var(\bar{X}) = Var(\frac{1}{n} \sum_{i = 1}^n x_i) = Var(\frac{1}{n}x_1 + \frac{1}{n}x_2 + \cdots + \frac{1}{n}x_n) =
+$$
+
+Better to use $Var(g(x_i)) / n$? rather than $Var(\hat{\theta}_1, \hat{\theta}_2, \cdots, \hat{\theta}_m).$
+
+```{r}
+n <- 10000
+u <- runif(n)
+# u1, u2, ..., u10k --> e^u1, e^u2, ... e^u10k
+
+hat_theta <- mean(exp(u))
+est_var <- var(exp(u))
+
+hat_theta <- numeric(100)
+for (i in 1:100) {
+  u <- runif(10000)
+  hat_theta[i] <- mean(exp(u))
+}
+
+var(hat_theta)
+```
+
+::: {.column-margin}
+Dr. Ko: once you've taken MATH-462, you should be able to study new topics in statistics on your own.
+:::
+
+### Importance Sampling
+
+$$
+\theta = \int_0^1 g(x)\ dx
+$$
+
+**Simple Monte-Carlo**
+
+1. Generate $u_1, u_2, ..., u_n \sim U(0, 1)$
+2. $\hat{\theta} = \frac{1}{n} \sum_{i=1}^n g(u_i)$
+
+**Importance sampling**
+
+1. Generate $x_1, x_2, ..., x_n \sim f_X(x)$
+2. $\hat{\theta} \leftarrow \frac{1}{n} \sum_{i = 1}^n (g(xi) / f(xi))$
+
+Here, $f(x)$ is known as an *importance* function; it is a PDF. We need it to be easy to generate numbers from the importance function. Note a key assumption: $f(x) > 0$ wherever $g(x) > 0$. That is, support of $f(x)$ is not necessarily the same as that of $g(x)$.
+
+Let $\theta = \int g(x)dx$ and $X$ be a random variable with pdf $f(x)$ such that $f(x) > 0$ on the set $\{x: g(x) > 0 \}$.
+
+
+...
+
+
+How to pick $f(X)$?
+
+- $Var(\hat{\theta}_I) = \
+
+```{r}
+# Example 6.11
+x <- seq(0, 1, 0.01)
+g <- exp(-x) / (1 + x^2)
+f3 <- exp(-x) / (1 - exp(-1))
+
+plot(x, g, type = "l", ylim = c(0, 2))
+lines(x, f3, lty = 3)
+```
