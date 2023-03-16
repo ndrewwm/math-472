@@ -46,6 +46,7 @@ u <- runif(10000, 0, pi/3)
 pi/3 * mean(g(u))
 ```
 
+\newpage
 ## 6.3
 
 We will compare two estimates for $\theta = \int_0^{\frac{1}{2}} e^{-x}\ dx$:
@@ -75,6 +76,7 @@ Based on $m = 10,000$, the we would say that $\theta$ is a more efficient estima
 
 <!-- But, why? Haven't finished answering. -->
 
+\newpage
 ## 6.6
 
 ```{r}
@@ -87,6 +89,7 @@ cov_uv <- cov(f(u), f(v))
 var_u_plus_v <- var(f(u)) + var(f(v)) + cov_uv
 ```
 
+\newpage
 ## 6.9
 
 The Rayleigh Density is
@@ -128,6 +131,7 @@ p <- (v1 - v2) / v1
 
 The reduction in variance is estimated as `r round(p * 100, 2)`%, based on $\sigma = 2$ and $n = 3,000$.
 
+\newpage
 ## 6.10
 
 Use Monte Carlo integration with antithetic variables to estimate
