@@ -189,6 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#section-15" id="toc-section-15" class="nav-link" data-scroll-target="#section-15">3/7/2023</a></li>
   <li><a href="#section-16" id="toc-section-16" class="nav-link" data-scroll-target="#section-16">3/9/2023</a></li>
   <li><a href="#section-17" id="toc-section-17" class="nav-link" data-scroll-target="#section-17">3/14/23</a></li>
+  <li><a href="#section-18" id="toc-section-18" class="nav-link" data-scroll-target="#section-18">3/17/23</a></li>
   </ul>
 </nav>
     </div>
@@ -1198,7 +1199,7 @@ f_X(x) = \begin{cases}
 <p>Suppose we have two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Then, <span class="math inline">\(Var(aX \pm bY) = a^2 \cdot Var(X) + b^2 \cdot Var(Y) \pm 2 \cdot a \cdot b \cdot Cov(X, Y)\)</span> where <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are numbers, and <span class="math inline">\(Cov(X, Y) = E(XY) - E(X) \cdot E(Y)\)</span>.</p>
 <p>Ex. <span class="math inline">\(Var(2X + 0.5Y)\)</span></p>
 <p>We have shown that <span class="math display">\[
-\frac{1}{m}\sum_{i=1}^n g(u_i) \leftarrow \theta = \int_a^b g(x)\ dx
+\frac{1}{m}\sum_{i=1}^n g(u_i) \to \theta = \int_a^b g(x)\ dx
 \]</span></p>
 <p>by the law of large numbers.</p>
 <p>Now, let <span class="math inline">\(a = b = \frac{1}{2}\)</span>, and thus <span class="math display">\[
@@ -1478,6 +1479,112 @@ Var(\bar{X}) = Var(\frac{1}{n} \sum_{i = 1}^n x_i) = Var(\frac{1}{n}x_1 + \frac{
 <p><img src="class-notes_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+</section>
+</section>
+<section id="section-18" class="level1 page-columns page-full">
+<h1>3/17/23</h1>
+<section id="summary-15" class="level2">
+<h2 class="anchored" data-anchor-id="summary-15">Summary</h2>
+<p>Ch.7, Monte Carlo methods in Statistical Inference</p>
+</section>
+<section id="notes-15" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="notes-15">Notes</h2>
+<ul>
+<li>We’re going to cover the topic that has motivated our learning of the preceding topics.</li>
+<li>Monte-Carlo methods involve use/generation of random numbers.
+<ul>
+<li>first we learned how to <em>generate</em> random numbers</li>
+<li>then we learned how to use random numbers to perform <em>integration</em>
+<ul>
+<li><span class="math inline">\(\theta = E[g(x)]\)</span></li>
+<li><span class="math inline">\(E(X) = \int_{-\infty}^{\infty} x * f_X(x)\ dx \to \hat{\theta} = \frac{1}{n} \sum_{i = 1}^n x_i \to \theta\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+<section id="mean-square-error-mse" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="mean-square-error-mse">Mean Square Error (MSE)</h3>
+<p>Suppose <span class="math inline">\(\hat{\theta}\)</span> is an estimate of <span class="math inline">\(\theta\)</span>. Define <strong>Mean Square Error</strong> of <span class="math inline">\(\hat{\theta}\)</span> as <span class="math display">\[\begin{align*}
+  MSE[\hat{\theta}] &amp;= E[(\hat{\theta} - \theta)^2] \\
+    &amp;= E[\hat{\theta}^2 - 2 \cdot \theta \cdot \hat{\theta} + \theta^2] \\
+    &amp;= E[\hat{\theta}^2] - 2 \theta E[\hat{\theta}] + \theta^2 \\
+    &amp;= E[\hat{\theta}^2] - E[\hat{\theta}]^2 + E[\hat{\theta}]^2 - 2 \theta E[\hat{\theta}] + \theta^2 \\
+    &amp;= Var(\hat{\theta}) + (E[\hat{\theta}] - \theta)^2
+\end{align*}\]</span></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Note that <span class="math inline">\(\hat{\theta}\)</span> is an estimate, and <span class="math inline">\(\theta\)</span> is the <em>true</em> value of a parameter.</p>
+</div><div class="">
+<p>MSE can be decomposed into two components. The second term, <span class="math inline">\((E[\hat{\theta}] - \theta)^2\)</span>, can be thought of as a penalty for the <em>bias</em> of <span class="math inline">\(\hat{\theta}\)</span>.</p>
+</div></div>
+<p>Some examples.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">numeric</span>(m)</span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
+<span id="cb116-7"><a href="#cb116-7" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb116-8"><a href="#cb116-8" aria-hidden="true" tabindex="-1"></a>  Y[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(x<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb116-9"><a href="#cb116-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb116-10"><a href="#cb116-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-11"><a href="#cb116-11" aria-hidden="true" tabindex="-1"></a>(hat_theta <span class="ot">&lt;-</span> <span class="fu">mean</span>(Y))  <span class="co"># should be close to 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.630376</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>(hat_mse <span class="ot">&lt;-</span> <span class="fu">mean</span>((Y <span class="sc">-</span> <span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span>))  <span class="co"># should be close to 6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.312739</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 7.1</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">numeric</span>(m)</span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
+<span id="cb120-6"><a href="#cb120-6" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb120-7"><a href="#cb120-7" aria-hidden="true" tabindex="-1"></a>  L[i] <span class="ot">&lt;-</span> <span class="fu">abs</span>(x[<span class="dv">1</span>] <span class="sc">-</span> x[<span class="dv">2</span>])</span>
+<span id="cb120-8"><a href="#cb120-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb120-9"><a href="#cb120-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-10"><a href="#cb120-10" aria-hidden="true" tabindex="-1"></a>(hat_theta <span class="ot">&lt;-</span> <span class="fu">mean</span>(L))  <span class="co"># should be close to 2 / sqrt(pi)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.08149</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>(hat_mse <span class="ot">&lt;-</span> <span class="fu">mean</span>((L <span class="sc">-</span> <span class="dv">2</span> <span class="sc">/</span> <span class="fu">sqrt</span>(pi))<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5757737</code></pre>
+</div>
+</div>
+<p>Kth-level trimmed mean. <span class="math display">\[
+\bar{X}_{[-k]} = \frac{1}{n - 2 \cdot k} = \sum_{i = k + 1}^{n - k} x_{(i)}
+\]</span></p>
+<ul>
+<li>Removes the top/bottom <span class="math inline">\(k\)</span> values from a sample and estimates the mean.
+<ul>
+<li>Used to eliminate extreme values.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 7.2</span></span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb124-5"><a href="#cb124-5" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="fu">numeric</span>(m)</span>
+<span id="cb124-6"><a href="#cb124-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-7"><a href="#cb124-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
+<span id="cb124-8"><a href="#cb124-8" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb124-9"><a href="#cb124-9" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">sort</span>(x)</span>
+<span id="cb124-10"><a href="#cb124-10" aria-hidden="true" tabindex="-1"></a>  K[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x[k<span class="sc">:</span>(<span class="fu">length</span>(x) <span class="sc">-</span> k)])</span>
+<span id="cb124-11"><a href="#cb124-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb124-12"><a href="#cb124-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-13"><a href="#cb124-13" aria-hidden="true" tabindex="-1"></a>(hat_theta <span class="ot">&lt;-</span> <span class="fu">mean</span>(K))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.006158516</code></pre>
+</div>
+</div>
+<p>Next topics: hypothesis testing, confidence intervals.</p>
 
 
 </section>

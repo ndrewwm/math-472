@@ -849,7 +849,7 @@ Ex. $Var(2X + 0.5Y)$
 
 We have shown that 
 $$
-\frac{1}{m}\sum_{i=1}^n g(u_i) \leftarrow \theta = \int_a^b g(x)\ dx
+\frac{1}{m}\sum_{i=1}^n g(u_i) \to \theta = \int_a^b g(x)\ dx
 $$
 
 by the law of large numbers.
@@ -1135,3 +1135,94 @@ f3 <- exp(-x) / (1 - exp(-1))
 plot(x, g, type = "l", ylim = c(0, 2))
 lines(x, f3, lty = 3)
 ```
+
+# 3/17/23
+
+## Summary
+
+Ch.7, Monte Carlo methods in Statistical Inference
+
+## Notes
+
+- We're going to cover the topic that has motivated our learning of the preceding topics.
+- Monte-Carlo methods involve use/generation of random numbers.
+  - first we learned how to *generate* random numbers
+  - then we learned how to use random numbers to perform *integration*
+      - $\theta = E[g(x)]$
+      - $E(X) = \int_{-\infty}^{\infty} x * f_X(x)\ dx \to \hat{\theta} = \frac{1}{n} \sum_{i = 1}^n x_i \to \theta$
+
+### Mean Square Error (MSE)
+
+Suppose $\hat{\theta}$ is an estimate of $\theta$. Define **Mean Square Error** of $\hat{\theta}$ as 
+\begin{align*}
+  MSE[\hat{\theta}] &= E[(\hat{\theta} - \theta)^2] \\
+    &= E[\hat{\theta}^2 - 2 \cdot \theta \cdot \hat{\theta} + \theta^2] \\
+    &= E[\hat{\theta}^2] - 2 \theta E[\hat{\theta}] + \theta^2 \\
+    &= E[\hat{\theta}^2] - E[\hat{\theta}]^2 + E[\hat{\theta}]^2 - 2 \theta E[\hat{\theta}] + \theta^2 \\
+    &= Var(\hat{\theta}) + (E[\hat{\theta}] - \theta)^2
+\end{align*}
+
+::: {.column-margin}
+Note that $\hat{\theta}$ is an estimate, and $\theta$ is the *true* value of a parameter.
+:::
+
+::: {.column-margin}
+MSE can be decomposed into two components. The second term, $(E[\hat{\theta}] - \theta)^2$, can be thought of as a penalty for the *bias* of $\hat{\theta}$.
+:::
+
+Some examples.
+
+```{r}
+# Example
+
+m <- 100
+Y <- numeric(m)
+
+for (i in 1:m) {
+  x <- rnorm(3, 0, 1)
+  Y[i] <- sum(x^2)
+}
+
+(hat_theta <- mean(Y))  # should be close to 3
+(hat_mse <- mean((Y - 3)^2))  # should be close to 6
+```
+
+```{r}
+# Example 7.1
+m <- 100
+L <- numeric(m)
+
+for (i in 1:m) {
+  x <- rnorm(2, 0, 1)
+  L[i] <- abs(x[1] - x[2])
+}
+
+(hat_theta <- mean(L))  # should be close to 2 / sqrt(pi)
+(hat_mse <- mean((L - 2 / sqrt(pi))^2))
+```
+
+Kth-level trimmed mean.
+$$
+\bar{X}_{[-k]} = \frac{1}{n - 2 \cdot k} = \sum_{i = k + 1}^{n - k} x_{(i)}
+$$
+
+- Removes the top/bottom $k$ values from a sample and estimates the mean.
+    - Used to eliminate extreme values.
+
+```{r}
+# Example 7.2
+
+m <- 100
+k <- 3
+K <- numeric(m)
+
+for (i in 1:m) {
+  x <- rnorm(100)
+  x <- sort(x)
+  K[i] <- mean(x[k:(length(x) - k)])
+}
+
+(hat_theta <- mean(K))
+```
+
+Next topics: hypothesis testing, confidence intervals.
