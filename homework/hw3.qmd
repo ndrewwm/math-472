@@ -140,6 +140,33 @@ $$
 $$
 and find the approximate reduction in variance as a percentage of the variance without variance reduction.
 
+```{r}
+f <- function(x) exp(-x) / (1 + x^2)
+mc <- function(n, anti = TRUE) {
+  u <- runif(n / 2)
+  v <- if (anti) 1 - u else runif(n / 2)
+  u <- c(u, v)
+  mean(f(u))
+}
+
+n <- 3000
+t1 <- t2 <- numeric(n)
+
+for (i in 1:n) {
+  t1[i] <- mc(1000, anti = FALSE)
+  t2[i] <- mc(1000, anti = TRUE)
+}
+
+var_smc <- var(t1)
+var_atv <- var(t2)
+
+theta <- mean(t2)
+
+p <- (var_smc - var_atv) / var_smc
+```
+
+From our simulation with $n = 3,000$, we have $\hat{\theta} =$ `r round(theta, 3)`. The estimated reduction in variance is `r round(p * 100, 2)`%.
+
 \newpage
 # Question 2
 

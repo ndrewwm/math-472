@@ -291,7 +291,7 @@
     "href": "homework/hw3.html#section-4",
     "title": "MATH-472: Homework 3",
     "section": "6.10",
-    "text": "6.10\nUse Monte Carlo integration with antithetic variables to estimate \\[\n\\int_0^1 \\frac{e^{-x}}{1 + x^2}\\ dx,\n\\] and find the approximate reduction in variance as a percentage of the variance without variance reduction."
+    "text": "6.10\nUse Monte Carlo integration with antithetic variables to estimate \\[\n\\int_0^1 \\frac{e^{-x}}{1 + x^2}\\ dx,\n\\] and find the approximate reduction in variance as a percentage of the variance without variance reduction.\n\nf <- function(x) exp(-x) / (1 + x^2)\nmc <- function(n, anti = TRUE) {\n  u <- runif(n / 2)\n  v <- if (anti) 1 - u else runif(n / 2)\n  u <- c(u, v)\n  mean(f(u))\n}\n\nn <- 3000\nt1 <- t2 <- numeric(n)\n\nfor (i in 1:n) {\n  t1[i] <- mc(1000, anti = FALSE)\n  t2[i] <- mc(1000, anti = TRUE)\n}\n\nvar_smc <- var(t1)\nvar_atv <- var(t2)\n\ntheta <- mean(t2)\n\np <- (var_smc - var_atv) / var_smc\n\nFrom our simulation with \\(n = 3,000\\), we have \\(\\hat{\\theta} =\\) 0.525. The estimated reduction in variance is 96.25%."
   },
   {
     "objectID": "class-notes.html#summary-14",
