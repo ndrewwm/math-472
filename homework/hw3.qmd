@@ -43,50 +43,48 @@ Monte-Carlo integration:
 ```{r}
 g <- function(t) sin(t)
 u <- runif(10000, 0, pi/3)
-mean(g(u))
+pi/3 * mean(g(u))
 ```
 
 ## 6.3
 
+We will compare two estimates for $\theta = \int_0^{\frac{1}{2}} e^{-x}\ dx$:
+
+- $\theta$, Simple Monte-Carlo
+- $\theta^*$, "Hit-and-Miss" method
+
 ```{r}
+m <- 10000
+
+# simple Monte-Carlo integration
 g <- function(x) exp(-x)
-f <- function(x) sqrt(x)
+u <- runif(m, 0, 1/2)
+theta <- 1/2 * mean(g(u))
+var_theta <- var(g(u)) / m
 
-gen_thetas <- function(N = 1000, n = 200) {
-  t <- numeric(N)
-  tstar <- numeric(N)
-  
-  for (i in 1:N) {
-    u <- runif(n, 0, 0.5)
-    e <- rexp(n, rate = 1)
-    t[i] <- mean(g(u))
-    tstar[i] <- mean(e <= 0.5)
-  }
+# hit-or-miss
+e <- rexp(m, 1)
+I <- e <= 1/2
+theta_star <- mean(I)
+var_theta_star <- theta_star * (1 - theta_star) / m
 
-  c(theta = var(t), theta_star = var(tstar))
-}
-
-gen_thetas()
+c("Variance - Simple MC" = var_theta, "Variance - Hit or Miss" = var_theta_star)
 ```
+
+Based on $m = 10,000$, the we would say that $\theta$ is a more efficient estimator than $\theta^*$.
+
+<!-- But, why? Haven't finished answering. -->
 
 ## 6.6
 
 ```{r}
-mc <- function(f, n, r, anti = TRUE) {
-  t <- numeric(n)
-  for (i in 1:n) {
-    m <- runif(r / 2)
-    n <- if (anti) 1 - m else runif(r / 2)
-    u <- c(m, n)
-    t[i] <- mean(f(u))
-  }
-  return(t)
-}
-
+# empirical estimates of Cov(e^U, e^{1-U}) and Var(e^U + e^{1-U})
 f <- function(x) exp(x)
+u <- runif(500)
+v <- 1 - u
 
-smc <- mc(f, 1000, 100, anti = FALSE)
-ava <- mc(f, 1000, 100)
+cov_uv <- cov(f(u), f(v))
+var_u_plus_v <- var(f(u)) + var(f(v)) + cov_uv
 ```
 
 ## 6.9
@@ -98,6 +96,37 @@ $$
 
 Implement a function to generate samples from a $Rayleigh(\sigma)$ distribution using antithetic variables. What is the percent reduction in variance of 
 $\frac{X + X'}{2}$ compared with $\frac{X_1 + X_2}{2}$ for independent $X_1$ and $X_2$?
+
+```{r}
+rayleigh <- function(n, sigma, anti = TRUE) {
+  u <- runif(n / 2)
+  v <- if (anti) 1 - u else runif(n / 2)
+  u <- c(u, v)
+  sqrt(-2 * sigma^2 * log(u))
+}
+
+independent <- rayleigh(n = 3000, sigma = 2, anti = FALSE)
+antithetic <- rayleigh(n = 3000, sigma = 2, anti = TRUE)
+
+# f(x_1, x_2, ..., x_1500) ~ X_1
+# f(x_1501, x_1502, ..., x_3000) ~ X_2
+X1 <- independent[1:1500]
+X2 <- independent[1501:3000]
+
+# f(x_1, x_2, ..., x_1500) ~ X
+# f(1 - x_1, 1 - x_2, ... 1 - x_1500) ~ X'
+X <- antithetic[1:1500]
+Xp <- antithetic[1501:3000]
+
+# calculate variances
+v1 <- 1/4 * var(X1) + 1/4 * var(X2) + 1/4 * 2 * cov(X1, X2)
+v2 <- 1/4 * var(X) + 1/4 * var(Xp) + 1/4 * 2 * cov(X, Xp)
+
+# percent reduction
+p <- (v1 - v2) / v1
+```
+
+The reduction in variance is estimated as `r round(p * 100, 2)`%, based on $\sigma = 2$ and $n = 3,000$.
 
 ## 6.10
 
@@ -112,7 +141,7 @@ and find the approximate reduction in variance as a percentage of the variance w
 
 Suppose you use the importance sampling method to obtain a Monte Carlo estimate of 
 $$
-\theta = \int_0^\infty g(x)\ dx,
+\theta = \int_1^\infty g(x)\ dx,
 $$
 where
 $$
@@ -129,17 +158,31 @@ Note that $t = x - 1$ has a gamma distribution with shape 3/2 and rate 2. Draw t
 
 ```{r}
 g <- function(x) x^2 / sqrt(2 * pi) * exp(-x^2 / 2)
-f <- function(x) 1 / gamma(3 / 2) * 2^(3/2) * x^(3) * exp(-2 * x)
+f <- function(x) 1 / gamma(3 / 2) * 2^(3/2) * (x - 1)^(3/2 - 1) * exp(-2 * (x - 1))
 x <- seq(1, 10, 0.01)
 d <- data.frame(x = x, y0 = g(x), y1 = f(x))
 
 library(ggplot2)
+
+theme_set(theme_minimal(base_size = 14))
 
 ggplot(d, aes(x = x)) +
   geom_line(aes(y = y0), size = 1.1, color = "grey") +
   geom_line(aes(y = y1), size = 1.1, color = "orange") +
   annotate("text", x = 2.0, y = 0.3, label = "g(x)", color = "grey", size = 4.5) +
   annotate("text", x = 2.5, y = 0.45, label = "f(x)", color = "orange", size = 4.5) +
-  theme_minimal(base_size = 14) + 
   labs(x = "x", y = "y")
+```
+
+ To estimate $\theta$ using importance sampling, we use the following procedure.
+
+ 1. Generate $x_1, x_2, \cdots, x_n \sim f_X(x)$
+ 2. Estimate $\hat{\theta}$ as $\hat{\theta} = \frac{1}{n} \sum_{i = 1}^n \frac{g(x_i)}{f(x_i)}$.
+
+```{r}
+x <- rgamma(10000, 3/2, 2) + 1
+theta <- mean(g(x) / f(x))
+theta
+
+integrate(g, 1, Inf)
 ```

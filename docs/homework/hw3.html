@@ -235,57 +235,53 @@ $$
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(t) <span class="fu">sin</span>(t)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10000</span>, <span class="dv">0</span>, pi<span class="sc">/</span><span class="dv">3</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">g</span>(u))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pi<span class="sc">/</span><span class="dv">3</span> <span class="sc">*</span> <span class="fu">mean</span>(<span class="fu">g</span>(u))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4775084</code></pre>
+<pre><code>[1] 0.5000456</code></pre>
 </div>
 </div>
 </section>
 <section id="section-1" class="level2">
 <h2 class="anchored" data-anchor-id="section-1">6.3</h2>
+<p>We will compare two estimates for <span class="math inline">\(\theta = \int_0^{\frac{1}{2}} e^{-x}\ dx\)</span>:</p>
+<ul>
+<li><span class="math inline">\(\theta\)</span>, Simple Monte-Carlo</li>
+<li><span class="math inline">\(\theta^*\)</span>, “Hit-and-Miss” method</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">exp</span>(<span class="sc">-</span>x)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sqrt</span>(x)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>gen_thetas <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">N =</span> <span class="dv">1000</span>, <span class="at">n =</span> <span class="dv">200</span>) {</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">numeric</span>(N)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  tstar <span class="ot">&lt;-</span> <span class="fu">numeric</span>(N)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="fl">0.5</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    e <span class="ot">&lt;-</span> <span class="fu">rexp</span>(n, <span class="at">rate =</span> <span class="dv">1</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    t[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">g</span>(u))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    tstar[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(e <span class="sc">&lt;=</span> <span class="fl">0.5</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># simple Monte-Carlo integration</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">exp</span>(<span class="sc">-</span>x)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(m, <span class="dv">0</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(<span class="fu">g</span>(u))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>var_theta <span class="ot">&lt;-</span> <span class="fu">var</span>(<span class="fu">g</span>(u)) <span class="sc">/</span> m</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># hit-or-miss</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">rexp</span>(m, <span class="dv">1</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>I <span class="ot">&lt;-</span> e <span class="sc">&lt;=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>theta_star <span class="ot">&lt;-</span> <span class="fu">mean</span>(I)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>var_theta_star <span class="ot">&lt;-</span> theta_star <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> theta_star) <span class="sc">/</span> m</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">theta =</span> <span class="fu">var</span>(t), <span class="at">theta_star =</span> <span class="fu">var</span>(tstar))</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">gen_thetas</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"Variance - Simple MC"</span> <span class="ot">=</span> var_theta, <span class="st">"Variance - Hit or Miss"</span> <span class="ot">=</span> var_theta_star)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       theta   theta_star 
-6.638171e-05 1.128808e-03 </code></pre>
+<pre><code>  Variance - Simple MC Variance - Hit or Miss 
+          1.283763e-06           2.394938e-05 </code></pre>
 </div>
 </div>
+<p>Based on <span class="math inline">\(m = 10,000\)</span>, the we would say that <span class="math inline">\(\theta\)</span> is a more efficient estimator than <span class="math inline">\(\theta^*\)</span>.</p>
+<!-- But, why? Haven't finished answering. -->
 </section>
 <section id="section-2" class="level2">
 <h2 class="anchored" data-anchor-id="section-2">6.6</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="cf">function</span>(f, n, r, <span class="at">anti =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">runif</span>(r <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="cf">if</span> (anti) <span class="dv">1</span> <span class="sc">-</span> m <span class="cf">else</span> <span class="fu">runif</span>(r <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    u <span class="ot">&lt;-</span> <span class="fu">c</span>(m, n)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    t[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">f</span>(u))</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(t)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">exp</span>(x)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>smc <span class="ot">&lt;-</span> <span class="fu">mc</span>(f, <span class="dv">1000</span>, <span class="dv">100</span>, <span class="at">anti =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>ava <span class="ot">&lt;-</span> <span class="fu">mc</span>(f, <span class="dv">1000</span>, <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># empirical estimates of Cov(e^U, e^{1-U}) and Var(e^U + e^{1-U})</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">exp</span>(x)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">500</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> u</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>cov_uv <span class="ot">&lt;-</span> <span class="fu">cov</span>(<span class="fu">f</span>(u), <span class="fu">f</span>(v))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>var_u_plus_v <span class="ot">&lt;-</span> <span class="fu">var</span>(<span class="fu">f</span>(u)) <span class="sc">+</span> <span class="fu">var</span>(<span class="fu">f</span>(v)) <span class="sc">+</span> cov_uv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="section-3" class="level2">
@@ -294,6 +290,35 @@ $$
 f(x) = \frac{x}{\sigma^2} e^{\frac{-x^2}{2\sigma^2}} \text{ where } x \geq 0, \sigma &gt; 0.
 \]</span></p>
 <p>Implement a function to generate samples from a <span class="math inline">\(Rayleigh(\sigma)\)</span> distribution using antithetic variables. What is the percent reduction in variance of <span class="math inline">\(\frac{X + X'}{2}\)</span> compared with <span class="math inline">\(\frac{X_1 + X_2}{2}\)</span> for independent <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rayleigh <span class="ot">&lt;-</span> <span class="cf">function</span>(n, sigma, <span class="at">anti =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> <span class="cf">if</span> (anti) <span class="dv">1</span> <span class="sc">-</span> u <span class="cf">else</span> <span class="fu">runif</span>(n <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">c</span>(u, v)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> sigma<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">log</span>(u))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>independent <span class="ot">&lt;-</span> <span class="fu">rayleigh</span>(<span class="at">n =</span> <span class="dv">3000</span>, <span class="at">sigma =</span> <span class="dv">2</span>, <span class="at">anti =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>antithetic <span class="ot">&lt;-</span> <span class="fu">rayleigh</span>(<span class="at">n =</span> <span class="dv">3000</span>, <span class="at">sigma =</span> <span class="dv">2</span>, <span class="at">anti =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># f(x_1, x_2, ..., x_1500) ~ X_1</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># f(x_1501, x_1502, ..., x_3000) ~ X_2</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>X1 <span class="ot">&lt;-</span> independent[<span class="dv">1</span><span class="sc">:</span><span class="dv">1500</span>]</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>X2 <span class="ot">&lt;-</span> independent[<span class="dv">1501</span><span class="sc">:</span><span class="dv">3000</span>]</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># f(x_1, x_2, ..., x_1500) ~ X</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># f(1 - x_1, 1 - x_2, ... 1 - x_1500) ~ X'</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> antithetic[<span class="dv">1</span><span class="sc">:</span><span class="dv">1500</span>]</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>Xp <span class="ot">&lt;-</span> antithetic[<span class="dv">1501</span><span class="sc">:</span><span class="dv">3000</span>]</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate variances</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span> <span class="sc">*</span> <span class="fu">var</span>(X1) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span> <span class="sc">*</span> <span class="fu">var</span>(X2) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">cov</span>(X1, X2)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span> <span class="sc">*</span> <span class="fu">var</span>(X) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span> <span class="sc">*</span> <span class="fu">var</span>(Xp) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">cov</span>(X, Xp)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># percent reduction</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> (v1 <span class="sc">-</span> v2) <span class="sc">/</span> v1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The reduction in variance is estimated as 94.56%, based on <span class="math inline">\(\sigma = 2\)</span> and <span class="math inline">\(n = 3,000\)</span>.</p>
 </section>
 <section id="section-4" class="level2">
 <h2 class="anchored" data-anchor-id="section-4">6.10</h2>
@@ -306,7 +331,7 @@ f(x) = \frac{x}{\sigma^2} e^{\frac{-x^2}{2\sigma^2}} \text{ where } x \geq 0, \s
 <section id="question-2" class="level1">
 <h1>Question 2</h1>
 <p>Suppose you use the importance sampling method to obtain a Monte Carlo estimate of <span class="math display">\[
-\theta = \int_0^\infty g(x)\ dx,
+\theta = \int_1^\infty g(x)\ dx,
 \]</span> where <span class="math display">\[
 g(x) = \frac{x^2}{\sqrt{2 \pi}} e^{-x^2 / 2}.
 \]</span></p>
@@ -317,22 +342,40 @@ f(x) = \frac{1}{\Gamma(3/2)} 2^{3/2} x^{3/2-1} e^{-2x}, 1 &lt; x &lt; \infty.
 <li><p>Estimate <span class="math inline">\(\theta\)</span> using the importance function in (a).</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> pi) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span> <span class="sc">/</span> <span class="fu">gamma</span>(<span class="dv">3</span> <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="dv">2</span><span class="sc">^</span>(<span class="dv">3</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> x<span class="sc">^</span>(<span class="dv">3</span>) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> x)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="fl">0.01</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y0 =</span> <span class="fu">g</span>(x), <span class="at">y1 =</span> <span class="fu">f</span>(x))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> y0), <span class="at">size =</span> <span class="fl">1.1</span>, <span class="at">color =</span> <span class="st">"grey"</span>) <span class="sc">+</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> y1), <span class="at">size =</span> <span class="fl">1.1</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">2.0</span>, <span class="at">y =</span> <span class="fl">0.3</span>, <span class="at">label =</span> <span class="st">"g(x)"</span>, <span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">size =</span> <span class="fl">4.5</span>) <span class="sc">+</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fl">0.45</span>, <span class="at">label =</span> <span class="st">"f(x)"</span>, <span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">size =</span> <span class="fl">4.5</span>) <span class="sc">+</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span> </span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">*</span> pi) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="dv">1</span> <span class="sc">/</span> <span class="fu">gamma</span>(<span class="dv">3</span> <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="dv">2</span><span class="sc">^</span>(<span class="dv">3</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> (x <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">^</span>(<span class="dv">3</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> (x <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="fl">0.01</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y0 =</span> <span class="fu">g</span>(x), <span class="at">y1 =</span> <span class="fu">f</span>(x))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> y0), <span class="at">size =</span> <span class="fl">1.1</span>, <span class="at">color =</span> <span class="st">"grey"</span>) <span class="sc">+</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> y1), <span class="at">size =</span> <span class="fl">1.1</span>, <span class="at">color =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">2.0</span>, <span class="at">y =</span> <span class="fl">0.3</span>, <span class="at">label =</span> <span class="st">"g(x)"</span>, <span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">size =</span> <span class="fl">4.5</span>) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fl">0.45</span>, <span class="at">label =</span> <span class="st">"f(x)"</span>, <span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">size =</span> <span class="fl">4.5</span>) <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="hw3_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="hw3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>To estimate <span class="math inline">\(\theta\)</span> using importance sampling, we use the following procedure.</p>
+<ol type="1">
+<li>Generate <span class="math inline">\(x_1, x_2, \cdots, x_n \sim f_X(x)\)</span></li>
+<li>Estimate <span class="math inline">\(\hat{\theta}\)</span> as <span class="math inline">\(\hat{\theta} = \frac{1}{n} \sum_{i = 1}^n \frac{g(x_i)}{f(x_i)}\)</span>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(<span class="dv">10000</span>, <span class="dv">3</span><span class="sc">/</span><span class="dv">2</span>, <span class="dv">2</span>) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">g</span>(x) <span class="sc">/</span> <span class="fu">f</span>(x))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>theta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4005603</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(g, <span class="dv">1</span>, <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.400626 with absolute error &lt; 5.7e-07</code></pre>
 </div>
 </div>
 
