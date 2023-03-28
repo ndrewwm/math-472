@@ -1226,3 +1226,110 @@ for (i in 1:m) {
 ```
 
 Next topics: hypothesis testing, confidence intervals.
+
+# 3/28/23
+
+## Summary
+
+## Notes
+
+- Exam 2 this coming Thursday (3/30)
+  - topics in chapter 6 (those covered in class)
+  - 1 day take-home exam, due 1:30pm 3/31
+  - submitted via email (pdf file) to kyungdukko at boisestate.edu
+  - 4 to 6 big questions
+  - Ch. 6 Simple Monte Carlo Integration
+    - Variance Reduction Techniques
+      - Antithetic
+      - Control Variate
+      - Importance Sampling
+
+Shifting to discuss topics from Chapter 7: Monte-Carlo Methods for Statistical Inference. Last class, we compared mean-square errors for different methods. Now we'll talk about inference, "something you'll use the most in your statistical research".
+
+Inference consists of two areas:
+
+- Estimation
+  - Estimation of unknown parameters $\theta$
+    - *point* estimation: calculate **one number** from a random sample of size $n$, $x_1, x_2, \dots, x_n$.
+      - typical approach: maximum likelihood estimation
+    - *interval* estimation: $100 \cdot (1 - \alpha)$% confidence interval of $\theta$.
+      - Calculate $(L, U)$, the bounds, for unknown $\theta$.
+      - Expect $\theta$ to be included in the interval $(L, U)$ with confidence of $100 \cdot (1 - \alpha)$%.
+  - We've already covered point estimation.
+
+- Test of Hypothesis
+
+Today, we'll focus on interval estimation. Elementary statistics give us some formulas for interval estimation. Estimating intervals for and unknown population mean $\mu$ and population variance $\sigma^2$.
+
+Procedure:
+
+1. We need a sample of size $n$, $x_1, x_2, \dots, x_n$
+
+2. We specify our confidence level, choosing a value for $\alpha$ in $100 \cdot (1 - \alpha)$.
+    - Dr. Ko says it's most common for 90%, 95%, or 99% CIs to be generated.
+
+3. One of the following conditions:
+    - (I) $x_1, x_2, \dots, x_n \sim N(\mu, \sigma^2)$
+        - $\mu$ is unknown, $\sigma^2$ is known, $n \geq 2$
+    - (II) $x_1, x_2, \dots, x_n \sim N(\mu, \sigma^2)$
+        - $\mu$ is unknown, $\sigma^2$ is unknown, $n < 30$
+    - (III) $x_1, x_2, \dots, x_n \sim (\mu, \sigma^2)$
+        - $\mu$ is unknown, $\sigma^2$ is unknown, $n > 30$
+
+Formula for I: $(\bar{X} - Z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}}, \bar{X} + Z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}})$, where $\bar{X} = \sum_{i = 1}^n x_i / n$.
+
+Formula for II: $(\bar{X} - T_{\frac{\alpha}{2}, df = n-1} \cdot \frac{s}{\sqrt{n}}, \bar{X} + T_{\frac{\alpha}{2}, df = n-1} \cdot \frac{s}{\sqrt{n}})$, where $\bar{X} = \sum_{i = 1}^n x_i / n$.
+
+Formula for III: $(\bar{X} - Z_{\frac{\alpha}{2}} \cdot \frac{s}{\sqrt{n}}, \bar{X} + Z_{\frac{\alpha}{2}} \cdot \frac{s}{\sqrt{n}})$, where $\bar{X} = \sum_{i = 1}^n x_i / n$.
+  - By the Central Limit Theorem, $\bar{X} \overset{approx}{\sim} N(\mu, \frac{\sigma}{\sqrt{n}}^2)$
+
+Examples.
+
+```{r}
+x <- c(580, 400, 428, 825, 850, 875, 920, 550, 575, 750, 636, 360, 590, 735, 950)
+n <- length(x)
+m <- mean(x)
+s <- sd(x)
+a <- c(0.10, 0.05)
+t <- qt(1 - a / 2, df = n - 1)
+
+(c90 <- c(m - t[1] * s / sqrt(n), m + t[1] * s / sqrt(n)))
+(c95 <- c(m - t[2] * s / sqrt(n), m + t[2] * s / sqrt(n)))
+```
+
+```{r}
+n <- 4
+m <- 65
+s <- 2.4
+t <- qt(1 - 0.05/2, df = 3)
+
+(c95 <- c(m - t * s / sqrt(n), m + t * s / sqrt(n)))
+```
+
+How do we know if a method for estimating a CI is valid? We have to prove that that the estimator meets the property ($\theta$ contained within the interval, at probability $1 - \alpha$).
+
+Empirical confidence level, for the t-statistic interval estimation. Let $\mu$ and $\sigma$ be fixed. Draw a random sample of size $n$ from the normal distribution with paramters $\mu$ and $\sigma$, and compute a 95% CI interval from the sample. Repeat this $k$ times, and then compute the proportion of estimated intervals that contain $\mu$.
+
+\begin{align*}
+  (L, U)_1 &\leftarrow x^1_1, x^1_2, \dots, x^1_n \sim N(\mu, \sigma) \\
+  (L, U)_2 &\leftarrow x^2_1, x^2_2, \dots, x^2_n \sim N(\mu, \sigma) \\
+  &\vdots \\
+  (L, U)_k &\leftarrow x^k_1, x^k_2, \dots, x^k_n \sim N(\mu, \sigma)
+\end{align*}
+
+In R, this can be accomplished, using $k = 1000$, $n = 20$, $\mu = 15$, $\sigma = 3$, with an alpha of 0.05.
+
+```{r}
+t_ci <- function(n = 20, mu = 15, sigma = 3, alpha = 0.05) {
+  x <- rnorm(n, mu, sigma)
+  m <- mean(x)
+  s <- sd(x)
+  t <- qt(1 - alpha / 2, df = n - 1)
+
+  c(m - t * s / sqrt(n), m + t * s / sqrt(n))
+}
+
+res <- replicate(n = 1000, expr = t_ci(), simplify = FALSE)
+(chk <- res |> map_lgl(~between(15, .[1], .[2])) |> mean())
+```
+

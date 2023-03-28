@@ -190,6 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#section-16" id="toc-section-16" class="nav-link" data-scroll-target="#section-16">3/9/2023</a></li>
   <li><a href="#section-17" id="toc-section-17" class="nav-link" data-scroll-target="#section-17">3/14/23</a></li>
   <li><a href="#section-18" id="toc-section-18" class="nav-link" data-scroll-target="#section-18">3/17/23</a></li>
+  <li><a href="#section-19" id="toc-section-19" class="nav-link" data-scroll-target="#section-19">3/28/23</a></li>
   </ul>
 </nav>
     </div>
@@ -1585,9 +1586,144 @@ Var(\bar{X}) = Var(\frac{1}{n} \sum_{i = 1}^n x_i) = Var(\frac{1}{n}x_1 + \frac{
 </div>
 </div>
 <p>Next topics: hypothesis testing, confidence intervals.</p>
-
-
 </section>
+</section>
+</section>
+<section id="section-19" class="level1">
+<h1>3/28/23</h1>
+<section id="summary-16" class="level2">
+<h2 class="anchored" data-anchor-id="summary-16">Summary</h2>
+</section>
+<section id="notes-16" class="level2">
+<h2 class="anchored" data-anchor-id="notes-16">Notes</h2>
+<ul>
+<li>Exam 2 this coming Thursday (3/30)
+<ul>
+<li>topics in chapter 6 (those covered in class)</li>
+<li>1 day take-home exam, due 1:30pm 3/31</li>
+<li>submitted via email (pdf file) to kyungdukko at boisestate.edu</li>
+<li>4 to 6 big questions</li>
+<li>Ch. 6 Simple Monte Carlo Integration
+<ul>
+<li>Variance Reduction Techniques
+<ul>
+<li>Antithetic</li>
+<li>Control Variate</li>
+<li>Importance Sampling</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Shifting to discuss topics from Chapter 7: Monte-Carlo Methods for Statistical Inference. Last class, we compared mean-square errors for different methods. Now we’ll talk about inference, “something you’ll use the most in your statistical research”.</p>
+<p>Inference consists of two areas:</p>
+<ul>
+<li>Estimation
+<ul>
+<li>Estimation of unknown parameters <span class="math inline">\(\theta\)</span>
+<ul>
+<li><em>point</em> estimation: calculate <strong>one number</strong> from a random sample of size <span class="math inline">\(n\)</span>, <span class="math inline">\(x_1, x_2, \dots, x_n\)</span>.
+<ul>
+<li>typical approach: maximum likelihood estimation</li>
+</ul></li>
+<li><em>interval</em> estimation: <span class="math inline">\(100 \cdot (1 - \alpha)\)</span>% confidence interval of <span class="math inline">\(\theta\)</span>.
+<ul>
+<li>Calculate <span class="math inline">\((L, U)\)</span>, the bounds, for unknown <span class="math inline">\(\theta\)</span>.</li>
+<li>Expect <span class="math inline">\(\theta\)</span> to be included in the interval <span class="math inline">\((L, U)\)</span> with confidence of <span class="math inline">\(100 \cdot (1 - \alpha)\)</span>%.</li>
+</ul></li>
+</ul></li>
+<li>We’ve already covered point estimation.</li>
+</ul></li>
+<li>Test of Hypothesis</li>
+</ul>
+<p>Today, we’ll focus on interval estimation. Elementary statistics give us some formulas for interval estimation. Estimating intervals for and unknown population mean <span class="math inline">\(\mu\)</span> and population variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Procedure:</p>
+<ol type="1">
+<li><p>We need a sample of size <span class="math inline">\(n\)</span>, <span class="math inline">\(x_1, x_2, \dots, x_n\)</span></p></li>
+<li><p>We specify our confidence level, choosing a value for <span class="math inline">\(\alpha\)</span> in <span class="math inline">\(100 \cdot (1 - \alpha)\)</span>.</p>
+<ul>
+<li>Dr.&nbsp;Ko says it’s most common for 90%, 95%, or 99% CIs to be generated.</li>
+</ul></li>
+<li><p>One of the following conditions:</p>
+<ul>
+<li><ol type="I">
+<li><span class="math inline">\(x_1, x_2, \dots, x_n \sim N(\mu, \sigma^2)\)</span></li>
+</ol>
+<ul>
+<li><span class="math inline">\(\mu\)</span> is unknown, <span class="math inline">\(\sigma^2\)</span> is known, <span class="math inline">\(n \geq 2\)</span></li>
+</ul></li>
+<li><ol start="2" type="I">
+<li><span class="math inline">\(x_1, x_2, \dots, x_n \sim N(\mu, \sigma^2)\)</span></li>
+</ol>
+<ul>
+<li><span class="math inline">\(\mu\)</span> is unknown, <span class="math inline">\(\sigma^2\)</span> is unknown, <span class="math inline">\(n &lt; 30\)</span></li>
+</ul></li>
+<li><ol start="3" type="I">
+<li><span class="math inline">\(x_1, x_2, \dots, x_n \sim (\mu, \sigma^2)\)</span></li>
+</ol>
+<ul>
+<li><span class="math inline">\(\mu\)</span> is unknown, <span class="math inline">\(\sigma^2\)</span> is unknown, <span class="math inline">\(n &gt; 30\)</span></li>
+</ul></li>
+</ul></li>
+</ol>
+<p>Formula for I: <span class="math inline">\((\bar{X} - Z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}}, \bar{X} + Z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}})\)</span>, where <span class="math inline">\(\bar{X} = \sum_{i = 1}^n x_i / n\)</span>.</p>
+<p>Formula for II: <span class="math inline">\((\bar{X} - T_{\frac{\alpha}{2}, df = n-1} \cdot \frac{s}{\sqrt{n}}, \bar{X} + T_{\frac{\alpha}{2}, df = n-1} \cdot \frac{s}{\sqrt{n}})\)</span>, where <span class="math inline">\(\bar{X} = \sum_{i = 1}^n x_i / n\)</span>.</p>
+<p>Formula for III: <span class="math inline">\((\bar{X} - Z_{\frac{\alpha}{2}} \cdot \frac{s}{\sqrt{n}}, \bar{X} + Z_{\frac{\alpha}{2}} \cdot \frac{s}{\sqrt{n}})\)</span>, where <span class="math inline">\(\bar{X} = \sum_{i = 1}^n x_i / n\)</span>. - By the Central Limit Theorem, <span class="math inline">\(\bar{X} \overset{approx}{\sim} N(\mu, \frac{\sigma}{\sqrt{n}}^2)\)</span></p>
+<p>Examples.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">580</span>, <span class="dv">400</span>, <span class="dv">428</span>, <span class="dv">825</span>, <span class="dv">850</span>, <span class="dv">875</span>, <span class="dv">920</span>, <span class="dv">550</span>, <span class="dv">575</span>, <span class="dv">750</span>, <span class="dv">636</span>, <span class="dv">360</span>, <span class="dv">590</span>, <span class="dv">735</span>, <span class="dv">950</span>)</span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.05</span>)</span>
+<span id="cb126-6"><a href="#cb126-6" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> a <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb126-7"><a href="#cb126-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-8"><a href="#cb126-8" aria-hidden="true" tabindex="-1"></a>(c90 <span class="ot">&lt;-</span> <span class="fu">c</span>(m <span class="sc">-</span> t[<span class="dv">1</span>] <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n), m <span class="sc">+</span> t[<span class="dv">1</span>] <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 580.9106 755.6227</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>(c95 <span class="ot">&lt;-</span> <span class="fu">c</span>(m <span class="sc">-</span> t[<span class="dv">2</span>] <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n), m <span class="sc">+</span> t[<span class="dv">2</span>] <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 561.8913 774.6420</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">65</span></span>
+<span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fl">2.4</span></span>
+<span id="cb130-4"><a href="#cb130-4" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">df =</span> <span class="dv">3</span>)</span>
+<span id="cb130-5"><a href="#cb130-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb130-6"><a href="#cb130-6" aria-hidden="true" tabindex="-1"></a>(c95 <span class="ot">&lt;-</span> <span class="fu">c</span>(m <span class="sc">-</span> t <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n), m <span class="sc">+</span> t <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 61.18106 68.81894</code></pre>
+</div>
+</div>
+<p>How do we know if a method for estimating a CI is valid? We have to prove that that the estimator meets the property (<span class="math inline">\(\theta\)</span> contained within the interval, at probability <span class="math inline">\(1 - \alpha\)</span>).</p>
+<p>Empirical confidence level, for the t-statistic interval estimation. Let <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> be fixed. Draw a random sample of size <span class="math inline">\(n\)</span> from the normal distribution with paramters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, and compute a 95% CI interval from the sample. Repeat this <span class="math inline">\(k\)</span> times, and then compute the proportion of estimated intervals that contain <span class="math inline">\(\mu\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+  (L, U)_1 &amp;\leftarrow x^1_1, x^1_2, \dots, x^1_n \sim N(\mu, \sigma) \\
+  (L, U)_2 &amp;\leftarrow x^2_1, x^2_2, \dots, x^2_n \sim N(\mu, \sigma) \\
+  &amp;\vdots \\
+  (L, U)_k &amp;\leftarrow x^k_1, x^k_2, \dots, x^k_n \sim N(\mu, \sigma)
+\end{align*}\]</span></p>
+<p>In R, this can be accomplished, using <span class="math inline">\(k = 1000\)</span>, <span class="math inline">\(n = 20\)</span>, <span class="math inline">\(\mu = 15\)</span>, <span class="math inline">\(\sigma = 3\)</span>, with an alpha of 0.05.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>t_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mu =</span> <span class="dv">15</span>, <span class="at">sigma =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>) {</span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma)</span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a>  t <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-7"><a href="#cb132-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(m <span class="sc">-</span> t <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n), m <span class="sc">+</span> t <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb132-8"><a href="#cb132-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb132-9"><a href="#cb132-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-10"><a href="#cb132-10" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">expr =</span> <span class="fu">t_ci</span>(), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb132-11"><a href="#cb132-11" aria-hidden="true" tabindex="-1"></a>(chk <span class="ot">&lt;-</span> res <span class="sc">|&gt;</span> <span class="fu">map_lgl</span>(<span class="sc">~</span><span class="fu">between</span>(<span class="dv">15</span>, .[<span class="dv">1</span>], .[<span class="dv">2</span>])) <span class="sc">|&gt;</span> <span class="fu">mean</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.96</code></pre>
+</div>
+</div>
+
+
 </section>
 </section>
 
