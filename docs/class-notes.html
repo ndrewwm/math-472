@@ -192,6 +192,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#section-18" id="toc-section-18" class="nav-link" data-scroll-target="#section-18">3/17/23</a></li>
   <li><a href="#section-19" id="toc-section-19" class="nav-link" data-scroll-target="#section-19">3/28/23</a></li>
   <li><a href="#section-20" id="toc-section-20" class="nav-link" data-scroll-target="#section-20">4/4/23</a></li>
+  <li><a href="#section-21" id="toc-section-21" class="nav-link" data-scroll-target="#section-21">4/6/23</a></li>
+  <li><a href="#section-22" id="toc-section-22" class="nav-link" data-scroll-target="#section-22">4/11/23</a></li>
   </ul>
 </nav>
     </div>
@@ -1807,8 +1809,8 @@ X_1, X_2, \cdots, X_n \sim N(\mu, \sigma^2)
 <thead>
 <tr class="header">
 <th style="text-align: left;">Nature</th>
-<th style="text-align: left;"><span class="math inline">\(H_0\)</span></th>
-<th style="text-align: left;"><span class="math inline">\(H_1\)</span></th>
+<th style="text-align: left;">Accept <span class="math inline">\(H_0\)</span></th>
+<th style="text-align: left;">Accept <span class="math inline">\(H_1\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1834,9 +1836,67 @@ X_1, X_2, \cdots, X_n \sim N(\mu, \sigma^2)
 <li>minimize type II error.</li>
 </ol>
 <p>A test that accomplishes these things is called the Uniformly Most Powerful Test (UMP Test).</p>
-
-
 </section>
+</section>
+</section>
+<section id="section-21" class="level1">
+<h1>4/6/23</h1>
+<section id="summary-18" class="level2">
+<h2 class="anchored" data-anchor-id="summary-18">Summary</h2>
+<p>Computation of test statistics.</p>
+</section>
+<section id="notes-18" class="level2">
+<h2 class="anchored" data-anchor-id="notes-18">Notes</h2>
+<p>Review of question 5 from the exam.</p>
+<p>We want <span class="math inline">\(\theta = \int_0^1 h(x)\ dx\)</span>, where <span class="math inline">\(h(x) = -0.5x + 0.5\)</span>, using the hit-or-miss method. For this procedure, we generate two uniform variables from <span class="math inline">\(U(0, 1)\)</span>, <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span>.</p>
+<p>TODO: typeset this</p>
+<pre><code>0 &lt;= h(x) &lt;= b
+x = u1
+y = b * u2
+
+0 &lt;= h(x) &lt;= -0.5x + 0.5 &lt;= 0.5
+x = 0 -&gt; h(0) = 0.5 = b
+x = 1 -&gt; h(1) = 0</code></pre>
+<p>Final exam will consist of new topics after Exam 2, but also topics from before. It’s cumulative. One question from each exam will be included in the final.</p>
+<p>Continuing with hypothesis testing.</p>
+<ol start="5" type="1">
+<li>Decision making: if T.S. is in the rejection region, then we reject <span class="math inline">\(H_0\)</span>.</li>
+</ol>
+<p>So, how do we determine the rejection region?</p>
+<ul>
+<li>tests of equality <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \theta \neq \theta_0\)</span> are <em>two-sided tests</em> (area of each region is <span class="math inline">\(\alpha / 2\)</span>).</li>
+<li>testing claims that a quantity is greater than some value result in rejection regions on the right-tail</li>
+<li>testing claims that a quantity is larger than some value result in rejection regions on the left-tail</li>
+</ul>
+<p><strong>Example.</strong> Test of hypothesis for an unknown population mean <span class="math inline">\(\mu\)</span>. Let <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> be a random sample.</p>
+<p>Scenario I. <span class="math inline">\(\mu\)</span> is unknown, <span class="math inline">\(n \geq 2\)</span> and <span class="math inline">\(\sigma^2\)</span> is known. <span class="math inline">\(X_1, X_2, \cdots, X_n \sim N(\mu, \sigma^2)\)</span>. - Assuming <span class="math inline">\(H_0\)</span> is true: <span class="math inline">\(T.S.^I = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} \sim N(0, 1)\)</span></p>
+<p>Scenario II. <span class="math inline">\(\mu\)</span> is unknown, <span class="math inline">\(n &lt; 30\)</span> and <span class="math inline">\(\sigma^2\)</span> is unknown. <span class="math inline">\(X_1, X_2, \cdots, X_n \sim N(\mu, \sigma^2)\)</span>. - Assuming <span class="math inline">\(H_0\)</span> is true: <span class="math inline">\(T.S.^{II} = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} \sim t(df = n - 1)\)</span></p>
+<p>Scenario III. <span class="math inline">\(\mu\)</span> is unknown, <span class="math inline">\(n &gt; 30\)</span> and <span class="math inline">\(\sigma^2\)</span> is unknown. <span class="math inline">\(X_1, X_2, \cdots, X_n \sim (\mu, \sigma^2)\)</span>. - Assuming <span class="math inline">\(H_0\)</span> is true: <span class="math inline">\(T.S.^{III} = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} \overset{approx}{\sim} N(0, 1)\)</span></p>
+<p><strong>Example.</strong> The heights of young American men, in inches, are normally distributed with unknown mean <span class="math inline">\(\mu\)</span> and unknown standard deviation <span class="math inline">\(\sigma\)</span>. You select a random sample of 4 young American men and measure their heights. The sample mean of the 4 measurements is 65 inches and the sample standard deviation is 2.4 inches.</p>
+<p>Someone claims that the mean height of young American men is 70 inches. Construct <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span>.</p>
+<p><span class="math inline">\(H_0: \mu = 70\)</span>, <span class="math inline">\(H_1: \mu \neq 70\)</span>. This is scenario II.</p>
+<p><span class="math inline">\(T.S.^{II} = \frac{65 - 70}{-2.4 / \sqrt{4}} \approx 4.16\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span> <span class="sc">-</span> <span class="fu">qt</span>(<span class="fl">0.025</span>, <span class="dv">3</span>) <span class="sc">*</span> <span class="fl">2.4</span> <span class="sc">/</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68.81894</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span> <span class="sc">+</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.025</span>, <span class="dv">3</span>) <span class="sc">*</span> <span class="fl">2.4</span> <span class="sc">/</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68.81894</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="section-22" class="level1">
+<h1>4/11/23</h1>
+<section id="summary-19" class="level2">
+<h2 class="anchored" data-anchor-id="summary-19">Summary</h2>
+</section>
+<section id="notes-19" class="level2">
+<h2 class="anchored" data-anchor-id="notes-19">Notes</h2>
+
+
 </section>
 </section>
 

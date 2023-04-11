@@ -1426,7 +1426,7 @@ The T.S. value is a function of the sample $x_1, x_2, \cdots, x_n$ and other kno
 
 Steps 3 and 4 are the theoretical aspects of hypothesis testing. We cover these two in Math 462 / Math 562.
 
-| Nature        | $H_0$         | $H_1$        |
+| Nature        | Accept $H_0$  | Accept $H_1$ |
 | :------------ | :------------ | :----------- |
 | $H_0$ is true | Correct       | Type I error | 
 | $H_1$ is true | Type II error | Correct      |
@@ -1445,3 +1445,70 @@ So, statistical hypothesis testing takes the following form:
 2. minimize type II error.
 
 A test that accomplishes these things is called the Uniformly Most Powerful Test (UMP Test).
+
+# 4/6/23
+
+## Summary
+
+Computation of test statistics.
+
+## Notes
+
+Review of question 5 from the exam.
+
+We want $\theta = \int_0^1 h(x)\ dx$, where $h(x) = -0.5x + 0.5$, using the hit-or-miss method. For this procedure, we generate two uniform variables from $U(0, 1)$, $u_1$ and $u_2$.
+
+TODO: typeset this
+```
+0 <= h(x) <= b
+x = u1
+y = b * u2
+
+0 <= h(x) <= -0.5x + 0.5 <= 0.5
+x = 0 -> h(0) = 0.5 = b
+x = 1 -> h(1) = 0
+```
+
+Final exam will consist of new topics after Exam 2, but also topics from before. It's cumulative. One question from each exam will be included in the final.
+
+Continuing with hypothesis testing.
+
+5. Decision making: if T.S. is in the rejection region, then we reject $H_0$.
+
+So, how do we determine the rejection region?
+
+- tests of equality $H_0: \theta = \theta_0$ vs. $H_1: \theta \neq \theta_0$ are *two-sided tests* (area of each region is $\alpha / 2$).
+- testing claims that a quantity is greater than some value result in rejection regions on the right-tail
+- testing claims that a quantity is larger than some value result in rejection regions on the left-tail
+
+**Example.** Test of hypothesis for an unknown population mean $\mu$. Let $X_1, X_2, \cdots, X_n$ be a random sample.
+
+Scenario I. $\mu$ is unknown, $n \geq 2$ and $\sigma^2$ is known. $X_1, X_2, \cdots, X_n \sim N(\mu, \sigma^2)$.
+    - Assuming $H_0$ is true: $T.S.^I = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} \sim N(0, 1)$
+
+Scenario II. $\mu$ is unknown, $n < 30$ and $\sigma^2$ is unknown. $X_1, X_2, \cdots, X_n \sim N(\mu, \sigma^2)$.
+    - Assuming $H_0$ is true: $T.S.^{II} = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} \sim t(df = n - 1)$
+
+Scenario III. $\mu$ is unknown, $n > 30$ and $\sigma^2$ is unknown. $X_1, X_2, \cdots, X_n \sim (\mu, \sigma^2)$.
+    - Assuming $H_0$ is true: $T.S.^{III} = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} \overset{approx}{\sim} N(0, 1)$
+
+
+**Example.** The heights of young American men, in inches, are normally distributed with unknown mean $\mu$ and unknown standard deviation $\sigma$. You select a random sample of 4 young American men and measure their heights. The sample mean of the 4 measurements is 65 inches and the sample standard deviation is 2.4 inches.
+
+Someone claims that the mean height of young American men is 70 inches. Construct $H_0$ and $H_1$.
+
+$H_0: \mu = 70$, $H_1: \mu \neq 70$. This is scenario II.
+
+$T.S.^{II} = \frac{65 - 70}{-2.4 / \sqrt{4}} \approx 4.16$.
+
+```{r}
+65 - qt(0.025, 3) * 2.4 / 2
+65 + qt(1 - 0.025, 3) * 2.4 / 2
+```
+
+# 4/11/23
+
+## Summary
+
+## Notes
+
