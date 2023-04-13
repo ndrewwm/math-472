@@ -1510,5 +1510,34 @@ $T.S.^{II} = \frac{65 - 70}{-2.4 / \sqrt{4}} \approx 4.16$.
 
 ## Summary
 
+Hypothesis testing, most recap from MATH-471.
+
 ## Notes
+
+**Example.** The heights of young American men, in inches, are normally distributed with unknown mean $\mu$ and unknown standard deviation $\sigma$. You select a random sample of 4 young American men and measure their heights. The sample mean of the 4 measurements is 65 inches and the sample standard deviation is 2.4 inches.
+
+Someone claims that the mean height of young American men is greater than 70 inches. Construct $H_0$ and $H_1$.
+
+$H_0: \mu \leq 70$, $H_1: \mu > 70$. This is scenario II.
+
+$T.S.^{II} = \frac{65 - 70}{2.4 / \sqrt{4}} \approx -4.16$.
+
+```{r}
+qt(1 - 0.05, df = 3)
+```
+
+Fail to reject.
+
+```{r}
+# calculating the p-values
+1 - pt(qt(1 - 0.05, 3), 3) # == 0.05
+1 - pt(-4.16, 3)
+```
+
+```{r}
+x <- c(61, 67, 63, 66.6)
+t.test(x, alternative = "greater", mu = 70)
+```
+
+Other notes taken by hand. Mostly a review from content done in MATH-471 (Data Analysis).
 

@@ -1892,9 +1892,50 @@ x = 1 -&gt; h(1) = 0</code></pre>
 <h1>4/11/23</h1>
 <section id="summary-19" class="level2">
 <h2 class="anchored" data-anchor-id="summary-19">Summary</h2>
+<p>Hypothesis testing, most recap from MATH-471.</p>
 </section>
 <section id="notes-19" class="level2">
 <h2 class="anchored" data-anchor-id="notes-19">Notes</h2>
+<p><strong>Example.</strong> The heights of young American men, in inches, are normally distributed with unknown mean <span class="math inline">\(\mu\)</span> and unknown standard deviation <span class="math inline">\(\sigma\)</span>. You select a random sample of 4 young American men and measure their heights. The sample mean of the 4 measurements is 65 inches and the sample standard deviation is 2.4 inches.</p>
+<p>Someone claims that the mean height of young American men is greater than 70 inches. Construct <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span>.</p>
+<p><span class="math inline">\(H_0: \mu \leq 70\)</span>, <span class="math inline">\(H_1: \mu &gt; 70\)</span>. This is scenario II.</p>
+<p><span class="math inline">\(T.S.^{II} = \frac{65 - 70}{2.4 / \sqrt{4}} \approx -4.16\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">df =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.353363</code></pre>
+</div>
+</div>
+<p>Fail to reject.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating the p-values</span></span>
+<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="dv">3</span>), <span class="dv">3</span>) <span class="co"># == 0.05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fl">4.16</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9873682</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">61</span>, <span class="dv">67</span>, <span class="dv">63</span>, <span class="fl">66.6</span>)</span>
+<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">mu =</span> <span class="dv">70</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  x
+t = -3.8705, df = 3, p-value = 0.9847
+alternative hypothesis: true mean is greater than 70
+95 percent confidence interval:
+ 60.99507      Inf
+sample estimates:
+mean of x 
+     64.4 </code></pre>
+</div>
+</div>
+<p>Other notes taken by hand. Mostly a review from content done in MATH-471 (Data Analysis).</p>
 
 
 </section>
