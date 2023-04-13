@@ -1541,3 +1541,60 @@ t.test(x, alternative = "greater", mu = 70)
 
 Other notes taken by hand. Mostly a review from content done in MATH-471 (Data Analysis).
 
+# 4/13/23
+
+## Summary
+
+## Notes
+
+One more example of classical hypothesis testing.
+
+```{r}
+beams <- c(580, 400, 428, 825, 850, 875, 920, 550, 575, 750, 636, 360, 590, 735, 950)
+
+t.test(beams, mu = 820, alternative = "greater")
+
+bound <- qt(0.1 / 2, df = length(beams) - 1) * sd(beams) / sqrt(length(beams))
+
+mean(beams) + c(1, -1) * bound
+```
+
+Now, onto computational statistics.
+
+Suppose we have a test statistic $T.S.^*$ that is proposed. The goal is to then assess the proposed statistic to see that it does not exceed a specified $\alpha$, and that it minimizes $\beta$.
+
+Procedure:
+
+1. Generate sample values, under the assumption that $H_0$ is true.
+
+\begin{align*}
+  x^1_1, x^1_2, &\cdots, x^1_n \\
+  x^2_1, x^2_2, &\cdots, x^2_n \\
+  &\vdots \\
+  x^k_1, x^k_2, &\cdots, x^k_n
+\end{align*}
+
+2. Generate $T.S.^i$ for each sample $i = 1, 2, \cdots, k$.
+
+3. Compute $I^i = \begin{cases} 1 & T.S.^i \text{ in rejection region} \\ 0 & \text{otherwise} \end{cases}.$
+
+4. Compute $\frac{1}{k} \sum_{i = 1}^k I^i$ to determine the empirical $\alpha$.
+
+**Example.**
+
+```{r}
+# Steps 1 and 2
+gen_ts <- function(n = 20, mu = 500, sigma2 = 100) {
+  x <- rnorm(n, mean = 500, sd = sqrt(sigma2))
+  (mean(x) - mu) / (sd(x) / sqrt(n))
+}
+
+# Steps 3 and 4
+check_rr <- function(ts, n = 20, alpha = 0.05) {
+  t_actual <- qt(0.05, df = n - 1)
+  mean(ts <= t_actual)
+}
+
+ts <- replicate(n = 1000, gen_ts(), simplify = FALSE)
+check_rr(unlist(ts))
+```

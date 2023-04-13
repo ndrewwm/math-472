@@ -194,6 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#section-20" id="toc-section-20" class="nav-link" data-scroll-target="#section-20">4/4/23</a></li>
   <li><a href="#section-21" id="toc-section-21" class="nav-link" data-scroll-target="#section-21">4/6/23</a></li>
   <li><a href="#section-22" id="toc-section-22" class="nav-link" data-scroll-target="#section-22">4/11/23</a></li>
+  <li><a href="#section-23" id="toc-section-23" class="nav-link" data-scroll-target="#section-23">4/13/23</a></li>
   </ul>
 </nav>
     </div>
@@ -1936,6 +1937,77 @@ mean of x
 </div>
 </div>
 <p>Other notes taken by hand. Mostly a review from content done in MATH-471 (Data Analysis).</p>
+</section>
+</section>
+<section id="section-23" class="level1">
+<h1>4/13/23</h1>
+<section id="summary-20" class="level2">
+<h2 class="anchored" data-anchor-id="summary-20">Summary</h2>
+</section>
+<section id="notes-20" class="level2">
+<h2 class="anchored" data-anchor-id="notes-20">Notes</h2>
+<p>One more example of classical hypothesis testing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>beams <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">580</span>, <span class="dv">400</span>, <span class="dv">428</span>, <span class="dv">825</span>, <span class="dv">850</span>, <span class="dv">875</span>, <span class="dv">920</span>, <span class="dv">550</span>, <span class="dv">575</span>, <span class="dv">750</span>, <span class="dv">636</span>, <span class="dv">360</span>, <span class="dv">590</span>, <span class="dv">735</span>, <span class="dv">950</span>)</span>
+<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(beams, <span class="at">mu =</span> <span class="dv">820</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  beams
+t = -3.0593, df = 14, p-value = 0.9958
+alternative hypothesis: true mean is greater than 820
+95 percent confidence interval:
+ 580.9106      Inf
+sample estimates:
+mean of x 
+ 668.2667 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>bound <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> <span class="fu">length</span>(beams) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">sd</span>(beams) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(beams))</span>
+<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(beams) <span class="sc">+</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> bound</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 580.9106 755.6227</code></pre>
+</div>
+</div>
+<p>Now, onto computational statistics.</p>
+<p>Suppose we have a test statistic <span class="math inline">\(T.S.^*\)</span> that is proposed. The goal is to then assess the proposed statistic to see that it does not exceed a specified <span class="math inline">\(\alpha\)</span>, and that it minimizes <span class="math inline">\(\beta\)</span>.</p>
+<p>Procedure:</p>
+<ol type="1">
+<li>Generate sample values, under the assumption that <span class="math inline">\(H_0\)</span> is true.</li>
+</ol>
+<p><span class="math display">\[\begin{align*}
+  x^1_1, x^1_2, &amp;\cdots, x^1_n \\
+  x^2_1, x^2_2, &amp;\cdots, x^2_n \\
+  &amp;\vdots \\
+  x^k_1, x^k_2, &amp;\cdots, x^k_n
+\end{align*}\]</span></p>
+<ol start="2" type="1">
+<li><p>Generate <span class="math inline">\(T.S.^i\)</span> for each sample <span class="math inline">\(i = 1, 2, \cdots, k\)</span>.</p></li>
+<li><p>Compute <span class="math inline">\(I^i = \begin{cases} 1 &amp; T.S.^i \text{ in rejection region} \\ 0 &amp; \text{otherwise} \end{cases}.\)</span></p></li>
+<li><p>Compute <span class="math inline">\(\frac{1}{k} \sum_{i = 1}^k I^i\)</span> to determine the empirical <span class="math inline">\(\alpha\)</span>.</p></li>
+</ol>
+<p><strong>Example.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Steps 1 and 2</span></span>
+<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a>gen_ts <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mu =</span> <span class="dv">500</span>, <span class="at">sigma2 =</span> <span class="dv">100</span>) {</span>
+<span id="cb154-3"><a href="#cb154-3" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">500</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(sigma2))</span>
+<span id="cb154-4"><a href="#cb154-4" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">mean</span>(x) <span class="sc">-</span> mu) <span class="sc">/</span> (<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb154-5"><a href="#cb154-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb154-6"><a href="#cb154-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb154-7"><a href="#cb154-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Steps 3 and 4</span></span>
+<span id="cb154-8"><a href="#cb154-8" aria-hidden="true" tabindex="-1"></a>check_rr <span class="ot">&lt;-</span> <span class="cf">function</span>(ts, <span class="at">n =</span> <span class="dv">20</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>) {</span>
+<span id="cb154-9"><a href="#cb154-9" aria-hidden="true" tabindex="-1"></a>  t_actual <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.05</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb154-10"><a href="#cb154-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(ts <span class="sc">&lt;=</span> t_actual)</span>
+<span id="cb154-11"><a href="#cb154-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb154-12"><a href="#cb154-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb154-13"><a href="#cb154-13" aria-hidden="true" tabindex="-1"></a>ts <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="fu">gen_ts</span>(), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb154-14"><a href="#cb154-14" aria-hidden="true" tabindex="-1"></a><span class="fu">check_rr</span>(<span class="fu">unlist</span>(ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.058</code></pre>
+</div>
+</div>
 
 
 </section>
