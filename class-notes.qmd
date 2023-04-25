@@ -1598,3 +1598,198 @@ check_rr <- function(ts, n = 20, alpha = 0.05) {
 ts <- replicate(n = 1000, gen_ts(), simplify = FALSE)
 check_rr(unlist(ts))
 ```
+
+# 4/18/23
+
+## Summary
+
+More hypothesis testing, discussion of bootstrap sampling.
+
+## Notes
+
+Given:
+
+- $X_1, X_2, \cdots, X_{20} \sim N(\mu, \sigma^2)$
+
+1. Calculate the *empirical significance level* ($Pr(\text{reject } H_0 | H_0 \text{ is true})$) with nominal $\alpha = 0.05$ and $n = 20$, using $m = 1000$.
+
+```{r}
+n <- 20
+m <- 1000
+alpha <- 0.05
+Q <- qt(alpha / 2, df = n - 1)
+
+mu0 <- 15
+mu1 <- 17
+sigma2 <- 4
+
+tstat <- numeric(m)
+
+for (i in 1:m) {
+  x <- rnorm(n, mean = mu0, sd = sqrt(sigma2))
+  a <- mean(x)
+  s <- sd(x)
+  tstat[i] <- (a - mu0) / (s / sqrt(n))
+}
+
+1 - sum(between(tstat, Q, -Q)) / m
+```
+
+2. Calculate the *power* ($1 - Pr(\text{accept } H_0 | H_1 \text{ is true}))$), using the same simulation configuration.
+
+```{r}
+tstat <- numeric(m)
+
+for (i in 1:m) {
+  x <- rnorm(n, mean = mu1, sd = sqrt(sigma2))
+  a <- mean(x)
+  s <- sd(x)
+  tstat[i] <- (a - 15) / (s / sqrt(n))
+}
+
+1 - sum(between(tstat, Q, -Q)) / m
+```
+
+Moving on to Chapter 8: **Resampling Methods**.
+
+Goal of inference: estimate $\theta$ with a point estimate $\hat{\theta}(x_1, x_2, \cdots, x_n)$.
+
+1. The estimator should be unbiased ($E(\hat{\theta}) = \theta$)
+2. The proposed estimator should have the smallest standard error $\sqrt{Var(\hat{\theta})}$
+
+Rather than using theoretical proofs to prove qualities of a given estimator, we *resample* from a given *sample* that we've collected, and use empirical estimates(?). We'll cover the Bootstrap and Jacknife resampling methods.
+
+Resampling treats an observed sample as a finite population, and random samples are generated (or resampled) from the observed sample to estimate population characteristics and make inference about the sampled population.
+
+Bootstrap sampling.
+
+```{r}
+x <- c(1.2, 0.5, 2.6, 5.6)
+i <- sample(x, length(x), replace = TRUE)
+```
+
+# 4/20/23
+
+## Summary
+
+Absent for travel.
+
+## Notes
+
+N/A
+
+# 4/25/23
+
+## Summary
+
+Linear regression, ANOVA.
+
+## Notes
+
+Today, continuing discussion of linear regression.
+
+Supose we have a set of bivariate data: $(x_1, y_1), (x_2, y_2), \cdots, (x_n, y_n).$ We can graphically assess the relationship between $X$ and $Y$ using a scatterplot. If we observe a *linear* relationship, its strength and direction can be quantified using Pearson's $r$.
+
+Linear relationships can be specified using an equation:
+
+\begin{align*}
+  y &= f(x) + \epsilon \\
+    &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_{p - 1} x_{p - 1} + \epsilon.
+\end{align*}
+
+::: {.column-margin}
+Note that a *dependent* variable $y$ can be modeled using $p$ different predictors.
+:::
+
+We're attempting to estimate $\hat{\beta}_0, \hat{\beta}_1, \cdots, \hat{\beta}_{p - 1}$.
+
+$$
+y_i = \beta_0 + \beta_1 x_{1,i} + \beta_2 x_{2, i} +  \cdots + \beta_{p - 1} x_{p - 1, i} + \epsilon_i, i = 1, 2, 3, \cdots, n.
+$$
+
+$$
+y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix}; X = \begin{bmatrix} 1 & x_{1,1} & x_{1,2} & \cdots & x_{1,p-1} \\ 1 & x_{2,1} & x_{2,2} & \cdots & x_{2,p-1} \\ \vdots & \vdots & \vdots &  & \vdots \\ 1 & x_{n,1} & x_{n, 2} & \cdots & x_{n, p-1} \end{bmatrix}
+$$
+
+The least-squares estimation procedure for the coefficients is $\hat{\beta} = (X^TX)^{-1}X^TY$, where $X$ is a matrix of predictor variables (the *design* matrix), and $Y$ is the dependent variable.
+
+In R:
+
+```{r}
+y <- c(0.1, 0.2, 0.3)
+x <- matrix(c(1, 2, 3, 4, 5, 6), 3, 2, byrow = TRUE)
+
+solve(t(x) %*% x) %*% t(x) %*% y # (X^T * X)^(-1) * X^T * Y
+```
+
+Here, `solve()` is used to take the inverse of a matrix, and `%*%` is the operator for matrix multiplication.
+
+**Example.**
+
+```{r}
+age <- c(20, 23, 25, 41, 49, 55, 63, 67, 74, 80)
+distance <- c(591, 512, 495, 467, 380, 418, 356, 415, 420, 347)
+
+ggplot(data = tibble(age, distance)) + geom_point(aes(x = age, y = distance))
+cor(age, distance)
+```
+
+Distance is negatively correlated with age. We want to estimate the following equation:
+
+$distance = \beta_0 + \beta_1 \cdot age + \epsilon.$
+
+Using R:
+```{r}
+intercept <- numeric(length(age)) + 1
+X <- cbind(intercept, age)
+betas <- solve(t(X) %*% X) %*% t(X) %*% distance
+
+# compare results with built-in function
+betas
+coef(lm(distance ~ age))
+```
+
+Thus, we have
+
+$E[\widehat{distance}] = 589.74 - 3.01 \cdot age + \epsilon$
+
+Then, a person aged 66 would be expected to have a reading distance of 
+```{r}
+betas[1] + betas[2] * 66
+```
+feet (on average).
+
+**Another example.**
+
+> Alex is a family doctor, and has taken a random sample of 14 of his patients, measuring their age, avg. daily consumption of saturated fat, and cholesterol.
+
+```{r}
+age <- c(25, 25, 28, 32, 32, 32, 38, 42, 48, 51, 51, 58, 62, 65)
+fat <- c(19, 28, 19, 16, 24, 20, 31, 20, 26, 24, 32, 21, 21, 30)
+chol <- c(180, 195, 186, 180, 210, 197, 239, 183, 204, 221, 243, 208, 228, 269)
+
+const <- numeric(length(age)) + 1
+X <- cbind(const, age, fat)
+betas <- solve(t(X) %*% X) %*% t(X) %*% chol
+
+betas
+coef(lm(chol ~ age + fat))
+```
+
+A new patient with age = 22, fat = 20:
+```{r}
+betas[1] + betas[2] * 22 + betas[3] * 20
+```
+
+- $H_0: \beta_0 = \beta_1 = \beta_2 = 0$
+- $H_1: H_0 \text{ is not true.}$ 
+
+**ANOVA** (Analysis of Variance): the total variation of $y$ can be summarized as SST = SSR + SSE, i.e.,
+
+$$
+\underset{\text{SST "Sum of Squares Total"}}{\underbrace{\sum_{i = 1}^n (y_i - \bar{y})^2}} = \underset{\text{SSR "Regression Sum of Squares"}}{\underbrace{\sum_{i = 1}^n (\hat{y_i} - \bar{y})^2}} + \underset{\text{SSE "Sum of Squares Error"}}{\underbrace{\sum_{i = 1}^n (y_i - \hat{y_i})^2}}
+$$
+
+- SST: total variation of $y$
+    - SSR: the amount of variation explained by the regression equation
+    - SSE: the amount of variation explained by variables not in the regression equation
