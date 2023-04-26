@@ -2113,7 +2113,7 @@ mean of x
 \end{align*}\]</span></p>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>Note that a <em>dependent</em> variable <span class="math inline">\(y\)</span> can be modeled using <span class="math inline">\(p\)</span> different predictors.</p>
+<p>Here, <span class="math inline">\(f(x)\)</span> is the <em>regression</em> function. Note that a <em>dependent</em> variable <span class="math inline">\(y\)</span> can be modeled using <span class="math inline">\(p\)</span> different predictors, rather than just one sole predictor.</p>
 </div></div><p>We’re attempting to estimate <span class="math inline">\(\hat{\beta}_0, \hat{\beta}_1, \cdots, \hat{\beta}_{p - 1}\)</span>.</p>
 <p><span class="math display">\[
 y_i = \beta_0 + \beta_1 x_{1,i} + \beta_2 x_{2, i} +  \cdots + \beta_{p - 1} x_{p - 1, i} + \epsilon_i, i = 1, 2, 3, \cdots, n.
@@ -2140,7 +2140,9 @@ y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix}; X = \begin{bmatri
 <div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">41</span>, <span class="dv">49</span>, <span class="dv">55</span>, <span class="dv">63</span>, <span class="dv">67</span>, <span class="dv">74</span>, <span class="dv">80</span>)</span>
 <span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>distance <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">591</span>, <span class="dv">512</span>, <span class="dv">495</span>, <span class="dv">467</span>, <span class="dv">380</span>, <span class="dv">418</span>, <span class="dv">356</span>, <span class="dv">415</span>, <span class="dv">420</span>, <span class="dv">347</span>)</span>
 <span id="cb163-3"><a href="#cb163-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-4"><a href="#cb163-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">tibble</span>(age, distance)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> distance))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb163-4"><a href="#cb163-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">tibble</span>(age, distance), <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> distance)) <span class="sc">+</span> </span>
+<span id="cb163-5"><a href="#cb163-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb163-6"><a href="#cb163-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="class-notes_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
 </div>

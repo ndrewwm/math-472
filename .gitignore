@@ -41,3 +41,6 @@ vignettes/*.pdf
 .DS_Store
 
 /.quarto/
+
+# Specific files
+/homework/exam2.qmd

@@ -1698,7 +1698,7 @@ Linear relationships can be specified using an equation:
 \end{align*}
 
 ::: {.column-margin}
-Note that a *dependent* variable $y$ can be modeled using $p$ different predictors.
+Here, $f(x)$ is the *regression* function. Note that a *dependent* variable $y$ can be modeled using $p$ different predictors, rather than just one sole predictor.
 :::
 
 We're attempting to estimate $\hat{\beta}_0, \hat{\beta}_1, \cdots, \hat{\beta}_{p - 1}$.
@@ -1730,7 +1730,10 @@ Here, `solve()` is used to take the inverse of a matrix, and `%*%` is the operat
 age <- c(20, 23, 25, 41, 49, 55, 63, 67, 74, 80)
 distance <- c(591, 512, 495, 467, 380, 418, 356, 415, 420, 347)
 
-ggplot(data = tibble(age, distance)) + geom_point(aes(x = age, y = distance))
+ggplot(data = tibble(age, distance), aes(x = age, y = distance)) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_point()
+
 cor(age, distance)
 ```
 

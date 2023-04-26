@@ -3,6 +3,9 @@ project:
   output-dir: docs
   preview:
     port: 4200
+  render:
+    - "*.qmd"
+    - "!exam2.qmd"
 
 website:
   title: "math-472"
